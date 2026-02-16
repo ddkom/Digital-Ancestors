@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open Framework for Artists · AI Pathways Map</title>
+  <style>
+    :root {
+      --bg: #f9f4ef;
+      --bg-alt: #fff7ec;
+      --ink: #231814;
+      --muted: #6b5b56;
+      --border-soft: rgba(35, 24, 20, 0.12);
+      --accent-1: #e4572e;
+      --accent-2: #2e9689;
+      --accent-3: #f2b134;
+      --accent-4: #7b5cd6;
+      --pill-bg: rgba(255, 255, 255, 0.7);
+      --radius-lg: 20px;
+      --radius-sm: 999px;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.08);
+      --node-width: 360px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", sans-serif;
+      color: var(--ink);
+      background: radial-gradient(circle at top left, #ffe8d5 0, transparent 40%),
+        radial-gradient(circle at top right, #e8f5f2 0, transparent 45%),
+        var(--bg);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 20px 20px 80px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 20px 10px;
+      max-width: 1120px;
+      margin: 0 auto;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(249, 244, 239, 0.95);
+      backdrop-filter: blur(10px);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 40% 60% 65% 35%;
+      background: conic-gradient(from 180deg, var(--accent-1), var(--accent-2), var(--accent-3), var(--accent-4), var(--accent-1));
+    }
+
+    .brand-title {
+      font-weight: 650;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      font-size: 0.83rem;
+    }
+
+    .pill-nav {
+      display: flex;
+      gap: 6px;
+      padding: 4px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+    }
+
+    .pill-nav button {
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .pill-nav button.primary {
+      background: #231814;
+      color: #ffe9d8;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      gap: 40px;
+      margin-top: 30px;
+      align-items: center;
+    }
+
+    @media (max-width: 880px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+    }
+
+    .hero-kicker span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent-1);
+    }
+
+    h1.hero-title {
+      font-size: clamp(2.3rem, 4vw, 3.1rem);
+      line-height: 1.03;
+      margin: 16px 0 14px;
+    }
+
+    .hero-highlight {
+      background: linear-gradient(120deg, #ffe1c5, #fff9e2);
+      display: inline-block;
+      padding: 0 6px;
+      border-radius: 9px;
+      box-decoration-break: clone;
+    }
+
+    .hero-body {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 42rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 11px 20px;
+      font-size: 0.95rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: #231814;
+      color: #fff6ee;
+      border-color: rgba(35, 24, 20, 0.9);
+      box-shadow: 0 14px 34px rgba(35, 24, 20, 0.35);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.86);
+      color: var(--ink);
+      border-color: rgba(35, 24, 20, 0.08);
+    }
+
+    .hero-aside {
+      background: radial-gradient(circle at top left, rgba(244, 144, 93, 0.35), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(85, 176, 166, 0.35), transparent 55%),
+        var(--bg-alt);
+      border-radius: 26px;
+      padding: 22px 22px 18px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-aside-title {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 6px;
+    }
+
+    .hero-aside-body {
+      font-size: 0.9rem;
+      color: #3e312d;
+      line-height: 1.5;
+    }
+
+    .hero-aside-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .hero-chip {
+      border-radius: 14px;
+      padding: 10px 11px;
+      background: rgba(255, 255, 255, 0.9);
+      font-size: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .hero-chip span.label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .section {
+      margin-top: 70px;
+    }
+
+    .section-header {
+      max-width: 640px;
+      margin-bottom: 26px;
+    }
+
+    .section-kicker {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 6px;
+    }
+
+    .section-body {
+      font-size: 0.96rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 36px;
+    }
+
+    @media (max-width: 880px) {
+      .two-col {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .story-card {
+      padding: 22px 22px 20px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-soft);
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .story-card strong {
+      color: var(--ink);
+    }
+
+    .track-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    @media (max-width: 960px) {
+      .track-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .track-card {
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 20px;
+      padding: 18px 18px 16px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .track-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      margin-bottom: 8px;
+    }
+
+    .track-pill span.dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+    }
+
+    .track-title {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+    }
+
+    .track-body {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .track-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .track-list li::before {
+      content: "•";
+      margin-right: 6px;
+      color: rgba(35, 24, 20, 0.55);
+    }
+
+    .map-shell {
+      margin-top: 24px;
+      border-radius: 26px;
+      background: #111217;
+      padding: 16px;
+      box-shadow: 0 20px 60px rgba(5, 5, 10, 0.6);
+      border: 1px solid #1d1f29;
+      position: relative;
+    }
+
+    .map-shell-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      color: #f8f5ff;
+      font-size: 0.85rem;
+    }
+
+    .map-shell-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .map-shell-badge {
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    #viewport {
+      width: 100%;
+      height: 520px;
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: grab;
+      background-color: #0b0c11;
+      background-image:
+        linear-gradient(#141623 1px, transparent 1px),
+        linear-gradient(90deg, #141623 1px, transparent 1px);
+      background-size: 44px 44px;
+      touch-action: none;
+      position: relative;
+    }
+
+    #world {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform-origin: 0 0;
+    }
+
+    svg#connections {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1px;
+      height: 1px;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    svg#connections path {
+      fill: none;
+      stroke: #3b3f52;
+      stroke-width: 2px;
+      stroke-linecap: round;
+      opacity: 0;
+      transition: opacity 0.4s ease-out;
+    }
+
+    svg#connections path.visible {
+      opacity: 1;
+      stroke-dasharray: 1600;
+      stroke-dashoffset: 1600;
+      animation: drawLine 1s ease-out forwards;
+    }
+
+    @keyframes drawLine {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    .node {
+      position: absolute;
+      width: var(--node-width);
+      background: #151722;
+      color: #f3f0ff;
+      padding: 22px 26px 20px;
+      border-radius: 20px;
+      border: 1px solid #27293a;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+      opacity: 0;
+      transform: translateY(24px) scale(0.94);
+      pointer-events: none;
+      transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .node.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    @keyframes pulse-ring {
+      0% {
+        box-shadow: 0 0 0 0 rgba(228, 102, 52, 0.4);
+      }
+
+      70% {
+        box-shadow: 0 0 0 15px rgba(228, 102, 52, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(228, 102, 52, 0);
+      }
+    }
+
+    .node.start {
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.74);
+      background: radial-gradient(circle at top, #ffe4d4 0, #e46634 38%, #fffbf7 100%);
+      color: #231814;
+      padding: 26px 30px 24px;
+      animation: pulse-ring 3s infinite;
+    }
+
+    .node.start .node-title {
+      font-size: 1.15rem;
+    }
+
+    .node.start .node-desc {
+      color: #3a271f;
+    }
+
+    .node.track-protect {
+      border-left: 5px solid #f97373;
+    }
+
+    .node.track-admin {
+      border-left: 5px solid #facc15;
+    }
+
+    .node.track-create {
+      border-left: 5px solid #22c55e;
+    }
+
+    .node.warning {
+      border-left: 5px solid #f97373;
+      background: #241018;
+    }
+
+    .node.end {
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      background: #101418;
+      text-align: center;
+      padding: 24px 30px 22px;
+    }
+
+    .node-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 0.78rem;
+      color: #a5a6be;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .node-tag {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(8, 9, 14, 0.55);
+    }
+
+    .node-title {
+      font-size: 1rem;
+      margin-bottom: 3px;
+    }
+
+    .node-desc {
+      font-size: 0.86rem;
+      line-height: 1.5;
+      color: #b6b7d5;
+    }
+
+    .node-context {
+      margin-top: 10px;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      font-size: 0.8rem;
+      color: #d0d4ff;
+      display: none;
+    }
+
+    .node-context.active {
+      display: block;
+    }
+
+    .context-toggle {
+      background: none;
+      border: none;
+      color: var(--accent-3);
+      font-size: 0.75rem;
+      cursor: pointer;
+      padding: 0;
+      margin-top: 6px;
+      text-decoration: underline;
+      opacity: 0.8;
+    }
+
+    .context-toggle:hover {
+      opacity: 1;
+    }
+
+    .options {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .opt-btn {
+      width: 100%;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(11, 12, 20, 0.9);
+      color: #e2e4ff;
+      padding: 8px 11px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      text-align: left;
+    }
+
+    .opt-btn span.sub {
+      font-size: 0.72rem;
+      opacity: 0.7;
+    }
+
+    .opt-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .opt-btn.selected {
+      background: #f9fafb;
+      color: #111827;
+      border-color: #f9fafb;
+      font-weight: 600;
+    }
+
+    .opt-btn::after {
+      content: "→";
+      font-size: 0.8rem;
+      opacity: 0.2;
+    }
+
+    .opt-btn.selected::after,
+    .opt-btn:hover::after {
+      opacity: 0.9;
+    }
+
+    .map-controls {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      z-index: 20;
+    }
+
+    .map-controls button {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(5, 6, 13, 0.85);
+      color: #f9fafb;
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .map-controls button:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Fullscreen styles for the map */
+    :fullscreen #viewport,
+    :-webkit-full-screen #viewport {
+      width: 100vw !important;
+      height: 100vh !important;
+      border-radius: 0 !important;
+    }
+
+    :fullscreen .map-shell,
+    :-webkit-full-screen .map-shell {
+      border-radius: 0 !important;
+    }
+
+    .map-legend-inline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 0.78rem;
+      color: #d0d4ff;
+    }
+
+    .map-legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .map-legend-swatch {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+    }
+
+    footer {
+      max-width: 1120px;
+      margin: 50px auto 40px;
+      padding: 0 20px;
+      color: #8b7a74;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true"></div>
+      <div>
+        <div class="brand-title">AI PATHWAYS FOR ARTISTS</div>
+        <div style="font-size:0.78rem;color:var(--muted);">An open framework for protection, care, and experimentation
+        </div>
+      </div>
+    </div>
+    <nav class="pill-nav">
+      <button class="primary" onclick="scrollToSection('map')">Launch the map</button>
+      <button onclick="scrollToSection('why')">Backstory</button>
+      <button onclick="scrollToSection('tracks')">Tracks</button>
+      <button onclick="scrollToSection('who')">Who it's for</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-heading">
+      <div>
+        <div class="hero-kicker"><span class="dot"></span> Artist-led guidance for AI choices</div>
+        <h1 id="hero-heading" class="hero-title">
+          A guided map to help artists <span class="hero-highlight">use AI, refuse it, or find the balance in
+            between</span>
+        </h1>
+        <p class="hero-body">
+          This framework turns complex questions about copyright, privacy, ethics, and creativity into a guided map with
+          concrete actions and resources you can use right now. It is part of <em>Digital Ancestors: Mortality, Memory,
+            Machine</em>, a collaboration between artists and responsible AI practitioners exploring how creative work
+          can coexist with emerging technologies.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" onclick="scrollToSection('map')">Start the map</button>
+          <button class="btn btn-ghost" onclick="scrollToSection('why')">Read the backstory</button>
+        </div>
+      </div>
+
+      <aside class="hero-aside" aria-label="What this map can help you do">
+        <div class="hero-aside-title">What this framework does</div>
+        <div class="hero-aside-body">
+          Answer a small set of questions and receive clear next steps and informative resources. You can reduce
+          scraping risk, use AI for studio support without oversharing, or experiment with new tools while staying
+          grounded in your personal preferences.
+        </div>
+        <div class="hero-aside-grid">
+          <div class="hero-chip">
+            <span class="label">If you want to</span>
+            Say no to AI scraping and protect your archives or new uploads
+          </div>
+          <div class="hero-chip">
+            <span class="label">If you want to</span>
+            Get help with admin work without sharing sensitive material
+          </div>
+          <div class="hero-chip">
+            <span class="label">If you want to</span>
+            Experiment with AI while understanding copyright implications
+          </div>
+          <div class="hero-chip">
+            <span class="label">If you feel</span>
+            Start somewhere, even if you feel unsure
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="why" class="section">
+      <div class="two-col">
+        <div class="section-header">
+          <div class="section-kicker">Backstory</div>
+          <h2 class="section-title">Why we built this framework</h2>
+          <p class="section-body">
+            Generative AI is reshaping how art is made, circulated, and valued. It can bring up grief, frustration,
+            curiosity, and possibility all at the same time. This project brings together practicing artists, AI
+            researchers, technologists, and policy advisors who care about artist autonomy and responsible technology.
+          </p>
+        </div>
+        <div class="story-card">
+          This map grew out of months of creative research and development experiments in <strong>Digital Ancestors:
+            Mortality, Memory, Machine</strong>. It started with a question: Can AI help care for creative legacy, and
+          cultural memory? We designed gallery works, kept process journals, and tested a number of tools over six
+          months. Alongside our art exhibit, we turned what we learned into an <strong>open framework</strong> that
+          other artists can adapt, critique, and help build upon.
+          <br /><br />
+          The map helps clarify what you might want from your own engagement with AI, from opting out entirely to
+          collaborating on new work.
+        </div>
+      </div>
+    </section>
+
+    <section id="tracks" class="section" aria-labelledby="tracks-heading">
+      <div class="section-header">
+        <div class="section-kicker">Three pathways</div>
+        <h2 id="tracks-heading" class="section-title">Tracks to match your preferences</h2>
+        <p class="section-body">
+          You can follow one track or move between them. The map starts where you are and adapts as your needs change.
+        </p>
+      </div>
+
+      <div class="track-grid">
+        <article class="track-card">
+          <div class="track-pill" style="background:rgba(244,63,94,0.08);border:1px solid rgba(248,113,113,0.5);">
+            <span class="dot" style="background:#f97373"></span>
+            Protect
+          </div>
+          <h3 class="track-title">Track 1 - Reduce how much work is used for AI training</h3>
+          <p class="track-body">
+            For artists who want to minimise how much of their work ends up in training datasets or is copied by AI
+            models.
+          </p>
+          <ul class="track-list">
+            <li>Image cloaking tools like Glaze or Nightshade</li>
+            <li>Attribution and watermarking practices</li>
+            <li>Website-level preferences and opt-outs</li>
+            <li>Contract language for client and platform agreements</li>
+          </ul>
+        </article>
+
+        <article class="track-card">
+          <div class="track-pill" style="background:rgba(252,211,77,0.08);border:1px solid rgba(250,204,21,0.55);">
+            <span class="dot" style="background:#facc15"></span>
+            Admin Support
+          </div>
+          <h3 class="track-title">Track 2 - Use AI for studio admin without oversharing</h3>
+          <p class="track-body">
+            For artists who want to use AI as a studio assistant. For example, help with writing and planning while
+            keeping control over their data.
+          </p>
+          <ul class="track-list">
+            <li>Prompt tips to improve privacy</li>
+            <li>Automation tools and examples</li>
+            <li>Mainstream and local chat tool options</li>
+          </ul>
+        </article>
+
+        <article class="track-card">
+          <div class="track-pill" style="background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.55);">
+            <span class="dot" style="background:#22c55e"></span>
+            Co-create
+          </div>
+          <h3 class="track-title">Track 3 - Make new work with AI</h3>
+          <p class="track-body">
+            For artists experimenting with AI media who want to stay grounded in ethics and transparency.
+          </p>
+          <ul class="track-list">
+            <li>Model choices and data sourcing basics</li>
+            <li>Train models with your own data</li>
+            <li>What current copyright law covers and what it does not</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="map" class="section" aria-labelledby="map-heading">
+      <div class="section-header">
+        <div class="section-kicker">Interactive map</div>
+        <h2 id="map-heading" class="section-title">Click through decisions and receive guided actions</h2>
+        <p class="section-body">
+          Start any path and move at your own pace. Each step reveals a practical action or resource. You can explore
+          multiple paths and revisit them anytime.
+        </p>
+      </div>
+
+      <div class="map-shell">
+        <div class="map-shell-header">
+          <div>AI Decision Flow • Artist Pathways</div>
+          <div class="map-shell-badges">
+            <div class="map-shell-badge">Click and drag to pan</div>
+            <div class="map-shell-badge">Scroll or pinch to zoom</div>
+            <div class="map-shell-badge">Try more than one path</div>
+          </div>
+        </div>
+
+        <div id="viewport">
+          <div id="world">
+            <svg id="connections"></svg>
+          </div>
+          <div class="map-controls" aria-label="Map zoom controls">
+            <button type="button" onclick="toggleFullscreen()" title="Fullscreen">⤢</button>
+            <button type="button" onclick="resetMap()" title="Restart map">↻</button>
+            <button type="button" onclick="zoomButton(0.2)" title="Zoom in">+</button>
+            <button type="button" onclick="zoomButton(-0.2)" title="Zoom out">−</button>
+          </div>
+        </div>
+
+        <div class="map-legend-inline" aria-label="Track legend">
+          <span class="map-legend-item"><span class="map-legend-swatch" style="background:#f97373"></span> Track 1:
+            Protect and preserve</span>
+          <span class="map-legend-item"><span class="map-legend-swatch" style="background:#facc15"></span> Track 2:
+            Studio and admin support</span>
+          <span class="map-legend-item"><span class="map-legend-swatch" style="background:#22c55e"></span> Track 3:
+            Co-create and transform</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="who" class="section" aria-labelledby="who-heading">
+      <div class="section-header">
+        <div class="section-kicker">Who it supports</div>
+        <h2 id="who-heading" class="section-title">Arts communities and the people around them</h2>
+        <p class="section-body">
+          The framework is designed for working artists and creative practitioners. It is also useful for cultural
+          workers, arts organizations, educators, policy-makers, and AI builders who want to better understand artist
+          needs.
+        </p>
+      </div>
+
+      <div class="two-col">
+        <div class="story-card">
+          <strong>For artists and creative professionals</strong><br />
+          Clarify your boundaries, learn practical safety steps, and explore new workflows if you want them. Use the map
+          when posting work, signing agreements, applying for funding, or testing new tools.
+          <br /><br />
+          <strong>For arts and legal organisations</strong><br />
+          Use the framework in workshops, office hours, or resource hubs. The map can support legal clinics, digital
+          safety training, and collective discussions.
+        </div>
+        <div class="story-card">
+          <strong>For policy makers</strong><br />
+          See where artists encounter friction in current tools and contracts. Use the map to surface real-world
+          scenarios when shaping policy.
+          <br /><br />
+          <strong>For AI researchers and developers</strong><br />
+          Treat the map as a set of user stories that highlight artist concerns around consent, provenance, and creative
+          control.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Built as part of the “Digital Ancestors: Mortality, Memory, Machine” project in collaboration with artists and
+    responsible AI practitioners. This is a living framework (v23).
+  </footer>
+
+
+
+  <script>
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      // Offset for sticky header
+      window.scrollTo({ top: el.offsetTop - 80, behavior: "smooth" });
+    }
+
+
+
+    // Toggle fullscreen mode for the map viewport
+    function toggleFullscreen() {
+      const elem = document.getElementById("viewport");
+
+      if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        if (elem.requestFullscreen) {
+          elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) {
+          elem.webkitRequestFullscreen();
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+      }
+    }
+
+    // When fullscreen changes, adjust zoom so map fills nicely
+    document.addEventListener("fullscreenchange", () => {
+      if (typeof scale === "undefined") return;
+      if (document.fullscreenElement) {
+        if (scale < 0.9) scale = 0.9;
+      } else {
+        scale = 1;
+      }
+      if (typeof updateTransform === "function") updateTransform();
+    });
+
+    const nodes = [
+      {
+        id: "start",
+        type: "start",
+        x: 0,
+        y: 0,
+        tag: "Start",
+        title: "What is your primary focus today?",
+        desc: "This map helps artists explore practical tools and workflows based on your practice, location, and comfort level. Choose where to start based on what’s most suited for you right now.",
+        options: [
+          { label: "Protecting my work", target: "p_type" },
+          { label: "Administrative tasks", target: "a_type" },
+          { label: "Creating new art", target: "c_source" },
+        ],
+      },
+
+      // --- TRACK 1: PROTECTION (The Shield) ---
+      {
+        id: "p_type",
+        type: "track-protect",
+        x: -900,
+        y: 400,
+        tag: "Focus",
+        title: "What kind of work are you protecting?",
+        desc: "Different media types come with different rights frameworks, unions, and support organizations.",
+        options: [
+          { label: "Visual Art / Images", target: "p_region_visual" },
+          { label: "Voice / Performance / Text", target: "p_region_perf" },
+        ],
+      },
+
+      // Branch 2: Region (Visual)
+      {
+        id: "p_region_visual",
+        type: "track-protect",
+        x: -1300,
+        y: 750,
+        tag: "Location",
+        title: "Where are you based?",
+        desc: "Copyright frameworks and rights can vary by region.",
+        options: [
+          { label: "Canada", target: "p_can_visual" },
+          { label: "UK / Europe", target: "p_uk_visual" },
+          { label: "Other / Global", target: "p_global_visual" },
+        ],
+      },
+      // Branch 2: Region (Performance/Text)
+      {
+        id: "p_region_perf",
+        type: "track-protect",
+        x: -500,
+        y: 750,
+        tag: "Location",
+        title: "Where are you based?",
+        desc: "Copyright frameworks and rights can vary by region.",
+        options: [
+          { label: "Canada", target: "p_can_perf" },
+          { label: "UK / Europe", target: "p_uk_perf" },
+        ],
+      },
+
+      // --- CANADA VISUAL BRANCH ---
+      {
+        id: "p_can_visual",
+        type: "track-protect",
+        x: -1500,
+        y: 1100,
+        tag: "Canada",
+        title: "CARFAC and Canadian copyright",
+        desc: "Canadian copyright law does not yet explicitly regulate AI training as fair dealing. Here are tips to assert your rights.",
+        options: [
+          { label: "I need a contract clause", target: "p_can_contract" },
+          { label: "I need to fight a scrape", target: "p_can_takedown" },
+        ],
+      },
+      {
+        id: "p_can_contract",
+        type: "track-protect",
+        x: -1500,
+        y: 1450,
+        tag: "Contracts",
+        title: "Consent, credit, compensation",
+        desc: "Contract language can clarify how your work may be used, including whether it can be used for AI training or related reuse.",
+        context: "<strong>Resources:</strong><br>• <a href='https://www.carfac.ca/' target='_blank'>CARFAC</a><br>• <a href='https://www.raav.org/' target='_blank'>RAAV</a><br>• <a href='https://commonpaper.com/standards/cloud-service-agreement/prohibit-ai-training/' target='_blank'>Sample “No AI Training” clauses for contracted work</a><br>• <a href='https://ised-isde.canada.ca/site/strategic-policy-sector/en/marketplace-framework-policy/consultation-copyright-age-generative-artificial-intelligence-what-we-heard-report' target='_blank'>Canada: “What We Heard” report on copyright and GenAI</a>",
+        options: [{ label: "I've seen the resources", target: "p_tech_defense" }],
+      },
+      {
+        id: "p_can_takedown",
+        type: "track-protect",
+        x: -1500,
+        y: 1800,
+        tag: "Action",
+        title: "Advocacy and collective action",
+        desc: "Many Canadian arts organizations are pushing for clearer rules and protections for creators around AI. Below are organizations that contributed to Canada's copyright and AI policy. Stay informed by following any of the organizations listed.",
+        context: "<strong>Join:</strong><br>• <a href='https://artistproducerresource.com/' target='_blank'>Artist Producer Resource</a><br>• <a href='https://www.impac.ca/' target='_blank'>IMPAC (Music/Authors)</a><br>• <a href='https://publications.gc.ca/pub?id=9.947840&sl=0' target='_blank'>Government publication listing: copyright and GenAI consultation</a>",
+        options: [{ label: "I've seen the resources", target: "p_tech_defense" }],
+      },
+
+      // --- UK VISUAL BRANCH ---
+      {
+        id: "p_uk_visual",
+        type: "track-protect",
+        x: -1100,
+        y: 1100,
+        tag: "UK",
+        title: "UK copyright and AI",
+        desc: "The UK has been consulting on copyright changes related to text and data mining. Creator groups continue to advocate for consent-based systems and meaningful transparency.",
+        options: [
+          { label: "Check my Pay/Rights", target: "p_uk_dacs" },
+          { label: "Join the Lobby", target: "p_uk_aop" },
+        ],
+      },
+      {
+        id: "p_uk_dacs",
+        type: "track-protect",
+        x: -1100,
+        y: 1450,
+        tag: "Rights",
+        title: "DACS royalties and AI guidance",
+        desc: "DACS helps visual creators claim royalties for reuse and shares guidance as policy develops around AI and copyright.",
+        context: "<strong>Resources:</strong><br>• <a href='https://www.dacs.org.uk/' target='_blank'>DACS</a><br>• <a href='https://www.dacs.org.uk/collective/what-is-payback' target='_blank'>What is DACS Payback?</a><br>• <a href='https://www.nuj.org.uk/' target='_blank'>NUJ AI Toolkit</a><br>• <a href='https://www.gov.uk/government/consultations/copyright-and-artificial-intelligence/copyright-and-artificial-intelligence' target='_blank'>UK consultation: copyright and AI</a>",
+        options: [{ label: "I've seen the resources", target: "p_tech_defense" }],
+      },
+      {
+        id: "p_uk_aop",
+        type: "track-protect",
+        x: -1100,
+        y: 1800,
+        tag: "Lobbying",
+        title: "Association of Photographers and allies",
+        desc: "Photographer-led and creator rights organizations share updates, advocacy, and practical guidance as policy and platform terms change.",
+        context: "<strong>Action:</strong><br>• <a href='https://www.the-aop.org/' target='_blank'>AOP</a><br>• <a href='https://www.aopawards.com/a-statement-from-leading-organisations-on-artificial-intelligence-and-copyright/' target='_blank'>AOP: joint statement on AI and copyright</a><br>• <a href='https://creatorsrightsalliance.org/' target='_blank'>Creators’ Rights Alliance</a>",
+        options: [{ label: "I've seen the resources", target: "p_tech_defense" }],
+      },
+      // --- GLOBAL VISUAL BRANCH ---
+      {
+        id: "p_global_visual",
+        type: "track-protect",
+        x: -1300,
+        y: 2150,
+        tag: "Global",
+        title: "Global and other regions",
+        desc: "We are expanding regional coverage. For now, you can still take practical steps like clearer contracts, stronger attribution habits, and technical preference signals.",
+        options: [{ label: "Go to the next layer: Defense", target: "p_tech_defense" }],
+      },
+
+      // --- PERFORMANCE/TEXT BRANCH ---
+      {
+        id: "p_can_perf",
+        type: "track-protect",
+        x: -700,
+        y: 1100,
+        tag: "Canada Perf",
+        title: "ACTRA and performance rights",
+        desc: "For performers, consent and contract language matter in AI-related work. Union guidance can help you understand options for voice, likeness, and reuse.",
+        context: "<strong>Resources:</strong><br>• <a href='https://actratoronto.com/artificial-intelligence-resources/' target='_blank'>ACTRA Toronto: AI resources</a><br>• <a href='https://writersunion.ca/advocacy/artificial-intelligence' target='_blank'>Writers’ Union of Canada: AI advocacy</a>",
+        options: [{ label: "I've seen the resources", target: "p_tech_defense" }],
+      },
+      {
+        id: "p_uk_perf",
+        type: "track-protect",
+        x: -300,
+        y: 1100,
+        tag: "UK Perf",
+        title: "Equity UK AI toolkit",
+        desc: "Equity UK provides guidance for performers, including rights, contracts, and practical steps for AI-mediated performance.",
+        context: "<strong>Resources:</strong><br>• <a href='https://www.equity.org.uk/advice-and-support/know-your-rights/ai-toolkit' target='_blank'>Equity UK: AI toolkit</a><br>• <a href='https://europeanwriterscouncil.eu/artificial-intelligence/' target='_blank'>European Writers’ Council</a>",
+        options: [{ label: "I've seen the resources", target: "p_tech_defense" }],
+      },
+
+      // --- GLOBAL TECH DEFENSE (Converged) ---
+      {
+        id: "p_tech_defense",
+        type: "track-protect",
+        x: -900,
+        y: 2500,
+        tag: "The Tech Shield",
+        title: "Layer 2: technical tools and preference signals",
+        desc: "Policy changes can take time. Some artists use technical tools to reduce unwanted reuse and to communicate training preferences. What fits your situation?",
+        options: [
+          { label: "Protect Content Posted Online", target: "p_glaze" },
+          { label: "Opt-Out from Web Crawling", target: "p_spawning" },
+          { label: "Opt-Out from Social Media Data Collection", target: "p_opt_platforms" },
+          { label: "Refuse for Environment", target: "p_eco" },
+        ],
+      },
+      {
+        id: "p_eco",
+        type: "track-protect",
+        x: -400,
+        y: 2850,
+        tag: "Environment",
+        title: "Environmental Consideration",
+        desc: "Environmental impact is a common reason for refusing AI or opting for specific tools. Understanding the dialogue of consumption can inform your choices.",
+        context: "<strong>Resources:</strong><br>• <a href='https://www.csps-efpc.gc.ca/tools/articles/ai-environmental-effects-eng.aspx' target='_blank'>AI Environmental Effects</a><br>• <a href='https://aixdesign.co/posts/small-ai' target='_blank'>Small AI</a><br>• <a href='https://mail.cyberneticforests.com/a-personalized-ecology-of-ai/' target='_blank'>A Personalized Ecology of AI</a><br>• <a href='https://datasociety.net/points/why-were-endorsing-the-ai-environmental-impacts-act/' target='_blank'>Endorsing the AI Environmental Impacts Act</a>",
+        options: [{ label: "I've seen the resources", target: "p_end_final" }],
+      },
+      {
+        id: "p_glaze",
+        type: "track-protect",
+        x: -1300,
+        y: 2850,
+        tag: "Cloaking",
+        title: "Glaze, Nightshade, and Mist",
+        desc: "These tools aim to make images harder for models to learn from or mimic. Treat them as optional layers, especially for work you share publicly.",
+        context: "<strong>Resources:</strong><br>• <a href='https://glaze.cs.uchicago.edu/' target='_blank'>Glaze and Nightshade (UChicago)</a><br>• <a href='https://glaze.cs.uchicago.edu/what-is-glaze.html' target='_blank'>What is Glaze?</a><br>• <a href='https://github.com/psyker-team/mist' target='_blank'>Mist (open source, experimental)</a><br>• <a href='https://cara.app/' target='_blank'>Cara.app (Glaze integrated social platform)</a>",
+        options: [{ label: "I've seen the resources", target: "p_end_final" }],
+      },
+
+      {
+        id: "p_spawning",
+        type: "track-protect",
+        x: -1000,
+        y: 2850,
+        tag: "Opt-Out",
+        title: "Spawning, Kudurru, and web signals",
+        desc: "You can register preferences, reduce scraping, and add signals to your site. These steps may help communicate intent, even if enforcement varies by platform and developer. (Note: services are sometimes offline/beta).",
+        context: "<strong>Resources:</strong><br>• <a href='https://spawning.ai/' target='_blank'>Spawning.ai</a><br>• <a href='https://kudurru.ai/' target='_blank'>Kudurru (block scrapers)</a><br>• <a href='https://www.wired.com/story/kudurru-ai-scraping-block-poisoning-spawning/' target='_blank'>Wired: how Kudurru works</a><br>• <a href='https://haveibeentrained.com/' target='_blank'>HaveIBeenTrained?</a><br>• Add `noai` or `noimageai` meta tags as a preference signal. These are not standardized and may not be respected by all bots.",
+        options: [{ label: "I've seen the resources", target: "p_end_final" }],
+      },
+
+      // --- PLATFORM OPT-OUTS ---
+      {
+        id: "p_opt_platforms",
+        type: "track-protect",
+        x: -700,
+        y: 2850,
+        tag: "Settings",
+        title: "Platform data controls",
+        desc: "Many apps have settings related to generative AI features or model improvement. Pick a platform to review the current steps and what the setting does.",
+        options: [
+          { label: "LinkedIn", target: "p_opt_linkedin" },
+          { label: "Meta (FB/IG)", target: "p_opt_meta" },
+          { label: "Adobe", target: "p_opt_adobe" },
+          { label: "MS Office", target: "p_opt_office" },
+          { label: "ChatGPT", target: "p_opt_chatgpt" },
+        ],
+      },
+      {
+        id: "p_opt_linkedin",
+        type: "track-protect",
+        x: -1000,
+        y: 3200,
+        tag: "Social",
+        title: "LinkedIn (Microsoft)",
+        desc: "LinkedIn’s “Data for Generative AI Improvement” setting may be on by default in some regions. Turning it off stops future use for training, but it does not undo training that already happened.",
+        context: "<strong>Steps:</strong><br>1. Profile icon > Settings & Privacy.<br>2. Data Privacy > Data for Generative AI Improvement.<br>3. Toggle <strong>OFF</strong>.<br>Source: <a href='https://www.linkedin.com/help/linkedin/answer/a6278444' target='_blank'>LinkedIn help on the setting and retroactivity</a>.",
+        options: [{ label: "Done", target: "p_end_final" }],
+      },
+      {
+        id: "p_opt_meta",
+        type: "track-protect",
+        x: -600,
+        y: 3200,
+        tag: "Social",
+        title: "Meta (Facebook and Instagram)",
+        desc: "In the EU and UK, Meta provides a way to object to certain data use under GDPR. In other regions, controls may be limited and requests may be handled differently.",
+        context: "<strong>Resources:</strong><br>• <a href='https://www.facebook.com/help/contact/510058597920541' target='_blank'>Meta objection form</a><br>• <a href='https://apnews.com/article/c785dc3591ae3c49543c435fc15379fb' target='_blank'>AP on Meta training in EU</a><br>• <a href='https://www.reuters.com/technology/artificial-intelligence/meta-use-public-posts-ai-interactions-train-models-eu-2025-04-14/' target='_blank'>Reuters on the EU objection process</a>.",
+        options: [{ label: "Done", target: "p_end_final" }],
+      },
+      {
+        id: "p_opt_adobe",
+        type: "track-protect",
+        x: -200,
+        y: 3200,
+        tag: "Creative",
+        title: "Adobe Creative Cloud",
+        desc: "Adobe has an account setting called “content analysis for product improvement” that you can turn off. This setting is about product improvement and may affect features that analyze content.",
+        context: "<strong>Resources:</strong><br>• <a href='https://account.adobe.com/privacy' target='_blank'>Adobe Account Privacy</a><br>• <a href='https://helpx.adobe.com/manage-account/using/machine-learning-faq.html' target='_blank'>Adobe content analysis FAQ</a>.",
+        options: [{ label: "Done", target: "p_end_final" }],
+      },
+      {
+        id: "p_opt_office",
+        type: "track-protect",
+        x: -600,
+        y: 3550,
+        tag: "Office",
+        title: "Microsoft Office connected experiences",
+        desc: "Office has privacy settings for connected experiences that can analyze content to provide cloud features. Microsoft documents how to manage these settings.",
+        context: "<strong>Resources:</strong><br>• <a href='https://learn.microsoft.com/en-us/microsoft-365-apps/privacy/connected-experiences' target='_blank'>Microsoft: connected experiences overview</a><br>• <a href='https://learn.microsoft.com/en-us/microsoft-365-apps/privacy/optional-connected-experiences' target='_blank'>Microsoft: optional connected experiences</a>",
+        options: [{ label: "Done", target: "p_end_final" }],
+      },
+      {
+        id: "p_opt_chatgpt",
+        type: "track-protect",
+        x: -200,
+        y: 3550,
+        tag: "AI Chat",
+        title: "ChatGPT (OpenAI)",
+        desc: "On consumer accounts, OpenAI may use conversations to improve models unless you opt out. Turning off training applies to new chats going forward.",
+        context: "<strong>Resources:</strong><br>• <a href='https://help.openai.com/en/articles/7730893-data-controls-faq' target='_blank'>OpenAI: Data Controls FAQ</a><br>• <a href='https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance' target='_blank'>OpenAI: how data is used</a>",
+        options: [{ label: "Done", target: "p_end_final" }],
+      },
+
+      {
+        id: "p_end_final",
+        type: "end",
+        x: -600,
+        y: 3900,
+        tag: "Protection Kit",
+        title: "Your protection toolkit",
+        desc: "You now have access to legal support resources, technical tools, and updated platform settings. Keep what works for your practice and revisit regularly as policies and features change.",
+        context: "<strong>Credits: Many tips in this track came from, <a href='https://www.truegrittexturesupply.com/blogs/news/how-to-protect-your-art-from-ai' target='_blank'>True Grit Texture Supply guide</a>.",
+      },
+
+
+      // --- TRACK 2: ADMIN (The Engine) ---
+      {
+        id: "a_type",
+        type: "track-admin",
+        x: 0,
+        y: 400,
+        tag: "Studio & Admin Support",
+        title: "What kind of help do you need?",
+        desc: "AI can help with one-off tasks (like drafting) or recurring systems (like tracking open calls).",
+        options: [
+          { label: "One-off admin support", target: "a_oneoff" },
+          { label: "Recurring automation", target: "a_tech" },
+        ],
+      },
+
+      // One-off Support
+      {
+        id: "a_oneoff",
+        type: "track-admin",
+        x: -250,
+        y: 750,
+        tag: "Advisory",
+        title: "Writing and grant help",
+        desc: "AI tools can help with structure and editing. For privacy, avoid pasting sensitive personal data, confidential contracts, or unpublished work you are not ready to share. Use whichever model you prefer. Below are some of the most common plus a private local alternative as well.",
+        context: "<strong>Tools:</strong><br>• <a href='https://chatgpt.com/' target='_blank'>ChatGPT</a><br>• <a href='https://gemini.google.com/' target='_blank'>Gemini</a><br>• <a href='https://lmstudio.ai/' target='_blank'>LM Studio (Local)</a>",
+        options: [{ label: "I've seen the resources", target: "a_end_tools" }],
+      },
+
+      // Recurring Automation (Tech Level)
+      {
+        id: "a_tech",
+        type: "track-admin",
+        x: 250,
+        y: 750,
+        tag: "Tech Level",
+        title: "How hands on do you want to be with automation?",
+        desc: "Choose no-code for quick setup, or custom workflows for more control.",
+        options: [
+          { label: "No-Code (Drag & Drop)", target: "a_nocode" },
+          { label: "Scripter (I want to build)", target: "a_code" },
+        ],
+      },
+
+      // No Code Branch
+      {
+        id: "a_nocode",
+        type: "track-admin",
+        x: 0,
+        y: 1100,
+        tag: "No-Code",
+        title: "Simple studio bots",
+        desc: "Connect your email, calendar, and web sources without writing code. Here are examples of automations you could create.",
+        options: [
+          { label: "Automate Open Call Notifications", target: "a_zapier_grant" },
+          { label: "Track Mentions", target: "a_zapier_social" },
+        ],
+      },
+      {
+        id: "a_zapier_grant",
+        type: "track-admin",
+        x: -200,
+        y: 1450,
+        tag: "Deadlines",
+        title: "Keep deadlines in one place",
+        desc: "Watch newsletters, RSS feeds, or bookmarked pages for keywords like “open call” for grants, exhibits, and residencies, then add reminders to your calendar.",
+        context: "<strong>Tools:</strong><br>• <a href='https://zapier.com/apps/google-calendar/integrations' target='_blank'>Zapier calendar integrations</a><br>• <a href='https://ifttt.com/' target='_blank'>IFTTT applets</a>",
+        options: [{ label: "Dive into Zapier example", target: "a_end_tools" }],
+      },
+      {
+        id: "a_zapier_social",
+        type: "track-admin",
+        x: 200,
+        y: 1450,
+        tag: "Monitoring",
+        title: "Track mentions of your work",
+        desc: "Set up an alert or bot for your name, studio, or project titles. This can help you notice opportunities, understand how your work circulates, and address misattribution early.",
+        context: "<strong>Try:</strong><br>• <a href='https://www.google.com/alerts' target='_blank'>Google Alerts</a><br>• <a href='https://zapier.com/blog/social-media-automation/' target='_blank'>Zapier guide to social monitoring</a>",
+        options: [{ label: "I've seen the resources", target: "a_end_tools" }],
+      },
+
+      // Code Branch
+      {
+        id: "a_code",
+        type: "track-admin",
+        x: 500,
+        y: 1100,
+        tag: "Power User",
+        title: "Deep automation or running local models",
+        desc: "n8n is a workflow automation tool you can host yourself. Further deepen privacy by running a local chatbot (e.g. LM Studio) is a private chatbot without using the cloud. Explore both with the following examples.",
+        options: [
+          { label: "Scrape Residency Sites", target: "a_n8n_scrape" },
+          { label: "Local LLM for Writing", target: "a_local_llm" },
+          { label: "Small Language Models (Eco)", target: "a_slm" },
+        ],
+      },
+      {
+        id: "a_n8n_scrape",
+        type: "track-admin",
+        x: 450,
+        y: 1450,
+        tag: "Scraping",
+        title: "The residency hunter",
+        desc: "Build a workflow to check arts organizations’ sites regularly and summarize new opportunities into one digest.",
+        context: "<strong>Blueprints:</strong><br>• <a href='https://n8n.io/workflows/' target='_blank'>n8n workflow library</a><br>• <a href='https://github.com/n8n-io/n8n' target='_blank'>n8n GitHub</a>",
+        options: [{ label: "I've seen the resources", target: "a_end_tools" }],
+      },
+      {
+        id: "a_local_llm",
+        type: "track-admin",
+        x: 850,
+        y: 1450,
+        tag: "Visual/Text",
+        title: "Private studio assistant",
+        desc: "Run a model locally so drafts can stay on your device. Running private models (not in the cloud) also takes up less energy resources.",
+        context: "<strong>Install:</strong><br>• <a href='https://ollama.com/' target='_blank'>Ollama</a><br>• <a href='https://lmstudio.ai/' target='_blank'>LM Studio</a>",
+        options: [{ label: "I've seen the resources", target: "a_end_tools" }],
+      },
+      {
+        id: "a_slm",
+        type: "track-admin",
+        x: 1250,
+        y: 1450,
+        tag: "Eco-Friendly",
+        title: "Small Language Models",
+        desc: "Small Language Models (SLMs) require significantly less processing power and energy than large foundational models, making them a more environmentally conscious choice for many tasks.",
+        context: "<strong>Try:</strong><br>• <a href='https://huggingface.co/blog/smollm' target='_blank'>SmolLM (Hugging Face)</a><br>• <a href='https://ollama.com/library/phi3' target='_blank'>Phi-3 (Microsoft)</a>",
+        options: [{ label: "I've seen the resources", target: "a_end_tools" }],
+      },
+
+      {
+        id: "a_end_tools",
+        type: "end",
+        x: 200,
+        y: 1800,
+        tag: "Admin Kit",
+        title: "Your automation stack",
+        desc: "You've now explored administrative support and custom automation options with AI. Start small and adjust as your practice changes.",
+      },
+
+
+      // --- TRACK 3: CREATION (The Lab) ---
+      {
+        id: "c_source",
+        type: "track-create",
+        x: 1000,
+        y: 400,
+        tag: "Co-create",
+        title: "How do you want to work with AI?",
+        desc: "Creating with AI means choosing a model, such as determining the dataset and the terms behind it.",
+        options: [
+          { label: "Ideation & Sketching", target: "c2_sandwich" },
+          { label: "I want to train on MY own art", target: "c_own" },
+          { label: "I want a general pre trained model", target: "c_public" },
+        ],
+      },
+      {
+        id: "c2_sandwich",
+        type: "track-create",
+        x: 700,
+        y: 750,
+        tag: "Workflow",
+        title: "The human sandwich",
+        desc: "Step 1: Human conceives the idea. Step 2: AI generates a sketch or helps brainstorm (e.g. conceptualize idea via dialogue). Step 3: Human refines and finalizes. The machine acts as collaborative not decisive for the creative process.",
+        context: "<strong>Why:</strong> This workflow ensures the final output retains your human touch and lived experience while still using AI.",
+        options: [{ label: "I've seen the resources", target: "c_end_create" }],
+      },
+
+      // Own Data Branch
+      {
+        id: "c_own",
+        type: "track-create",
+        x: 1000,
+        y: 750,
+        tag: "Self-Model",
+        title: "Re-imagine your art with your own machine",
+        desc: "Training a LoRA uses a significantly smaller dataset (such as your own rather than images from all over the web) and takes less processing power too.",
+        options: [
+          { label: "How do I do this?", target: "c_lora_guide" },
+        ],
+      },
+      {
+        id: "c_lora_guide",
+        type: "track-create",
+        x: 1000,
+        y: 1100,
+        tag: "Tutorial",
+        title: "Training a LoRA",
+        desc: "Many workflows start with a small, high quality set of your work plus consistent labels or captions.",
+        context: "<strong>Guides:</strong><br>• <a href='https://stable-diffusion-art.com/train-lora/' target='_blank'>How to Train a LoRA</a><br>• <a href='https://education.civitai.com/' target='_blank'>Civitai Education</a><br>• <a href='https://github.com/bmaltais/kohya_ss' target='_blank'>Kohya_ss (training GUI)</a>",
+        options: [{ label: "I've seen the resources", target: "c_end_create" }],
+      },
+
+      // Public Data Branch
+      {
+        id: "c_public",
+        type: "track-create",
+        x: 1300,
+        y: 750,
+        tag: "Public Models",
+        title: "Options for public models",
+        desc: "Not all public models are the same. Some emphasize licensed sources; others rely on web-scale datasets.",
+        options: [
+          { label: "Certified 'Fair' / Licensed", target: "c_fair" },
+          { label: "Open Source / Scraped", target: "c_open_risk" },
+        ],
+      },
+      {
+        id: "c_fair",
+        type: "track-create",
+        x: 1200,
+        y: 1100,
+        tag: "Certified",
+        title: "Licensed and certified models",
+        desc: "These options prioritize licensed or permissioned training data and clearer terms.",
+        context: "<strong>Resources:</strong><br>• <a href='https://www.fairlytrained.org/certified-models' target='_blank'>Fairly Trained Certified Models</a><br>• <a href='https://firefly.adobe.com/' target='_blank'>Adobe Firefly</a><br>• <a href='https://www.adobe.com/ai/overview/firefly/gen-ai-approach.html' target='_blank'>Firefly training data approach</a><br>• <a href='https://helpx.adobe.com/firefly/web/get-started/learn-the-basics/adobe-firefly-faq.html' target='_blank'>Firefly FAQ for contributors</a>",
+        options: [{ label: "I've seen the resources", target: "c_end_create" }],
+      },
+      {
+        id: "c_open_risk",
+        type: "track-create",
+        x: 1550,
+        y: 1100,
+        tag: "Big Players in the Game",
+        title: "Household name models",
+        desc: "Powerful, often free for limited use, but trained on the open web (such as Laion-5B dataset). Helpful for texture and ideation, but complex for final copyright.",
+        context: "<strong>Tools:</strong><br>• <a href='https://chatgpt.com/' target='_blank'>ChatGPT</a><br>• <a href='https://gemini.google.com/' target='_blank'>Gemini</a><br>• <a href='https://www.midjourney.com/' target='_blank'>Midjourney</a><br>• <a href='https://copilot.microsoft.com/' target='_blank'>Co-Pilot</a><br><br><strong>Learn more:</strong><br>• <a href='https://laion.ai/laion-5b-a-new-era-of-open-large-scale-multi-modal-datasets/' target='_blank'>LAION 5B dataset overview</a><br>• <a href='https://arxiv.org/abs/2210.08402' target='_blank'>LAION 5B paper (arXiv)</a>",
+        options: [{ label: "Tips for prompting and processing AI-generated works", target: "c_naming_check" }],
+      },
+
+      {
+        id: "c_naming_check",
+        type: "track-create",
+        x: 1450,
+        y: 1450,
+        tag: "Ethics Check",
+        title: "Naming Artists?",
+        desc: "Does your prompt use 'In the style of [Living Artist]'?",
+        options: [
+          { label: "Yes", target: "c_naming_stop" },
+          { label: "No", target: "c_copyright_check" },
+        ],
+      },
+      {
+        id: "c_naming_stop",
+        type: "warning",
+        x: 1850,
+        y: 1450,
+        tag: "Stop",
+        title: "ETHICAL STOP",
+        desc: "Do not erode the market of active peers. Describe the technique (e.g., 'impasto') instead.",
+        options: [{ label: "Fixed", target: "c_copyright_check" }],
+      },
+      {
+        id: "c_copyright_check",
+        type: "track-create",
+        x: 1450,
+        y: 1800,
+        tag: "Legal",
+        title: "Copyrighting?",
+        desc: "Do you intend to register copyright for this?",
+        options: [
+          { label: "Yes", target: "c_human_xform" },
+          { label: "No", target: "c_transparency" },
+        ],
+      },
+      {
+        id: "c_human_xform",
+        type: "track-create",
+        x: 1850,
+        y: 1800,
+        tag: "Info",
+        title: "Human Transform",
+        desc: "AI output is often public domain. Check the tools privacy settings to be sure. To claim it as your own, you must process it significantly, for example paint over it or collage it.",
+        context: "<strong>Info:</strong> US Copyright Office requires substantial human authorship.",
+        options: [{ label: "Understood", target: "c_transparency" }],
+      },
+      {
+        id: "c_transparency",
+        type: "track-create",
+        x: 1450,
+        y: 2150,
+        tag: "Action",
+        title: "Transparency",
+        desc: "Action: Label work as #AI-Assisted or #GenerativeArt to maintain trust.",
+        options: [{ label: "Finish", target: "c_end_create" }],
+      },
+
+      {
+        id: "c_end_create",
+        type: "end",
+        x: 1000,
+        y: 2500,
+        tag: "Studio Kit",
+        title: "Your creative stack",
+        desc: "You've explored options from small models to using big tech platforms and tools. Each choice involves trade-offs. When sharing your work, remember your intent shows through your process and documentation. Transparency and clear disclaimers about the tools you use are key to maintaining trust and context around your work.",
+        context: "<strong>Resources:</strong><br>• <a href='https://creativecommons.org/about/cclicenses/' target='_blank'>Creative Commons licenses</a>",
+      },
+    ];
+
+    const world = document.getElementById("world");
+    const svgLayer = document.getElementById("connections");
+
+    let scale = 1;
+    let pointX = window.innerWidth / 2 - 190;
+    let pointY = 40;
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+
+    const trackRoots = ["p_type", "a_type", "c_source"];
+
+    // Recursively collapse a node and its children (Toggle functionality)
+    function getChildren(nodeId) {
+      const node = nodes.find(n => n.id === nodeId);
+      if (!node || !node.options) return [];
+      return node.options.map(o => o.target).filter(t => t);
+    }
+
+    function deepCollapse(nodeId) {
+      const children = getChildren(nodeId);
+      children.forEach(childId => deepCollapse(childId));
+
+      const el = document.getElementById(nodeId);
+      if (el) {
+        el.classList.remove("visible");
+        el.querySelectorAll(".opt-btn.selected").forEach(b => b.classList.remove("selected"));
+
+        // Reset context
+        const ctx = el.querySelector('.node-context');
+        if (ctx) ctx.classList.remove('active');
+        const ctxBtn = el.querySelector('.context-toggle');
+        if (ctxBtn) ctxBtn.innerText = (nodes.find(n => n.id === nodeId)?.type === 'end') ? 'Open Resources' : 'Resources';
+      }
+
+      // Remove outgoing paths from this node
+      children.forEach(childId => {
+        const pId = `path-${nodeId}-${childId}`;
+        const p = document.getElementById(pId);
+        if (p) p.remove();
+      });
+    }
+
+    function createNode(data) {
+      const el = document.createElement("div");
+      el.className = `node ${data.type}`;
+      el.id = data.id;
+      el.style.left = `${data.x}px`;
+      el.style.top = `${data.y}px`;
+
+      let html = `<div class="node-header"><span class="node-tag">${data.tag || "Step"}</span></div>`;
+      html += `<div class="node-title">${data.title}</div>`;
+      html += `<div class="node-desc">${data.desc}</div>`;
+
+      if (data.context) {
+        const label = data.type === 'end' ? 'Open Resources' : 'Resources';
+        html += `<button class="context-toggle" onclick="toggleContext(this)">${label}</button>`;
+        html += `<div class="node-context">${data.context}</div>`;
+      }
+
+      if (data.options && data.options.length) {
+        html += '<div class="options">';
+        data.options.forEach((opt) => {
+          const safeTarget = opt.target ? opt.target.replace(/"/g, "&quot;") : "";
+          html += `<button class="opt-btn" onclick="selectOption('${data.id}','${safeTarget}',this)">${opt.label}</button>`;
+        });
+        html += "</div>";
+      }
+
+      el.innerHTML = html;
+      world.appendChild(el);
+    }
+
+    function initMap() {
+      nodes.forEach(createNode);
+      updateTransform();
+      setTimeout(() => revealNode("start"), 400);
+    }
+
+    function revealNode(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.add("visible");
+    }
+
+    function selectOption(fromId, toId, btn) {
+      // Toggle OFF if already selected
+      if (btn.classList.contains("selected")) {
+        btn.classList.remove("selected");
+        if (toId) {
+          deepCollapse(toId);
+          // Remove connection
+          const path = document.getElementById(`path-${fromId}-${toId}`);
+          if (path) path.remove();
+        }
+        return;
+      }
+
+      // Toggle ON (Multi-track allowed)
+      btn.classList.add("selected");
+      if (toId) {
+        drawConnection(fromId, toId);
+        revealNode(toId);
+        const node = nodes.find((n) => n.id === toId);
+        if (node) focusNode(node);
+      }
+    }
+
+    function toggleContext(btn) {
+      const ctx = btn.nextElementSibling;
+      if (ctx) {
+        ctx.classList.toggle('active');
+        btn.innerText = ctx.classList.contains('active') ? "Hide Resources" : "Resources";
+      }
+    }
+
+    function drawConnection(fromId, toId) {
+      const pathId = `path-${fromId}-${toId}`;
+      if (document.getElementById(pathId)) return;
+      const from = nodes.find((n) => n.id === fromId);
+      const to = nodes.find((n) => n.id === toId);
+      if (!from || !to) return;
+
+      const nodeWidth = parseInt(
+        getComputedStyle(document.documentElement).getPropertyValue("--node-width")
+      );
+      const startX = from.x + 0.5 * nodeWidth;
+      const startY = from.y + 120;
+      const endX = to.x + 0.5 * nodeWidth;
+      const endY = to.y;
+      const midY = (startY + endY) / 2;
+
+      const d = `M ${startX} ${startY} C ${startX} ${midY}, ${endX} ${midY}, ${endX} ${endY}`;
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("id", pathId);
+      path.setAttribute("d", d);
+      svgLayer.appendChild(path);
+      requestAnimationFrame(() => path.classList.add("visible"));
+    }
+
+    function updateTransform() {
+      world.style.transform = `translate(${pointX}px, ${pointY}px) scale(${scale})`;
+    }
+
+    function focusNode(node) {
+      const viewport = document.getElementById("viewport");
+      const rect = viewport.getBoundingClientRect();
+      const targetX = node.x + 180;
+      const targetY = node.y + 80;
+      pointX = rect.width / 2 - targetX * scale;
+      pointY = rect.height / 2 - targetY * scale;
+      if (pointY > 80) pointY = 80;
+      world.style.transition = "transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)";
+      updateTransform();
+      setTimeout(() => (world.style.transition = "none"), 700);
+    }
+
+    function applyZoom(delta, cx, cy) {
+      const oldScale = scale;
+      let next = scale + delta;
+      if (next < 0.4) next = 0.4;
+      if (next > 2.4) next = 2.4;
+      pointX = cx - ((cx - pointX) * next) / oldScale;
+      pointY = cy - ((cy - pointY) * next) / oldScale;
+      scale = next;
+      updateTransform();
+    }
+
+    function zoomButton(delta) {
+      const viewport = document.getElementById("viewport");
+      const rect = viewport.getBoundingClientRect();
+      world.style.transition = "transform 0.25s ease-out";
+      applyZoom(delta, rect.width / 2, rect.height / 2);
+      setTimeout(() => (world.style.transition = "none"), 260);
+    }
+
+    function resetMap() {
+      while (svgLayer.firstChild) svgLayer.removeChild(svgLayer.firstChild);
+      world.innerHTML = "";
+      expandedTracks.clear();
+      nodes.forEach(createNode);
+      scale = 1;
+      const viewport = document.getElementById("viewport");
+      const rect = viewport.getBoundingClientRect();
+      pointX = rect.width / 2 - 190;
+      pointY = 40;
+      updateTransform();
+      setTimeout(() => revealNode("start"), 200);
+    }
+
+    const viewportEl = document.getElementById("viewport");
+
+    viewportEl.addEventListener("wheel", (e) => {
+      e.preventDefault();
+      const delta = -e.deltaY * 0.001;
+      const rect = viewportEl.getBoundingClientRect();
+      const cx = e.clientX - rect.left;
+      const cy = e.clientY - rect.top;
+      applyZoom(delta, cx, cy);
+    });
+
+    viewportEl.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      startX = e.clientX - pointX;
+      startY = e.clientY - pointY;
+      viewportEl.style.cursor = "grabbing";
+    });
+
+    window.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      pointX = e.clientX - startX;
+      pointY = e.clientY - startY;
+      updateTransform();
+    });
+
+    window.addEventListener("mouseup", () => {
+      isDragging = false;
+      viewportEl.style.cursor = "grab";
+    });
+
+    initMap();
+  </script>
+</body>
+
+</html>
