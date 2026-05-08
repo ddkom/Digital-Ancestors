@@ -5,14 +5,14 @@ export function HeroSection() {
   return (
     <section className="hero" aria-labelledby="hero-heading">
       <div>
-        <div className="hero-kicker">
+        {/* <div className="hero-kicker">
           <span className="dot" /> Artist-led guidance for AI choices
-        </div>
+        </div> */}
         <h1 id="hero-heading" className="hero-title">
-          A guided map to help artists{" "}
-          <span className="hero-highlight">
-            use AI, refuse it, or find the balance in between
-          </span>
+          {/* A guided map to help artists{" "} */}
+          {/* <span className="hero-highlight"> */}
+            use AI, refuse it, or find the balance in between...
+          {/* </span> */}
         </h1>
         <p className="hero-body">
           This framework turns complex questions about copyright, privacy, ethics, and creativity
@@ -30,33 +30,6 @@ export function HeroSection() {
           </Button>
         </div>
       </div>
-
-      <aside className="hero-aside" aria-label="What this map can help you do">
-        <div className="hero-aside-title">What this framework does</div>
-        <div className="hero-aside-body">
-          Answer a small set of questions and receive clear next steps and informative resources. You
-          can reduce scraping risk, use AI for studio support without oversharing, or experiment
-          with new tools while staying grounded in your personal preferences.
-        </div>
-        <div className="hero-aside-grid">
-          <div className="hero-chip">
-            <span className="label">If you want to</span>
-            Say no to AI scraping and protect your archives or new uploads
-          </div>
-          <div className="hero-chip">
-            <span className="label">If you want to</span>
-            Get help with admin work without sharing sensitive material
-          </div>
-          <div className="hero-chip">
-            <span className="label">If you want to</span>
-            Experiment with AI while understanding copyright implications
-          </div>
-          <div className="hero-chip">
-            <span className="label">If you feel</span>
-            Start somewhere, even if you feel unsure
-          </div>
-        </div>
-      </aside>
     </section>
   );
 }

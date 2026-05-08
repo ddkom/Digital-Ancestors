@@ -4,7 +4,7 @@ export function WhySection() {
       <div className="two-col">
         <div className="section-header">
           <div className="section-kicker">Backstory</div>
-          <h2 className="section-title">Why we built this framework</h2>
+          <h2 className="section-title">Why we care</h2>
           <p className="section-body">
             Generative AI is reshaping how art is made, circulated, and valued. It can bring up grief,
             frustration, curiosity, and possibility all at the same time. This project brings together

@@ -48,7 +48,7 @@ export function TracksSection() {
     <section id="tracks" className="section" aria-labelledby="tracks-heading">
       <SectionHeader
         kicker="Three pathways"
-        title="Tracks to match your preferences"
+        title="Why are you here?"
         titleId="tracks-heading"
         body="You can follow one track or move between them. The map starts where you are and adapts as your needs change."
       />

@@ -49,15 +49,28 @@ export function ConnectionLayer({ edges, nodeById, nodeWidth }: Props) {
           />
         </filter>
         <marker
-          id="connections-arrow"
-          markerWidth="8"
-          markerHeight="8"
-          refX="7"
-          refY="4"
+          id="connections-start-dot"
+          viewBox="0 0 7 7"
+          markerWidth="7"
+          markerHeight="7"
+          refX="3.5"
+          refY="3.5"
           orient="auto"
-          markerUnits="strokeWidth"
+          markerUnits="userSpaceOnUse"
         >
-          <path d="M0 0 L8 4 L0 8 z" fill="currentColor" />
+          <circle cx="3.5" cy="3.5" r="3" fill="currentColor" />
+        </marker>
+        <marker
+          id="connections-arrow"
+          viewBox="0 0 10 10"
+          markerWidth="10"
+          markerHeight="10"
+          refX="10"
+          refY="5"
+          orient="auto"
+          markerUnits="userSpaceOnUse"
+        >
+          <path d="M0 0 L10 5 L0 10 z" fill="currentColor" />
         </marker>
       </defs>
       {edges.map(({ from, to }) => {
@@ -72,6 +85,7 @@ export function ConnectionLayer({ edges, nodeById, nodeWidth }: Props) {
             id={pathId}
             d={connectionPathD(a, b, nodeWidth)}
             className={visible ? "visible" : undefined}
+            markerStart="url(#connections-start-dot)"
             markerEnd="url(#connections-arrow)"
           />
         );

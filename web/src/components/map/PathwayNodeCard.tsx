@@ -9,16 +9,6 @@ type Props = {
   onToggleOption: (toId: string) => void;
 };
 
-/** Slight per-card rotation so the layout feels less grid-aligned. */
-function nodeTiltDeg(id: string): number {
-  let h = 2166136261;
-  for (let i = 0; i < id.length; i++) {
-    h ^= id.charCodeAt(i);
-    h = Math.imul(h, 16777619);
-  }
-  return ((h % 11) - 5) * 0.22;
-}
-
 export function PathwayNodeCard({
   node,
   visible,
@@ -33,11 +23,7 @@ export function PathwayNodeCard({
     <div
       id={node.id}
       className={`node ${node.type}${visible ? " visible" : ""}`.trim()}
-      style={{
-        left: node.x,
-        top: node.y,
-        ["--node-tilt" as string]: `${nodeTiltDeg(node.id)}deg`,
-      }}
+      style={{ left: node.x, top: node.y }}
     >
       <div className="node-header">
         <span className="node-tag">{node.tag ?? "Step"}</span>

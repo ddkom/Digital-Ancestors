@@ -1,7 +1,15 @@
+import { useState } from "react";
 import { PillNavButton } from "../ui/PillNavButton";
 import { scrollToSection } from "../../lib/scrollToSection";
 
 export function SiteHeader() {
+  const [activePill, setActivePill] = useState<"map" | "why" | "tracks" | "who">("map");
+
+  const handlePillClick = (section: "map" | "why" | "tracks" | "who") => {
+    setActivePill(section);
+    scrollToSection(section);
+  };
+
   return (
     <header>
       <div className="brand">
@@ -14,12 +22,18 @@ export function SiteHeader() {
         </div>
       </div>
       <nav className="pill-nav">
-        <PillNavButton active onClick={() => scrollToSection("map")}>
+        <PillNavButton active={activePill === "map"} onClick={() => handlePillClick("map")}>
           Launch the map
         </PillNavButton>
-        <PillNavButton onClick={() => scrollToSection("why")}>Backstory</PillNavButton>
-        <PillNavButton onClick={() => scrollToSection("tracks")}>Tracks</PillNavButton>
-        <PillNavButton onClick={() => scrollToSection("who")}>Who it&apos;s for</PillNavButton>
+        <PillNavButton active={activePill === "why"} onClick={() => handlePillClick("why")}>
+          Backstory
+        </PillNavButton>
+        <PillNavButton active={activePill === "tracks"} onClick={() => handlePillClick("tracks")}>
+          Tracks
+        </PillNavButton>
+        <PillNavButton active={activePill === "who"} onClick={() => handlePillClick("who")}>
+          Who it&apos;s for
+        </PillNavButton>
       </nav>
     </header>
   );
