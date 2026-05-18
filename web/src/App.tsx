@@ -5,7 +5,7 @@ import { SiteHeader } from "./components/layout/SiteHeader";
 import { SiteFooter } from "./components/layout/SiteFooter";
 import { HeroSection } from "./components/sections/HeroSection";
 import { WhySection } from "./components/sections/WhySection";
-import { TracksSection } from "./components/sections/TracksSection";
+import { TracksSection } from "./components/sections/TracksSection";  
 import { MapSection } from "./components/sections/MapSection";
 import { WhoSection } from "./components/sections/WhoSection";
 
