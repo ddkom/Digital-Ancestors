@@ -1,56 +1,25 @@
+import { copy } from "../../locales";
 import { SectionHeader } from "./SectionHeader";
 
-const tracks = [
-  {
-    pillStyle: { background: "rgba(244,63,94,0.08)", border: "1px solid rgba(248,113,113,0.5)" },
-    dot: "#f97373",
-    label: "Protect",
-    title: "Track 1 - Reduce how much work is used for AI training",
-    body:
-      "For artists who want to minimise how much of their work ends up in training datasets or is copied by AI models.",
-    items: [
-      "Image cloaking tools like Glaze or Nightshade",
-      "Attribution and watermarking practices",
-      "Website-level preferences and opt-outs",
-      "Contract language for client and platform agreements",
-    ],
-  },
-  {
-    pillStyle: { background: "rgba(252,211,77,0.08)", border: "1px solid rgba(250,204,21,0.55)" },
-    dot: "#facc15",
-    label: "Admin Support",
-    title: "Track 2 - Use AI for studio admin without oversharing",
-    body:
-      "For artists who want to use AI as a studio assistant. For example, help with writing and planning while keeping control over their data.",
-    items: [
-      "Prompt tips to improve privacy",
-      "Automation tools and examples",
-      "Mainstream and local chat tool options",
-    ],
-  },
-  {
-    pillStyle: { background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.55)" },
-    dot: "#22c55e",
-    label: "Co-create",
-    title: "Track 3 - Make new work with AI",
-    body:
-      "For artists experimenting with AI media who want to stay grounded in ethics and transparency.",
-    items: [
-      "Model choices and data sourcing basics",
-      "Train models with your own data",
-      "What current copyright law covers and what it does not",
-    ],
-  },
-];
+const trackStyles = [
+  { pillStyle: { background: "rgba(160,167,229,0.08)" }, dot: "#A0A7E5" },
+  { pillStyle: { background: "rgba(142,165,42,0.08)" }, dot: "#8EA52A" },
+  { pillStyle: { background: "rgba(34,197,94,0.08)" }, dot: "#22c55e" },
+] as const;
+
+const tracks = copy.tracks.cards.map((card, i) => ({
+  ...card,
+  ...trackStyles[i],
+}));
 
 export function TracksSection() {
   return (
     <section id="tracks" className="section" aria-labelledby="tracks-heading">
       <SectionHeader
-        kicker="Three pathways"
-        title="Why are you here?"
+        kicker={copy.tracks.kicker}
+        title={copy.tracks.title}
         titleId="tracks-heading"
-        body="You can follow one track or move between them. The map starts where you are and adapts as your needs change."
+        body={copy.tracks.body}
       />
       <div className="track-grid">
         {tracks.map((t) => (

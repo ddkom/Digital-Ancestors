@@ -1,5 +1,6 @@
 import type { PathwayNode } from "../../types/pathway";
 import { usePathwayMap } from "../../hooks/usePathwayMap";
+import { copy } from "../../locales";
 import { MapViewport } from "../map/MapViewport";
 import { ConnectionLayer } from "../map/ConnectionLayer";
 import { PathwayNodeCard } from "../map/PathwayNodeCard";
@@ -51,19 +52,19 @@ export function MapSection({ nodes }: Props) {
   return (
     <section id="map" className="section" aria-labelledby="map-heading">
       <SectionHeader
-        kicker="Interactive map"
-        title="Click through decisions and receive guided actions"
+        kicker={copy.map.kicker}
+        title={copy.map.title}
         titleId="map-heading"
-        body="Start any path and move at your own pace. Each step reveals a practical action or resource. You can explore multiple paths and revisit them anytime."
+        body={copy.map.body}
       />
 
       <div className="map-shell">
         <div className="map-shell-header">
-          <div>AI Decision Flow • Artist Pathways</div>
+          <div>{copy.map.shellTitle}</div>
           <div className="map-shell-badges">
-            <div className="map-shell-badge">Click and drag to pan</div>
-            <div className="map-shell-badge">Scroll or pinch to zoom</div>
-            <div className="map-shell-badge">Try more than one path</div>
+            <div className="map-shell-badge">{copy.map.badges.pan}</div>
+            <div className="map-shell-badge">{copy.map.badges.zoom}</div>
+            <div className="map-shell-badge">{copy.map.badges.paths}</div>
           </div>
         </div>
 

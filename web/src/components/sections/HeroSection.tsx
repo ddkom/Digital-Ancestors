@@ -1,32 +1,25 @@
 import { Button } from "../ui/Button";
 import { scrollToSection } from "../../lib/scrollToSection";
+import { copy } from "../../locales";
 
 export function HeroSection() {
   return (
     <section className="hero" aria-labelledby="hero-heading">
       <div>
-        {/* <div className="hero-kicker">
-          <span className="dot" /> Artist-led guidance for AI choices
-        </div> */}
         <h1 id="hero-heading" className="hero-title">
-          {/* A guided map to help artists{" "} */}
-          {/* <span className="hero-highlight"> */}
-            use AI, refuse it, or find the balance in between...
-          {/* </span> */}
+          {copy.hero.title}
         </h1>
         <p className="hero-body">
-          This framework turns complex questions about copyright, privacy, ethics, and creativity
-          into a guided map with concrete actions and resources you can use right now. It is part of{" "}
-          <em>Digital Ancestors: Mortality, Memory, Machine</em>, a collaboration between artists
-          and responsible AI practitioners exploring how creative work can coexist with emerging
-          technologies.
+          {copy.hero.bodyBeforeProject}{" "}
+          <em>{copy.common.projectTitle}</em>
+          {copy.hero.bodyAfterProject}
         </p>
         <div className="hero-actions">
           <Button variant="primary" onClick={() => scrollToSection("map")}>
-            Start the map
+            {copy.hero.cta.map}
           </Button>
           <Button variant="ghost" onClick={() => scrollToSection("why")}>
-            Read the backstory
+            {copy.hero.cta.why}
           </Button>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import DOMPurify from "dompurify";
+import { copy } from "../../locales";
 import type { PathwayNode } from "../../types/pathway";
 
 type Props = {
@@ -16,8 +17,10 @@ export function PathwayNodeCard({
   onToggleOption,
 }: Props) {
   const [contextOpen, setContextOpen] = useState(false);
-  const resourceLabel = node.type === "end" ? "Open Resources" : "Resources";
-  const toggleLabel = contextOpen ? "Hide Resources" : resourceLabel;
+  const labels = copy.pathwayNodeCard;
+  const resourceLabel =
+    node.type === "end" ? labels.openResources : labels.resources;
+  const toggleLabel = contextOpen ? labels.hideResources : resourceLabel;
 
   return (
     <div
@@ -26,7 +29,7 @@ export function PathwayNodeCard({
       style={{ left: node.x, top: node.y }}
     >
       <div className="node-header">
-        <span className="node-tag">{node.tag ?? "Step"}</span>
+        <span className="node-tag">{node.tag ?? labels.defaultTag}</span>
       </div>
       <div className="node-title">{node.title}</div>
       <div className="node-desc">{node.desc}</div>

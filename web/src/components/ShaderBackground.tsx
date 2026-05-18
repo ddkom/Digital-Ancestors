@@ -164,6 +164,10 @@ export function ShaderBackground({ palette }: Props = {}) {
       let shaderOK = false;
       let noctaves = 4;
       const c: number[] = [];
+      const MOUSE_INFLUENCE = 0.35;
+      const MOUSE_LERP = 0.05;
+      let smoothMouseX = 0;
+      let smoothMouseY = 0;
 
       const initc = () => {
         for (let i = 0; i < 22; i++) c[i] = p.random(-5, 5);
@@ -197,9 +201,11 @@ export function ShaderBackground({ palette }: Props = {}) {
           p.background(244, 230, 210);
           return;
         }
+        smoothMouseX = p.lerp(smoothMouseX, p.mouseX, MOUSE_LERP);
+        smoothMouseY = p.lerp(smoothMouseY, p.mouseY, MOUSE_LERP);
         test.setUniform("iResolution", [p.width, p.height]);
         test.setUniform("iTime", p.millis() * 0.0005);
-        test.setUniform("iMouse", [p.mouseX, p.mouseY]);
+        test.setUniform("iMouse", [smoothMouseX * MOUSE_INFLUENCE, smoothMouseY * MOUSE_INFLUENCE]);
         test.setUniform("noctaves", noctaves);
         test.setUniform("c", c);
         const pal = paletteRef.current;

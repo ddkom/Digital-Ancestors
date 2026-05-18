@@ -1,4 +1,11 @@
 {
+  "scripts": {
+    "dev": "npm run dev --prefix web",
+    "build": "npm run build --prefix web",
+    "lint": "npm run lint --prefix web",
+    "preview": "npm run preview --prefix web",
+    "validate:pathway": "npm run validate:pathway --prefix web"
+  },
   "dependencies": {
     "p5": "^2.2.3"
   },

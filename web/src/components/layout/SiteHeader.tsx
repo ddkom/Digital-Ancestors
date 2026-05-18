@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { copy } from "../../locales";
 import { PillNavButton } from "../ui/PillNavButton";
 import { scrollToSection } from "../../lib/scrollToSection";
 
@@ -10,29 +11,31 @@ export function SiteHeader() {
     scrollToSection(section);
   };
 
+  const { nav } = copy.siteHeader;
+
   return (
     <header>
       <div className="brand">
         <div className="brand-mark" aria-hidden="true" />
         <div>
-          <div className="brand-title">AI PATHWAYS FOR ARTISTS</div>
+          <div className="brand-title">{copy.siteHeader.brandTitle}</div>
           <div style={{ fontSize: "0.78rem", color: "var(--muted)" }}>
-            An open framework for protection, care, and experimentation
+            {copy.siteHeader.brandSubtitle}
           </div>
         </div>
       </div>
       <nav className="pill-nav">
         <PillNavButton active={activePill === "map"} onClick={() => handlePillClick("map")}>
-          Launch the map
+          {nav.map}
         </PillNavButton>
         <PillNavButton active={activePill === "why"} onClick={() => handlePillClick("why")}>
-          Backstory
+          {nav.why}
         </PillNavButton>
         <PillNavButton active={activePill === "tracks"} onClick={() => handlePillClick("tracks")}>
-          Tracks
+          {nav.tracks}
         </PillNavButton>
         <PillNavButton active={activePill === "who"} onClick={() => handlePillClick("who")}>
-          Who it&apos;s for
+          {nav.who}
         </PillNavButton>
       </nav>
     </header>
