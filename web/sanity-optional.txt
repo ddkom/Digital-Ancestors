@@ -1,0 +1,14 @@
+Optional Sanity CMS (add when you need a hosted editor instead of editing JSON in Git)
+
+1. Create a Sanity project: https://www.sanity.io/docs/getting-started-with-sanity
+2. Define a document type that mirrors src/types/pathway.ts:
+   - id: slug (unique)
+   - type: string (allowed: start, track-protect, track-admin, track-create, warning, end)
+   - x, y: numbers
+   - tag, title, desc: strings
+   - context: text or block content (if using Portable Text, map in the React layer)
+   - options: array of { label: string, target: reference to pathwayNode }
+3. Use a read-only API token in the browser (CORS allow your Vercel domain) or fetch at build time in vite build.
+4. Deploy Studio: sanity deploy (free hosting on *.sanity.studio).
+
+Current app loads graph data from src/data/pathwayNodes.json at build time.

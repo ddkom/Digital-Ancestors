@@ -1,0 +1,137 @@
+{
+  "common": {
+    "projectTitle": "Digital Ancestors: Mortality, Memory, Machine",
+    "openFramework": "open framework"
+  },
+  "meta": {
+    "pageTitle": "Open Framework for Artists · AI Pathways Map"
+  },
+  "siteHeader": {
+    "brandTitle": "AI PATHWAYS FOR ARTISTS",
+    "brandSubtitle": "An open framework for protection, care, and experimentation",
+    "nav": {
+      "map": "Launch the map",
+      "why": "Backstory",
+      "tracks": "Tracks",
+      "who": "Who it's for"
+    }
+  },
+  "hero": {
+    "title": "use AI, refuse it, or find the balance in between...",
+    "bodyBeforeProject": "This framework turns complex questions about copyright, privacy, ethics, and creativity into a guided map with concrete actions and resources you can use right now. It is part of",
+    "bodyAfterProject": ", a collaboration between artists and responsible AI practitioners exploring how creative work can coexist with emerging technologies.",
+    "cta": {
+      "map": "Start the map",
+      "why": "Read the backstory"
+    }
+  },
+  "why": {
+    "kicker": "Backstory",
+    "title": "Why we care",
+    "body": "Generative AI is reshaping how art is made, circulated, and valued. It can bring up grief, frustration, curiosity, and possibility all at the same time. This project brings together practicing artists, AI researchers, technologists, and policy advisors who care about artist autonomy and responsible technology.",
+    "storyCard": {
+      "intro": "This map grew out of months of creative research and development experiments in",
+      "middle": ". It started with a question: Can AI help care for creative legacy, and cultural memory? We designed gallery works, kept process journals, and tested a number of tools over six months. Alongside our art exhibit, we turned what we learned into an",
+      "middleSuffix": "that other artists can adapt, critique, and help build upon.",
+      "closing": "The map helps clarify what you might want from your own engagement with AI, from opting out entirely to collaborating on new work."
+    }
+  },
+  "who": {
+    "kicker": "Who it supports",
+    "title": "Arts communities and the people around them",
+    "body": "The framework is designed for working artists and creative practitioners. It is also useful for cultural workers, arts organizations, educators, policy-makers, and AI builders who want to better understand artist needs.",
+    "audiences": {
+      "artists": {
+        "heading": "For artists and creative professionals",
+        "body": "Clarify your boundaries, learn practical safety steps, and explore new workflows if you want them. Use the map when posting work, signing agreements, applying for funding, or testing new tools."
+      },
+      "organisations": {
+        "heading": "For arts and legal organisations",
+        "body": "Use the framework in workshops, office hours, or resource hubs. The map can support legal clinics, digital safety training, and collective discussions."
+      },
+      "policy": {
+        "heading": "For policy makers",
+        "body": "See where artists encounter friction in current tools and contracts. Use the map to surface real-world scenarios when shaping policy."
+      },
+      "researchers": {
+        "heading": "For AI researchers and developers",
+        "body": "Treat the map as a set of user stories that highlight artist concerns around consent, provenance, and creative control."
+      }
+    }
+  },
+  "tracks": {
+    "kicker": "Three pathways",
+    "title": "Why are you here?",
+    "body": "You can follow one track or move between them. The map starts where you are and adapts as your needs change.",
+    "cards": [
+      {
+        "label": "Protect",
+        "title": "Reduce how much work is used for AI training",
+        "body": "For artists who want to minimise how much of their work ends up in training datasets or is copied by AI models.",
+        "items": [
+          "Image cloaking tools like Glaze or Nightshade",
+          "Attribution and watermarking practices",
+          "Website-level preferences and opt-outs",
+          "Contract language for client and platform agreements"
+        ]
+      },
+      {
+        "label": "Admin Support",
+        "title": "Use AI for studio admin without oversharing",
+        "body": "For artists who want to use AI as a studio assistant. For example, help with writing and planning while keeping control over their data.",
+        "items": [
+          "Prompt tips to improve privacy",
+          "Automation tools and examples",
+          "Mainstream and local chat tool options"
+        ]
+      },
+      {
+        "label": "Co-create",
+        "title": "Make new work with AI",
+        "body": "For artists experimenting with AI media who want to stay grounded in ethics and transparency.",
+        "items": [
+          "Model choices and data sourcing basics",
+          "Train models with your own data",
+          "What current copyright law covers and what it does not"
+        ]
+      }
+    ]
+  },
+  "map": {
+    "kicker": "Interactive map",
+    "title": "Click through decisions and receive guided actions",
+    "body": "Start any path and move at your own pace. Each step reveals a practical action or resource. You can explore multiple paths and revisit them anytime.",
+    "shellTitle": "AI Decision Flow • Artist Pathways",
+    "badges": {
+      "pan": "Click and drag to pan",
+      "zoom": "Scroll or pinch to zoom",
+      "paths": "Try more than one path"
+    },
+    "legend": {
+      "protect": "Protect and preserve",
+      "admin": "Studio and admin support",
+      "create": "Co-create and transform"
+    },
+    "controls": {
+      "fullscreen": "Fullscreen",
+      "reset": "Restart map",
+      "zoomIn": "Zoom in",
+      "zoomOut": "Zoom out"
+    },
+    "aria": {
+      "legend": "Track legend",
+      "controls": "Map zoom controls"
+    }
+  },
+  "pathwayNodeCard": {
+    "defaultTag": "Step",
+    "resources": "Resources",
+    "openResources": "Open Resources",
+    "hideResources": "Hide Resources"
+  },
+  "siteFooter": {
+    "intro": "Built as part of the",
+    "projectQuoted": "\"Digital Ancestors: Mortality, Memory, Machine\"",
+    "outro": "project in collaboration with artists and responsible AI practitioners. This is a living framework (v23)."
+  }
+}
