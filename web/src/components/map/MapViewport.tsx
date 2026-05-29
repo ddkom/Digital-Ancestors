@@ -14,6 +14,7 @@ type Props = {
   setPointX: (v: number) => void;
   setPointY: (v: number) => void;
   applyZoom: (delta: number, cx: number, cy: number) => void;
+  wheelZoomEnabled?: boolean;
   children: ReactNode;
 };
 
@@ -24,12 +25,26 @@ export function MapViewport({
   setPointX,
   setPointY,
   applyZoom,
+  wheelZoomEnabled = false,
   children,
 }: Props) {
   const isDragging = useRef(false);
   const startXRef = useRef(0);
   const startYRef = useRef(0);
 
+  useEffect(() => {
+    if (!wheelZoomEnabled) return;
+    const el = viewportRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      const delta = -e.deltaY * 0.001;
+      const rect = el.getBoundingClientRect();
+      applyZoom(delta, e.clientX - rect.left, e.clientY - rect.top);
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, [applyZoom, viewportRef, wheelZoomEnabled]);
 
   const onMouseDown = useCallback(
     (e: React.MouseEvent) => {
