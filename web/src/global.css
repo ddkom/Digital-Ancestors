@@ -576,6 +576,7 @@ svg#connections path.visible {
 
 .node-anchor:not(.visible) .node-edge-options,
 .node-anchor:not(.visible) .opt-btn,
+.node-anchor:not(.visible) .resource-btn,
 .node-anchor:not(.visible) .context-toggle {
   pointer-events: none;
 }
@@ -689,6 +690,56 @@ svg#connections path.visible {
 
 .node-context.active {
   display: block;
+}
+
+.context-block + .context-block {
+  margin-top: 10px;
+}
+
+.context-notes {
+  margin: 6px 0 0;
+}
+
+.context-resources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.resource-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 80px;
+  border: none;
+  background: color-mix(in srgb, var(--map-edge-stroke) 22%, white);
+  color: color-mix(in srgb, var(--map-edge-stroke) 75%, var(--ink));
+  padding: 10px 16px;
+  font-size: 0.75rem;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: none;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.resource-btn:hover {
+  background: color-mix(in srgb, var(--map-edge-stroke) 32%, white);
+  color: color-mix(in srgb, var(--map-edge-stroke) 88%, var(--ink));
+  transform: translateY(-1px);
+}
+
+.resource-btn::after {
+  content: "↗";
+  margin-left: 6px;
+  font-size: 0.7rem;
+  opacity: 0.55;
+}
+
+.resource-btn:hover::after {
+  opacity: 0.9;
 }
 
 .context-toggle {

@@ -1,7 +1,37 @@
 import { useState } from "react";
-import DOMPurify from "dompurify";
 import { copy } from "../../locales";
-import type { PathwayNode } from "../../types/pathway";
+import type { PathwayContextBlock, PathwayNode } from "../../types/pathway";
+
+function normalizeContext(
+  context: PathwayNode["context"],
+): PathwayContextBlock[] {
+  if (!context) return [];
+  return Array.isArray(context) ? context : [context];
+}
+
+function ContextBlock({ block }: { block: PathwayContextBlock }) {
+  return (
+    <div className="context-block">
+      <strong>{block["resource-type"]}:</strong>
+      {block.notes ? <p className="context-notes">{block.notes}</p> : null}
+      {block.resources?.length ? (
+        <div className="context-resources">
+          {block.resources.map((resource) => (
+            <a
+              key={resource.link}
+              href={resource.link}
+              className="resource-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {resource.name}
+            </a>
+          ))}
+        </div>
+      ) : null}
+    </div>
+  );
+}
 
 type Props = {
   node: PathwayNode;
@@ -21,6 +51,7 @@ export function PathwayNodeCard({
   const resourceLabel =
     node.type === "end" ? labels.openResources : labels.resources;
   const toggleLabel = contextOpen ? labels.hideResources : resourceLabel;
+  const contextBlocks = normalizeContext(node.context);
 
   return (
     <div
@@ -37,7 +68,7 @@ export function PathwayNodeCard({
         <div className="node-title">{node.title}</div>
         <div className="node-desc">{node.desc}</div>
 
-        {node.context ? (
+        {contextBlocks.length ? (
           <>
             <button
               type="button"
@@ -48,12 +79,14 @@ export function PathwayNodeCard({
             </button>
             <div
               className={`node-context${contextOpen ? " active" : ""}`.trim()}
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(node.context, {
-                  ADD_ATTR: ["target", "rel"],
-                }),
-              }}
-            />
+            >
+              {contextBlocks.map((block) => (
+                <ContextBlock
+                  key={block["resource-type"]}
+                  block={block}
+                />
+              ))}
+            </div>
           </>
         ) : null}
 
