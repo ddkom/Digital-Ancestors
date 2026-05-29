@@ -109,6 +109,7 @@ export function MapSection({ nodes, shaderPalette }: Props) {
                 edges={activeEdges}
                 nodeById={nodeById}
                 nodeWidth={NODE_WIDTH}
+                layoutEpoch={[...visibleIds].sort().join()}
               />
               {nodes.map((node) => (
                 <PathwayNodeCard

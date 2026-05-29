@@ -1,6 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import type { PathwayNode } from "../../types/pathway";
-import { connectionPathD } from "../../hooks/usePathwayMap";
+import {
+  connectionPathD,
+  estimateEdgeAnchors,
+} from "../../hooks/usePathwayMap";
+import { measureEdgeAnchors, type EdgeAnchor } from "./connectionAnchors";
 
 type Edge = { from: string; to: string };
 
@@ -8,17 +12,45 @@ type Props = {
   edges: Edge[];
   nodeById: Map<string, PathwayNode>;
   nodeWidth: number;
+  /** Re-measure when nodes finish appearing or resize. */
+  layoutEpoch: string;
 };
 
-export function ConnectionLayer({ edges, nodeById, nodeWidth }: Props) {
+export function ConnectionLayer({
+  edges,
+  nodeById,
+  nodeWidth,
+  layoutEpoch,
+}: Props) {
   const [visibleKeys, setVisibleKeys] = useState<Set<string>>(new Set());
+  const [anchors, setAnchors] = useState<Map<string, EdgeAnchor>>(new Map());
+
+  useLayoutEffect(() => {
+    const update = () =>
+      setAnchors(measureEdgeAnchors(edges, nodeById, nodeWidth));
+
+    update();
+    const raf = requestAnimationFrame(update);
+    const t = window.setTimeout(update, 650);
+
+    const world = document.getElementById("world");
+    const ro = new ResizeObserver(update);
+    if (world) {
+      ro.observe(world);
+      world.querySelectorAll(".node-anchor").forEach((node) => ro.observe(node));
+    }
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.clearTimeout(t);
+      ro.disconnect();
+    };
+  }, [edges, nodeById, nodeWidth, layoutEpoch]);
 
   useEffect(() => {
     const keys = new Set(edges.map((e) => `${e.from}-${e.to}`));
     setVisibleKeys(new Set());
-    const id = requestAnimationFrame(() => {
-      setVisibleKeys(keys);
-    });
+    const id = requestAnimationFrame(() => setVisibleKeys(keys));
     return () => cancelAnimationFrame(id);
   }, [edges]);
 
@@ -74,17 +106,22 @@ export function ConnectionLayer({ edges, nodeById, nodeWidth }: Props) {
         </marker>
       </defs>
       {edges.map(({ from, to }) => {
-        const a = nodeById.get(from);
-        const b = nodeById.get(to);
-        if (!a || !b) return null;
-        const pathId = `path-${from}-${to}`;
-        const visible = visibleKeys.has(`${from}-${to}`);
+        const fromNode = nodeById.get(from);
+        const toNode = nodeById.get(to);
+        if (!fromNode || !toNode) return null;
+
+        const edgeKey = `${from}-${to}`;
+        const measured = anchors.get(edgeKey);
+        const fallback = estimateEdgeAnchors(fromNode, toNode, nodeWidth);
+        const { startX, startY, endX, endY } = measured ?? fallback;
+        const d = connectionPathD(startX, startY, endX, endY);
+
         return (
           <path
-            key={pathId}
-            id={pathId}
-            d={connectionPathD(a, b, nodeWidth)}
-            className={visible ? "visible" : undefined}
+            key={`path-${from}-${to}`}
+            id={`path-${from}-${to}`}
+            d={d}
+            className={visibleKeys.has(edgeKey) ? "visible" : undefined}
             markerStart="url(#connections-start-dot)"
             markerEnd="url(#connections-arrow)"
           />
