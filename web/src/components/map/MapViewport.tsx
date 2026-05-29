@@ -30,21 +30,10 @@ export function MapViewport({
   const startXRef = useRef(0);
   const startYRef = useRef(0);
 
-  useEffect(() => {
-    const el = viewportRef.current;
-    if (!el) return;
-    const onWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      const delta = -e.deltaY * 0.001;
-      const rect = el.getBoundingClientRect();
-      applyZoom(delta, e.clientX - rect.left, e.clientY - rect.top);
-    };
-    el.addEventListener("wheel", onWheel, { passive: false });
-    return () => el.removeEventListener("wheel", onWheel);
-  }, [applyZoom, viewportRef]);
 
   const onMouseDown = useCallback(
     (e: React.MouseEvent) => {
+      if ((e.target as HTMLElement).closest("button, a, .map-controls")) return;
       isDragging.current = true;
       startXRef.current = e.clientX - pointX;
       startYRef.current = e.clientY - pointY;
