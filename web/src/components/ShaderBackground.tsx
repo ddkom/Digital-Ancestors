@@ -218,11 +218,6 @@ export function ShaderBackground({ palette }: Props = {}) {
         p.plane(p.width, p.height);
       };
 
-      p.mouseReleased = () => {
-        noctaves = noctaves === 5 ? 4 : noctaves + 1;
-        if (noctaves === 4) initc();
-      };
-
       p.windowResized = () => {
         p.resizeCanvas(p.windowWidth, p.windowHeight);
       };

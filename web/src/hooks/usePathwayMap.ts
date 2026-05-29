@@ -7,8 +7,11 @@ import {
   useState,
 } from "react";
 import type { PathwayNode } from "../types/pathway";
+import { LAYOUT_NODE_WIDTH } from "../utils/layoutPathwayNodes";
 
-const NODE_WIDTH = 360;
+const NODE_WIDTH = LAYOUT_NODE_WIDTH;
+const MIN_SCALE = 0.15;
+const MAX_SCALE = 2.4;
 
 function getChildren(
   nodeId: string,
@@ -126,8 +129,8 @@ export function usePathwayMap(nodes: PathwayNode[]) {
     (delta: number, cx: number, cy: number) => {
       setScale((oldScale) => {
         let next = oldScale + delta;
-        if (next < 0.4) next = 0.4;
-        if (next > 2.4) next = 2.4;
+        if (next < MIN_SCALE) next = MIN_SCALE;
+        if (next > MAX_SCALE) next = MAX_SCALE;
         setPointX((px) => cx - ((cx - px) * next) / oldScale);
         setPointY((py) => cy - ((cy - py) * next) / oldScale);
         return next;
@@ -157,7 +160,7 @@ export function usePathwayMap(nodes: PathwayNode[]) {
   useEffect(() => {
     const onFullscreen = () => {
       setScale((s) => {
-        if (document.fullscreenElement && s < 0.9) return 0.9;
+        if (document.fullscreenElement && s < MIN_SCALE) return MIN_SCALE;
         if (!document.fullscreenElement) return 1;
         return s;
       });
@@ -196,43 +199,83 @@ export function usePathwayMap(nodes: PathwayNode[]) {
   };
 }
 
-/** Deterministic variation so edges don't stack as identical chart curves. */
-function edgeSeed(fromId: string, toId: string): number {
-  let h = 2166136261;
-  for (const c of `${fromId}|${toId}`) {
-    h ^= c.charCodeAt(0);
-    h = Math.imul(h, 16777619);
-  }
-  return h >>> 0;
-}
+export const CONNECTION_CORNER_RADIUS = 80;
+/** Vertical run below the button center before the first turn. */
+export const CONNECTION_STEM_DOWN = 52;
 
-/**
- * Wide, asymmetric Bézier paths — reads more like a hand-drawn flow than a straight diagram.
- */
-export function connectionPathD(
+/** Fallback when the option button is not yet in the DOM. */
+export function estimateEdgeAnchors(
   from: PathwayNode,
   to: PathwayNode,
   nodeWidth: number,
+): { startX: number; startY: number; endX: number; endY: number } {
+  const options = from.options ?? [];
+  const idx = Math.max(0, options.findIndex((o) => o.target === to.id));
+  const count = Math.max(1, options.length);
+  const btnWidth = 132;
+  const gap = 8;
+  const rowWidth = count * btnWidth + (count - 1) * gap;
+  const cardHeight = 200;
+  const btnHeight = 34;
+  return {
+    startX:
+      from.x +
+      nodeWidth / 2 -
+      rowWidth / 2 +
+      idx * (btnWidth + gap) +
+      btnWidth / 2,
+    startY: from.y + cardHeight + btnHeight / 2,
+    endX: to.x + nodeWidth / 2,
+    endY: to.y,
+  };
+}
+
+/**
+ * Orthogonal connector: button center → down → across → down to target top.
+ * Corners use exterior fillets (arcs bulge outside the L, not into the corner).
+ */
+export function connectionPathD(
+  startX: number,
+  startY: number,
+  endX: number,
+  endY: number,
+  cornerRadius = CONNECTION_CORNER_RADIUS,
 ): string {
-  const startX = from.x + 0.5 * nodeWidth;
-  const startY = from.y + 120;
-  const endX = to.x + 0.5 * nodeWidth;
-  const endY = to.y;
   const dx = endX - startX;
-  const dy = endY - startY;
-  const s = edgeSeed(from.id, to.id);
-  const t = (s % 1000) / 1000;
-  const t2 = ((s >> 10) % 1000) / 1000;
+  const sx = Math.sign(dx) || 1;
 
-  const sweepBase =
-    Math.max(120, Math.abs(dx) * 0.5 + Math.abs(dy) * 0.14) * (0.85 + t * 0.35);
-  const sign = dx >= 0 ? 1 : -1;
-  const wobble = ((s >> 3) % 9) - 4;
+  let routeY = startY + CONNECTION_STEM_DOWN;
+  if (endY >= startY) {
+    routeY = Math.min(routeY, endY - cornerRadius * 1.1);
+    routeY = Math.max(routeY, startY + 12);
+  } else {
+    routeY = startY - CONNECTION_STEM_DOWN;
+    routeY = Math.max(routeY, endY + cornerRadius * 1.1);
+    routeY = Math.min(routeY, startY - 12);
+  }
 
-  const cx1 = startX + sign * sweepBase + wobble * 10;
-  const cy1 = startY + dy * (0.22 + t2 * 0.2);
-  const cx2 = endX - sign * sweepBase * 0.52 + wobble * 6;
-  const cy2 = endY - dy * (0.24 + t * 0.18);
+  const dy1 = routeY - startY;
+  const dy2 = endY - routeY;
 
-  return `M ${startX} ${startY} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${endX} ${endY}`;
+  let r = Math.min(cornerRadius, Math.abs(dx) / 2, Math.abs(dy1), Math.abs(dy2));
+  if (r < 2) {
+    return `M ${startX} ${startY} L ${startX} ${routeY} L ${endX} ${routeY} L ${endX} ${endY}`;
+  }
+
+  const sy1 = Math.sign(dy1) || 1;
+  const sy2 = Math.sign(dy2) || 1;
+
+  const cross1 = -sy1 * sx;
+  const cross2 = sx * sy2;
+  const sweep1 = cross1 > 0 ? 1 : 0;
+  const sweep2 = cross2 > 0 ? 1 : 0;
+
+  return [
+    `M ${startX} ${startY}`,
+    `L ${startX} ${routeY - sy1 * r}`,
+    `A ${r} ${r} 0 0 ${sweep1} ${startX + sx * r} ${routeY}`,
+    `L ${endX - sx * r} ${routeY}`,
+    `A ${r} ${r} 0 0 ${sweep2} ${endX} ${routeY + sy2 * r}`,
+    `L ${endX} ${endY}`,
+  ].join(" ");
 }

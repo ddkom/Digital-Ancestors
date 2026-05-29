@@ -31,6 +31,7 @@ for (; i < html.length; i++) {
 }
 const arrayLiteral = html.slice(begin, i);
 const nodes = new Function(`"use strict"; return ${arrayLiteral}`)();
+const stripped = nodes.map(({ x, y, ...rest }) => rest);
 fs.mkdirSync(path.dirname(outPath), { recursive: true });
-fs.writeFileSync(outPath, JSON.stringify(nodes, null, 2) + "\n", "utf8");
-console.log("Wrote", outPath, "nodes:", nodes.length);
+fs.writeFileSync(outPath, JSON.stringify(stripped, null, 2) + "\n", "utf8");
+console.log("Wrote", outPath, "nodes:", stripped.length);

@@ -1,5 +1,6 @@
-import pathwayNodes from "./data/pathwayNodes.json";
-import type { PathwayNode } from "./types/pathway";
+import pathwayNodeDefs from "./data/pathwayNodes.json";
+import type { PathwayNodeDef } from "./types/pathway";
+import { layoutPathwayNodes } from "./utils/layoutPathwayNodes";
 import { ShaderBackground } from "./components/ShaderBackground";
 import { SiteHeader } from "./components/layout/SiteHeader";
 import { SiteFooter } from "./components/layout/SiteFooter";
@@ -9,25 +10,25 @@ import { TracksSection } from "./components/sections/TracksSection";
 import { MapSection } from "./components/sections/MapSection";
 import { WhoSection } from "./components/sections/WhoSection";
 
-const nodes = pathwayNodes as PathwayNode[];
+const nodes = layoutPathwayNodes(pathwayNodeDefs as PathwayNodeDef[]);
+
+const shaderPalette = {
+  deep: "#6D88C9",
+  light: "#F2AAB0",
+  accent: "#97CAF1",
+  highlight: "#8EA52A",
+};
 
 export default function App() {
   return (
     <>
-      <ShaderBackground
-        palette={{
-          deep: "#6D88C9", // blue
-          light: "#F2AAB0", // pink
-          accent: "#97CAF1", // light blue
-          highlight: "#8EA52A", // green
-        }}
-      />
+      <ShaderBackground palette={shaderPalette} />
       <SiteHeader />
       <main>
         <HeroSection />
         <WhySection />
         <TracksSection />
-        <MapSection nodes={nodes} />
+        <MapSection nodes={nodes} shaderPalette={shaderPalette} />
         <WhoSection />
       </main>
       <SiteFooter />
