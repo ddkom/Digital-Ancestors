@@ -27,6 +27,8 @@ export function PathwayNodeCard({
       id={node.id}
       className={`node-anchor ${node.type}${visible ? " visible" : ""}`.trim()}
       style={{ left: node.x, top: node.y }}
+      {...(!visible ? { inert: true } : {})}
+      aria-hidden={!visible}
     >
       <div className="node node-card">
         <div className="node-header">

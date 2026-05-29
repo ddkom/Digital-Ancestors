@@ -2,10 +2,12 @@ import {
   useCallback,
   useEffect,
   useRef,
+  type CSSProperties,
   type ReactNode,
   type RefObject,
   type Ref,
 } from "react";
+import type { ShaderPalette } from "../ShaderBackground";
 
 /** Scroll-wheel zoom (fullscreen only). */
 const WHEEL_ZOOM_SENSITIVITY = 0.001;
@@ -22,6 +24,7 @@ type Props = {
   setPointY: (v: number) => void;
   applyZoom: (delta: number, cx: number, cy: number) => void;
   wheelZoomEnabled?: boolean;
+  shaderPalette?: ShaderPalette;
   children: ReactNode;
 };
 
@@ -33,8 +36,17 @@ export function MapViewport({
   setPointY,
   applyZoom,
   wheelZoomEnabled = false,
+  shaderPalette,
   children,
 }: Props) {
+  const paletteStyle = shaderPalette
+    ? ({
+        "--map-edge-stroke": shaderPalette.deep,
+        "--map-btn-bg": shaderPalette.highlight,
+        "--map-btn-bg-hover": `color-mix(in srgb, ${shaderPalette.highlight} 88%, white)`,
+        "--map-btn-bg-selected": `color-mix(in srgb, ${shaderPalette.highlight} 72%, #1a1a14)`,
+      } as CSSProperties)
+    : undefined;
   const isDragging = useRef(false);
   const startXRef = useRef(0);
   const startYRef = useRef(0);
@@ -139,7 +151,7 @@ export function MapViewport({
       id="viewport"
       ref={viewportRef as Ref<HTMLDivElement>}
       onMouseDown={onMouseDown}
-      style={{ cursor: "grab" }}
+      style={{ cursor: "grab", ...paletteStyle }}
     >
       {children}
     </div>

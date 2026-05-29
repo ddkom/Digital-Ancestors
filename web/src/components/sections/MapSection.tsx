@@ -98,6 +98,7 @@ export function MapSection({ nodes, shaderPalette }: Props) {
             setPointY={setPointY}
             applyZoom={applyZoom}
             wheelZoomEnabled={isMapFullscreen}
+            shaderPalette={shaderPalette}
           >
             <div
               id="world"

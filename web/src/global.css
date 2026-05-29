@@ -460,7 +460,10 @@ h1.hero-title {
 }
 
 #viewport {
-  --map-edge-stroke: #2a2418;
+  --map-edge-stroke: #6d88c9;
+  --map-btn-bg: #8ea52a;
+  --map-btn-bg-hover: color-mix(in srgb, var(--map-btn-bg) 88%, white);
+  --map-btn-bg-selected: color-mix(in srgb, var(--map-btn-bg) 72%, #1a1a14);
   width: 100%;
   height: 75vh;
   overflow: hidden;
@@ -502,7 +505,7 @@ svg#connections {
 svg#connections path {
   fill: none;
   stroke: var(--map-edge-stroke);
-  stroke-width: 3.65px;
+  stroke-width: 10px;
   stroke-linecap: round;
   stroke-linejoin: round;
   filter: url(#connections-ink);
@@ -569,7 +572,12 @@ svg#connections path.visible {
   padding: 0 12px;
   box-sizing: border-box;
   transform: translateY(50%);
-  pointer-events: auto;
+}
+
+.node-anchor:not(.visible) .node-edge-options,
+.node-anchor:not(.visible) .opt-btn,
+.node-anchor:not(.visible) .context-toggle {
+  pointer-events: none;
 }
 
 /* Start tile: stack choices on the card’s bottom-center edge */
@@ -703,9 +711,9 @@ svg#connections path.visible {
   width: auto;
   /* max-width: 11.5rem; */
   border-radius: 80px;
-  border: 1px solid rgba(35, 24, 20, 0.14);
-  background: #faf7f0;
-  color: #2a241c;
+  border: 1px solid color-mix(in srgb, var(--map-btn-bg) 65%, #1a1a14);
+  background: var(--map-btn-bg);
+  color: #faf8f3;
   padding: 14px 20px;
   font-size: 0.78rem;
   line-height: 1.25;
@@ -717,8 +725,8 @@ svg#connections path.visible {
   text-align: center;
   white-space: nowrap;
   box-shadow:
-    0 6px 16px rgba(35, 24, 20, 0.12),
-    0 1px 0 rgba(255, 255, 255, 0.65) inset;
+    0 6px 16px color-mix(in srgb, var(--map-btn-bg) 45%, transparent),
+    0 1px 0 rgba(255, 255, 255, 0.35) inset;
 }
 
 .opt-btn span.sub {
@@ -727,14 +735,14 @@ svg#connections path.visible {
 }
 
 .opt-btn:hover {
-  background: rgba(255, 255, 255, 0.95);
-  border-color: rgba(35, 24, 20, 0.22);
+  background: var(--map-btn-bg-hover);
+  border-color: color-mix(in srgb, var(--map-btn-bg) 55%, #1a1a14);
 }
 
 .opt-btn.selected {
-  background: #2a2418;
+  background: var(--map-btn-bg-selected);
   color: #faf8f3;
-  border-color: #2a2418;
+  border-color: color-mix(in srgb, var(--map-btn-bg) 45%, #1a1a14);
   font-weight: 600;
 }
 

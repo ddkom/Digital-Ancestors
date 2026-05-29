@@ -2,8 +2,6 @@
   {
     "id": "start",
     "type": "start",
-    "x": 0,
-    "y": 0,
     "tag": "Start",
     "title": "What is your primary focus today?",
     "desc": "This map helps artists explore practical tools and workflows based on your practice, location, and comfort level. Choose where to start based on what’s most suited for you right now.",
@@ -25,8 +23,6 @@
   {
     "id": "p_type",
     "type": "track-protect",
-    "x": -900,
-    "y": 400,
     "tag": "Focus",
     "title": "What kind of work are you protecting?",
     "desc": "Different media types come with different rights frameworks, unions, and support organizations.",
@@ -44,8 +40,6 @@
   {
     "id": "p_region_visual",
     "type": "track-protect",
-    "x": -1300,
-    "y": 750,
     "tag": "Location",
     "title": "Where are you based?",
     "desc": "Copyright frameworks and rights can vary by region.",
@@ -67,8 +61,6 @@
   {
     "id": "p_region_perf",
     "type": "track-protect",
-    "x": -500,
-    "y": 750,
     "tag": "Location",
     "title": "Where are you based?",
     "desc": "Copyright frameworks and rights can vary by region.",
@@ -86,8 +78,6 @@
   {
     "id": "p_can_visual",
     "type": "track-protect",
-    "x": -1500,
-    "y": 1100,
     "tag": "Canada",
     "title": "CARFAC and Canadian copyright",
     "desc": "Canadian copyright law does not yet explicitly regulate AI training as fair dealing. Here are tips to assert your rights.",
@@ -105,8 +95,6 @@
   {
     "id": "p_can_contract",
     "type": "track-protect",
-    "x": -1500,
-    "y": 1450,
     "tag": "Contracts",
     "title": "Consent, credit, compensation",
     "desc": "Contract language can clarify how your work may be used, including whether it can be used for AI training or related reuse.",
@@ -121,8 +109,6 @@
   {
     "id": "p_can_takedown",
     "type": "track-protect",
-    "x": -1500,
-    "y": 1800,
     "tag": "Action",
     "title": "Advocacy and collective action",
     "desc": "Many Canadian arts organizations are pushing for clearer rules and protections for creators around AI. Below are organizations that contributed to Canada's copyright and AI policy. Stay informed by following any of the organizations listed.",
@@ -137,8 +123,6 @@
   {
     "id": "p_uk_visual",
     "type": "track-protect",
-    "x": -1100,
-    "y": 1100,
     "tag": "UK",
     "title": "UK copyright and AI",
     "desc": "The UK has been consulting on copyright changes related to text and data mining. Creator groups continue to advocate for consent-based systems and meaningful transparency.",
@@ -156,8 +140,6 @@
   {
     "id": "p_uk_dacs",
     "type": "track-protect",
-    "x": -1100,
-    "y": 1450,
     "tag": "Rights",
     "title": "DACS royalties and AI guidance",
     "desc": "DACS helps visual creators claim royalties for reuse and shares guidance as policy develops around AI and copyright.",
@@ -172,8 +154,6 @@
   {
     "id": "p_uk_aop",
     "type": "track-protect",
-    "x": -1100,
-    "y": 1800,
     "tag": "Lobbying",
     "title": "Association of Photographers and allies",
     "desc": "Photographer-led and creator rights organizations share updates, advocacy, and practical guidance as policy and platform terms change.",
@@ -188,8 +168,6 @@
   {
     "id": "p_global_visual",
     "type": "track-protect",
-    "x": -1300,
-    "y": 2150,
     "tag": "Global",
     "title": "Global and other regions",
     "desc": "We are expanding regional coverage. For now, you can still take practical steps like clearer contracts, stronger attribution habits, and technical preference signals.",
@@ -203,8 +181,6 @@
   {
     "id": "p_can_perf",
     "type": "track-protect",
-    "x": -700,
-    "y": 1100,
     "tag": "Canada Perf",
     "title": "ACTRA and performance rights",
     "desc": "For performers, consent and contract language matter in AI-related work. Union guidance can help you understand options for voice, likeness, and reuse.",
@@ -219,8 +195,6 @@
   {
     "id": "p_uk_perf",
     "type": "track-protect",
-    "x": -300,
-    "y": 1100,
     "tag": "UK Perf",
     "title": "Equity UK AI toolkit",
     "desc": "Equity UK provides guidance for performers, including rights, contracts, and practical steps for AI-mediated performance.",
@@ -235,8 +209,6 @@
   {
     "id": "p_tech_defense",
     "type": "track-protect",
-    "x": -900,
-    "y": 2500,
     "tag": "The Tech Shield",
     "title": "Layer 2: technical tools and preference signals",
     "desc": "Policy changes can take time. Some artists use technical tools to reduce unwanted reuse and to communicate training preferences. What fits your situation?",
@@ -262,8 +234,6 @@
   {
     "id": "p_eco",
     "type": "track-protect",
-    "x": -400,
-    "y": 2850,
     "tag": "Environment",
     "title": "Environmental Consideration",
     "desc": "Environmental impact is a common reason for refusing AI or opting for specific tools. Understanding the dialogue of consumption can inform your choices.",
@@ -278,8 +248,6 @@
   {
     "id": "p_glaze",
     "type": "track-protect",
-    "x": -1300,
-    "y": 2850,
     "tag": "Cloaking",
     "title": "Glaze, Nightshade, and Mist",
     "desc": "These tools aim to make images harder for models to learn from or mimic. Treat them as optional layers, especially for work you share publicly.",
@@ -294,8 +262,6 @@
   {
     "id": "p_spawning",
     "type": "track-protect",
-    "x": -1000,
-    "y": 2850,
     "tag": "Opt-Out",
     "title": "Spawning, Kudurru, and web signals",
     "desc": "You can register preferences, reduce scraping, and add signals to your site. These steps may help communicate intent, even if enforcement varies by platform and developer. (Note: services are sometimes offline/beta).",
@@ -310,8 +276,6 @@
   {
     "id": "p_opt_platforms",
     "type": "track-protect",
-    "x": -700,
-    "y": 2850,
     "tag": "Settings",
     "title": "Platform data controls",
     "desc": "Many apps have settings related to generative AI features or model improvement. Pick a platform to review the current steps and what the setting does.",
@@ -341,8 +305,6 @@
   {
     "id": "p_opt_linkedin",
     "type": "track-protect",
-    "x": -1000,
-    "y": 3200,
     "tag": "Social",
     "title": "LinkedIn (Microsoft)",
     "desc": "LinkedIn’s “Data for Generative AI Improvement” setting may be on by default in some regions. Turning it off stops future use for training, but it does not undo training that already happened.",
@@ -357,8 +319,6 @@
   {
     "id": "p_opt_meta",
     "type": "track-protect",
-    "x": -600,
-    "y": 3200,
     "tag": "Social",
     "title": "Meta (Facebook and Instagram)",
     "desc": "In the EU and UK, Meta provides a way to object to certain data use under GDPR. In other regions, controls may be limited and requests may be handled differently.",
@@ -373,8 +333,6 @@
   {
     "id": "p_opt_adobe",
     "type": "track-protect",
-    "x": -200,
-    "y": 3200,
     "tag": "Creative",
     "title": "Adobe Creative Cloud",
     "desc": "Adobe has an account setting called “content analysis for product improvement” that you can turn off. This setting is about product improvement and may affect features that analyze content.",
@@ -389,8 +347,6 @@
   {
     "id": "p_opt_office",
     "type": "track-protect",
-    "x": -600,
-    "y": 3550,
     "tag": "Office",
     "title": "Microsoft Office connected experiences",
     "desc": "Office has privacy settings for connected experiences that can analyze content to provide cloud features. Microsoft documents how to manage these settings.",
@@ -405,8 +361,6 @@
   {
     "id": "p_opt_chatgpt",
     "type": "track-protect",
-    "x": -200,
-    "y": 3550,
     "tag": "AI Chat",
     "title": "ChatGPT (OpenAI)",
     "desc": "On consumer accounts, OpenAI may use conversations to improve models unless you opt out. Turning off training applies to new chats going forward.",
@@ -421,8 +375,6 @@
   {
     "id": "p_end_final",
     "type": "end",
-    "x": -600,
-    "y": 3900,
     "tag": "Protection Kit",
     "title": "Your protection toolkit",
     "desc": "You now have access to legal support resources, technical tools, and updated platform settings. Keep what works for your practice and revisit regularly as policies and features change.",
@@ -431,8 +383,6 @@
   {
     "id": "a_type",
     "type": "track-admin",
-    "x": 0,
-    "y": 400,
     "tag": "Studio & Admin Support",
     "title": "What kind of help do you need?",
     "desc": "AI can help with one-off tasks (like drafting) or recurring systems (like tracking open calls).",
@@ -450,8 +400,6 @@
   {
     "id": "a_oneoff",
     "type": "track-admin",
-    "x": -250,
-    "y": 750,
     "tag": "Advisory",
     "title": "Writing and grant help",
     "desc": "AI tools can help with structure and editing. For privacy, avoid pasting sensitive personal data, confidential contracts, or unpublished work you are not ready to share. Use whichever model you prefer. Below are some of the most common plus a private local alternative as well.",
@@ -466,8 +414,6 @@
   {
     "id": "a_tech",
     "type": "track-admin",
-    "x": 250,
-    "y": 750,
     "tag": "Tech Level",
     "title": "How hands on do you want to be with automation?",
     "desc": "Choose no-code for quick setup, or custom workflows for more control.",
@@ -485,8 +431,6 @@
   {
     "id": "a_nocode",
     "type": "track-admin",
-    "x": 0,
-    "y": 1100,
     "tag": "No-Code",
     "title": "Simple studio bots",
     "desc": "Connect your email, calendar, and web sources without writing code. Here are examples of automations you could create.",
@@ -504,8 +448,6 @@
   {
     "id": "a_zapier_grant",
     "type": "track-admin",
-    "x": -200,
-    "y": 1450,
     "tag": "Deadlines",
     "title": "Keep deadlines in one place",
     "desc": "Watch newsletters, RSS feeds, or bookmarked pages for keywords like “open call” for grants, exhibits, and residencies, then add reminders to your calendar.",
@@ -520,8 +462,6 @@
   {
     "id": "a_zapier_social",
     "type": "track-admin",
-    "x": 200,
-    "y": 1450,
     "tag": "Monitoring",
     "title": "Track mentions of your work",
     "desc": "Set up an alert or bot for your name, studio, or project titles. This can help you notice opportunities, understand how your work circulates, and address misattribution early.",
@@ -536,8 +476,6 @@
   {
     "id": "a_code",
     "type": "track-admin",
-    "x": 500,
-    "y": 1100,
     "tag": "Power User",
     "title": "Deep automation or running local models",
     "desc": "n8n is a workflow automation tool you can host yourself. Further deepen privacy by running a local chatbot (e.g. LM Studio) is a private chatbot without using the cloud. Explore both with the following examples.",
@@ -559,8 +497,6 @@
   {
     "id": "a_n8n_scrape",
     "type": "track-admin",
-    "x": 450,
-    "y": 1450,
     "tag": "Scraping",
     "title": "The residency hunter",
     "desc": "Build a workflow to check arts organizations’ sites regularly and summarize new opportunities into one digest.",
@@ -575,8 +511,6 @@
   {
     "id": "a_local_llm",
     "type": "track-admin",
-    "x": 850,
-    "y": 1450,
     "tag": "Visual/Text",
     "title": "Private studio assistant",
     "desc": "Run a model locally so drafts can stay on your device. Running private models (not in the cloud) also takes up less energy resources.",
@@ -591,8 +525,6 @@
   {
     "id": "a_slm",
     "type": "track-admin",
-    "x": 1250,
-    "y": 1450,
     "tag": "Eco-Friendly",
     "title": "Small Language Models",
     "desc": "Small Language Models (SLMs) require significantly less processing power and energy than large foundational models, making them a more environmentally conscious choice for many tasks.",
@@ -607,8 +539,6 @@
   {
     "id": "a_end_tools",
     "type": "end",
-    "x": 200,
-    "y": 1800,
     "tag": "Admin Kit",
     "title": "Your automation stack",
     "desc": "You've now explored administrative support and custom automation options with AI. Start small and adjust as your practice changes."
@@ -616,8 +546,6 @@
   {
     "id": "c_source",
     "type": "track-create",
-    "x": 1000,
-    "y": 400,
     "tag": "Co-create",
     "title": "How do you want to work with AI?",
     "desc": "Creating with AI means choosing a model, such as determining the dataset and the terms behind it.",
@@ -639,8 +567,6 @@
   {
     "id": "c2_sandwich",
     "type": "track-create",
-    "x": 700,
-    "y": 750,
     "tag": "Workflow",
     "title": "The human sandwich",
     "desc": "Step 1: Human conceives the idea. Step 2: AI generates a sketch or helps brainstorm (e.g. conceptualize idea via dialogue). Step 3: Human refines and finalizes. The machine acts as collaborative not decisive for the creative process.",
@@ -655,8 +581,6 @@
   {
     "id": "c_own",
     "type": "track-create",
-    "x": 1000,
-    "y": 750,
     "tag": "Self-Model",
     "title": "Re-imagine your art with your own machine",
     "desc": "Training a LoRA uses a significantly smaller dataset (such as your own rather than images from all over the web) and takes less processing power too.",
@@ -670,8 +594,6 @@
   {
     "id": "c_lora_guide",
     "type": "track-create",
-    "x": 1000,
-    "y": 1100,
     "tag": "Tutorial",
     "title": "Training a LoRA",
     "desc": "Many workflows start with a small, high quality set of your work plus consistent labels or captions.",
@@ -686,8 +608,6 @@
   {
     "id": "c_public",
     "type": "track-create",
-    "x": 1300,
-    "y": 750,
     "tag": "Public Models",
     "title": "Options for public models",
     "desc": "Not all public models are the same. Some emphasize licensed sources; others rely on web-scale datasets.",
@@ -705,8 +625,6 @@
   {
     "id": "c_fair",
     "type": "track-create",
-    "x": 1200,
-    "y": 1100,
     "tag": "Certified",
     "title": "Licensed and certified models",
     "desc": "These options prioritize licensed or permissioned training data and clearer terms.",
@@ -721,8 +639,6 @@
   {
     "id": "c_open_risk",
     "type": "track-create",
-    "x": 1550,
-    "y": 1100,
     "tag": "Big Players in the Game",
     "title": "Household name models",
     "desc": "Powerful, often free for limited use, but trained on the open web (such as Laion-5B dataset). Helpful for texture and ideation, but complex for final copyright.",
@@ -737,8 +653,6 @@
   {
     "id": "c_naming_check",
     "type": "track-create",
-    "x": 1450,
-    "y": 1450,
     "tag": "Ethics Check",
     "title": "Naming Artists?",
     "desc": "Does your prompt use 'In the style of [Living Artist]'?",
@@ -756,8 +670,6 @@
   {
     "id": "c_naming_stop",
     "type": "warning",
-    "x": 1850,
-    "y": 1450,
     "tag": "Stop",
     "title": "ETHICAL STOP",
     "desc": "Do not erode the market of active peers. Describe the technique (e.g., 'impasto') instead.",
@@ -771,8 +683,6 @@
   {
     "id": "c_copyright_check",
     "type": "track-create",
-    "x": 1450,
-    "y": 1800,
     "tag": "Legal",
     "title": "Copyrighting?",
     "desc": "Do you intend to register copyright for this?",
@@ -790,8 +700,6 @@
   {
     "id": "c_human_xform",
     "type": "track-create",
-    "x": 1850,
-    "y": 1800,
     "tag": "Info",
     "title": "Human Transform",
     "desc": "AI output is often public domain. Check the tools privacy settings to be sure. To claim it as your own, you must process it significantly, for example paint over it or collage it.",
@@ -806,8 +714,6 @@
   {
     "id": "c_transparency",
     "type": "track-create",
-    "x": 1450,
-    "y": 2150,
     "tag": "Action",
     "title": "Transparency",
     "desc": "Action: Label work as #AI-Assisted or #GenerativeArt to maintain trust.",
@@ -821,8 +727,6 @@
   {
     "id": "c_end_create",
     "type": "end",
-    "x": 1000,
-    "y": 2500,
     "tag": "Studio Kit",
     "title": "Your creative stack",
     "desc": "You've explored options from small models to using big tech platforms and tools. Each choice involves trade-offs. When sharing your work, remember your intent shows through your process and documentation. Transparency and clear disclaimers about the tools you use are key to maintaining trust and context around your work.",

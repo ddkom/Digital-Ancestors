@@ -11,14 +11,20 @@ export type PathwayOption = {
   target?: string;
 };
 
-export type PathwayNode = {
+/** Node definition from JSON — layout is computed unless x/y are overridden. */
+export type PathwayNodeDef = {
   id: string;
   type: PathwayNodeType;
-  x: number;
-  y: number;
+  x?: number;
+  y?: number;
   tag?: string;
   title: string;
   desc: string;
   context?: string;
   options?: PathwayOption[];
+};
+
+export type PathwayNode = PathwayNodeDef & {
+  x: number;
+  y: number;
 };

@@ -7,8 +7,9 @@ import {
   useState,
 } from "react";
 import type { PathwayNode } from "../types/pathway";
+import { LAYOUT_NODE_WIDTH } from "../utils/layoutPathwayNodes";
 
-const NODE_WIDTH = 360;
+const NODE_WIDTH = LAYOUT_NODE_WIDTH;
 const MIN_SCALE = 0.15;
 const MAX_SCALE = 2.4;
 

@@ -1,5 +1,6 @@
-import pathwayNodes from "./data/pathwayNodes.json";
-import type { PathwayNode } from "./types/pathway";
+import pathwayNodeDefs from "./data/pathwayNodes.json";
+import type { PathwayNodeDef } from "./types/pathway";
+import { layoutPathwayNodes } from "./utils/layoutPathwayNodes";
 import { ShaderBackground } from "./components/ShaderBackground";
 import { SiteHeader } from "./components/layout/SiteHeader";
 import { SiteFooter } from "./components/layout/SiteFooter";
@@ -9,7 +10,7 @@ import { TracksSection } from "./components/sections/TracksSection";
 import { MapSection } from "./components/sections/MapSection";
 import { WhoSection } from "./components/sections/WhoSection";
 
-const nodes = pathwayNodes as PathwayNode[];
+const nodes = layoutPathwayNodes(pathwayNodeDefs as PathwayNodeDef[]);
 
 const shaderPalette = {
   deep: "#6D88C9",
