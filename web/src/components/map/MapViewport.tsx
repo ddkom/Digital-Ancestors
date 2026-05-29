@@ -7,6 +7,13 @@ import {
   type Ref,
 } from "react";
 
+/** Scroll-wheel zoom (fullscreen only). */
+const WHEEL_ZOOM_SENSITIVITY = 0.001;
+/** Trackpad pinch arrives as ctrl+wheel; higher than scroll for snappier zoom. */
+const PINCH_WHEEL_SENSITIVITY = 0.007;
+/** Two-finger touch pinch: scales the distance ratio into a zoom delta. */
+const TOUCH_PINCH_SENSITIVITY = 3;
+
 type Props = {
   viewportRef: RefObject<HTMLDivElement | null>;
   pointX: number;
@@ -33,17 +40,67 @@ export function MapViewport({
   const startYRef = useRef(0);
 
   useEffect(() => {
-    if (!wheelZoomEnabled) return;
     const el = viewportRef.current;
     if (!el) return;
+
+    const isInteractiveTarget = (target: EventTarget | null) =>
+      target instanceof Element &&
+      Boolean(target.closest("button, a, .map-controls"));
+
     const onWheel = (e: WheelEvent) => {
+      const isTrackpadPinch = e.ctrlKey;
+      if (!wheelZoomEnabled && !isTrackpadPinch) return;
       e.preventDefault();
-      const delta = -e.deltaY * 0.001;
+      const sensitivity = isTrackpadPinch
+        ? PINCH_WHEEL_SENSITIVITY
+        : WHEEL_ZOOM_SENSITIVITY;
+      const delta = -e.deltaY * sensitivity;
       const rect = el.getBoundingClientRect();
       applyZoom(delta, e.clientX - rect.left, e.clientY - rect.top);
     };
+
+    let lastPinchDistance: number | null = null;
+
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length !== 2) {
+        lastPinchDistance = null;
+        return;
+      }
+      const [a, b] = [e.touches[0], e.touches[1]];
+      lastPinchDistance = Math.hypot(b.clientX - a.clientX, b.clientY - a.clientY);
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length !== 2 || lastPinchDistance === null) return;
+      if (isInteractiveTarget(e.target)) return;
+      e.preventDefault();
+      const [a, b] = [e.touches[0], e.touches[1]];
+      const distance = Math.hypot(b.clientX - a.clientX, b.clientY - a.clientY);
+      const rect = el.getBoundingClientRect();
+      const cx = (a.clientX + b.clientX) / 2 - rect.left;
+      const cy = (a.clientY + b.clientY) / 2 - rect.top;
+      const ratio = distance / lastPinchDistance;
+      const delta = (ratio - 1) * TOUCH_PINCH_SENSITIVITY;
+      lastPinchDistance = distance;
+      applyZoom(delta, cx, cy);
+    };
+
+    const onTouchEnd = () => {
+      lastPinchDistance = null;
+    };
+
     el.addEventListener("wheel", onWheel, { passive: false });
-    return () => el.removeEventListener("wheel", onWheel);
+    el.addEventListener("touchstart", onTouchStart, { passive: true });
+    el.addEventListener("touchmove", onTouchMove, { passive: false });
+    el.addEventListener("touchend", onTouchEnd);
+    el.addEventListener("touchcancel", onTouchEnd);
+    return () => {
+      el.removeEventListener("wheel", onWheel);
+      el.removeEventListener("touchstart", onTouchStart);
+      el.removeEventListener("touchmove", onTouchMove);
+      el.removeEventListener("touchend", onTouchEnd);
+      el.removeEventListener("touchcancel", onTouchEnd);
+    };
   }, [applyZoom, viewportRef, wheelZoomEnabled]);
 
   const onMouseDown = useCallback(
