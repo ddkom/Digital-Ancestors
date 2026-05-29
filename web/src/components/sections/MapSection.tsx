@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import type { PathwayNode } from "../../types/pathway";
 import { usePathwayMap } from "../../hooks/usePathwayMap";
 import { copy } from "../../locales";
@@ -7,12 +8,29 @@ import { PathwayNodeCard } from "../map/PathwayNodeCard";
 import { MapControls } from "../map/MapControls";
 import { MapLegend } from "../map/MapLegend";
 import { SectionHeader } from "./SectionHeader";
+import {
+  ShaderBackground,
+  type ShaderPalette,
+} from "../ShaderBackground";
 
 type Props = {
   nodes: PathwayNode[];
+  shaderPalette: ShaderPalette;
 };
 
-export function MapSection({ nodes }: Props) {
+export function MapSection({ nodes, shaderPalette }: Props) {
+  const fullscreenHostRef = useRef<HTMLDivElement>(null);
+  const [isMapFullscreen, setIsMapFullscreen] = useState(false);
+
+  useEffect(() => {
+    const onFullscreenChange = () => {
+      setIsMapFullscreen(document.fullscreenElement === fullscreenHostRef.current);
+    };
+    document.addEventListener("fullscreenchange", onFullscreenChange);
+    return () =>
+      document.removeEventListener("fullscreenchange", onFullscreenChange);
+  }, []);
+
   const {
     nodeById,
     viewportRef,
@@ -32,7 +50,7 @@ export function MapSection({ nodes }: Props) {
   } = usePathwayMap(nodes);
 
   const toggleFullscreen = () => {
-    const elem = viewportRef.current;
+    const elem = fullscreenHostRef.current;
     if (!elem) return;
     if (!document.fullscreenElement) {
       const req =
@@ -58,7 +76,7 @@ export function MapSection({ nodes }: Props) {
         body={copy.map.body}
       />
 
-      <div className="map-shell">
+      {/* <div className="map-shell"> */}
         <div className="map-shell-header">
           <div>{copy.map.shellTitle}</div>
           <div className="map-shell-badges">
@@ -68,45 +86,50 @@ export function MapSection({ nodes }: Props) {
           </div>
         </div>
 
-        <MapViewport
-          viewportRef={viewportRef}
-          pointX={pointX}
-          pointY={pointY}
-          setPointX={setPointX}
-          setPointY={setPointY}
-          applyZoom={applyZoom}
-        >
-          <div
-            id="world"
-            style={{
-              transform: `translate(${pointX}px, ${pointY}px) scale(${scale})`,
-            }}
+        <div ref={fullscreenHostRef} className="map-fullscreen-host">
+          {isMapFullscreen ? (
+            <ShaderBackground palette={shaderPalette} />
+          ) : null}
+          <MapViewport
+            viewportRef={viewportRef}
+            pointX={pointX}
+            pointY={pointY}
+            setPointX={setPointX}
+            setPointY={setPointY}
+            applyZoom={applyZoom}
           >
-            <ConnectionLayer
-              edges={activeEdges}
-              nodeById={nodeById}
-              nodeWidth={NODE_WIDTH}
-            />
-            {nodes.map((node) => (
-              <PathwayNodeCard
-                key={node.id}
-                node={node}
-                visible={visibleIds.has(node.id)}
-                isOptionSelected={(toId) => isOptionSelected(node.id, toId)}
-                onToggleOption={(toId) => toggleOption(node.id, toId)}
+            <div
+              id="world"
+              style={{
+                transform: `translate(${pointX}px, ${pointY}px) scale(${scale})`,
+              }}
+            >
+              <ConnectionLayer
+                edges={activeEdges}
+                nodeById={nodeById}
+                nodeWidth={NODE_WIDTH}
               />
-            ))}
-          </div>
-          <MapControls
-            onFullscreen={toggleFullscreen}
-            onReset={resetMap}
-            onZoomIn={() => zoomByButton(0.2)}
-            onZoomOut={() => zoomByButton(-0.2)}
-          />
-        </MapViewport>
+              {nodes.map((node) => (
+                <PathwayNodeCard
+                  key={node.id}
+                  node={node}
+                  visible={visibleIds.has(node.id)}
+                  isOptionSelected={(toId) => isOptionSelected(node.id, toId)}
+                  onToggleOption={(toId) => toggleOption(node.id, toId)}
+                />
+              ))}
+            </div>
+            <MapControls
+              onFullscreen={toggleFullscreen}
+              onReset={resetMap}
+              onZoomIn={() => zoomByButton(0.2)}
+              onZoomOut={() => zoomByButton(-0.2)}
+            />
+          </MapViewport>
+        </div>
 
         <MapLegend />
-      </div>
+      {/* </div> */}
     </section>
   );
 }

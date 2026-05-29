@@ -462,10 +462,12 @@ h1.hero-title {
 #viewport {
   --map-edge-stroke: #2a2418;
   width: 100%;
-  height: 520px;
+  height: 75vh;
   overflow: hidden;
   cursor: grab;
-  background-color: black;
+  background-color: #ffffff99;
+  position: relative;
+  z-index: 1;
   /* background-image:
     radial-gradient(ellipse 100% 70% at 12% 18%, rgba(255, 252, 245, 0.75) 0%, transparent 52%),
     radial-gradient(ellipse 80% 55% at 88% 72%, rgba(195, 185, 168, 0.45) 0%, transparent 48%),
@@ -477,7 +479,6 @@ h1.hero-title {
       rgba(60, 48, 36, 0.02) 5px
     ); */
   touch-action: none;
-  position: relative;
 }
 
 #world {
@@ -742,17 +743,31 @@ svg#connections path.visible {
   background: #fff;
 }
 
-/* Fullscreen styles for the map */
-:fullscreen #viewport,
-:-webkit-full-screen #viewport {
-  width: 100vw !important;
-  height: 100vh !important;
-  /* border-radius: 0 !important; */
+/* Fullscreen map: host includes an in-tree shader; viewport stays transparent */
+.map-fullscreen-host {
+  position: relative;
 }
 
-:fullscreen .map-shell,
-:-webkit-full-screen .map-shell {
-  /* border-radius: 0 !important; */
+.map-fullscreen-host .shader-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.map-fullscreen-host:fullscreen,
+.map-fullscreen-host:-webkit-full-screen {
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+}
+
+.map-fullscreen-host:fullscreen #viewport,
+.map-fullscreen-host:-webkit-full-screen #viewport {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
 }
 
 .map-legend-inline {

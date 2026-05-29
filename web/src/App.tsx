@@ -11,23 +11,23 @@ import { WhoSection } from "./components/sections/WhoSection";
 
 const nodes = pathwayNodes as PathwayNode[];
 
+const shaderPalette = {
+  deep: "#6D88C9",
+  light: "#F2AAB0",
+  accent: "#97CAF1",
+  highlight: "#8EA52A",
+};
+
 export default function App() {
   return (
     <>
-      <ShaderBackground
-        palette={{
-          deep: "#6D88C9", // blue
-          light: "#F2AAB0", // pink
-          accent: "#97CAF1", // light blue
-          highlight: "#8EA52A", // green
-        }}
-      />
+      <ShaderBackground palette={shaderPalette} />
       <SiteHeader />
       <main>
         <HeroSection />
         <WhySection />
         <TracksSection />
-        <MapSection nodes={nodes} />
+        <MapSection nodes={nodes} shaderPalette={shaderPalette} />
         <WhoSection />
       </main>
       <SiteFooter />
