@@ -14,6 +14,8 @@ export type PathwayOption = {
 export type PathwayResource = {
   name: string;
   link: string;
+  title?: string;
+  desc?: string;
 };
 
 export type PathwayContextBlock = {
