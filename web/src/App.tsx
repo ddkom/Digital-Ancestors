@@ -1,16 +1,9 @@
-import pathwayNodeDefs from "./data/pathwayNodes.json";
-import type { PathwayNodeDef } from "./types/pathway";
-import { layoutPathwayNodes } from "./utils/layoutPathwayNodes";
+import { Route, Routes } from "react-router-dom";
 import { ShaderBackground } from "./components/ShaderBackground";
 import { SiteHeader } from "./components/layout/SiteHeader";
 import { SiteFooter } from "./components/layout/SiteFooter";
-import { HeroSection } from "./components/sections/HeroSection";
-import { WhySection } from "./components/sections/WhySection";
-import { TracksSection } from "./components/sections/TracksSection";  
-import { MapSection } from "./components/sections/MapSection";
-import { WhoSection } from "./components/sections/WhoSection";
-
-const nodes = layoutPathwayNodes(pathwayNodeDefs as PathwayNodeDef[]);
+import { HomePage } from "./pages/HomePage";
+import { ResourcesPage } from "./pages/ResourcesPage";
 
 const shaderPalette = {
   deep: "#6D88C9",
@@ -24,13 +17,10 @@ export default function App() {
     <>
       <ShaderBackground palette={shaderPalette} />
       <SiteHeader />
-      <main>
-        <HeroSection />
-        <WhySection />
-        <TracksSection />
-        <MapSection nodes={nodes} shaderPalette={shaderPalette} />
-        <WhoSection />
-      </main>
+      <Routes>
+        <Route path="/" element={<HomePage shaderPalette={shaderPalette} />} />
+        <Route path="/resources" element={<ResourcesPage />} />
+      </Routes>
       <SiteFooter />
     </>
   );
