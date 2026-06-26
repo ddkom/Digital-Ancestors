@@ -523,8 +523,9 @@ svg#connections path {
 
 svg#connections path.visible {
   opacity: 1;
-  stroke-dasharray: 1600;
-  stroke-dashoffset: 1600;
+  /* Normalized via pathLength="1" on each path — full length regardless of map span */
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
   animation: drawLine 1s ease-out forwards;
 }
 

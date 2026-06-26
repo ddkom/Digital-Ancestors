@@ -1,5 +1,8 @@
 import type { PathwayNode } from "../../types/pathway";
-import { estimateEdgeAnchors } from "../../hooks/usePathwayMap";
+import {
+  CONNECTION_END_INSET,
+  estimateEdgeAnchors,
+} from "../../hooks/usePathwayMap";
 
 type Edge = { from: string; to: string };
 
@@ -59,7 +62,7 @@ export function measureEdgeAnchors(
         "center",
       );
       let endX = toNode.x + nodeWidth / 2;
-      let endY = toNode.y;
+      let endY = toNode.y + CONNECTION_END_INSET;
       if (toEl && toCard) {
         const end = localPoint(
           toCard.getBoundingClientRect(),
@@ -69,7 +72,7 @@ export function measureEdgeAnchors(
           "top-center",
         );
         endX = end.x;
-        endY = end.y;
+        endY = end.y + CONNECTION_END_INSET;
       }
       anchors.set(key, { startX: start.x, startY: start.y, endX, endY });
     } else {

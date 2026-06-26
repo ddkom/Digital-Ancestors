@@ -97,7 +97,7 @@ export function ConnectionLayer({
           viewBox="0 0 10 10"
           markerWidth="10"
           markerHeight="10"
-          refX="10"
+          refX="9"
           refY="5"
           orient="auto"
           markerUnits="userSpaceOnUse"
@@ -121,6 +121,7 @@ export function ConnectionLayer({
             key={`path-${from}-${to}`}
             id={`path-${from}-${to}`}
             d={d}
+            pathLength={1}
             className={visibleKeys.has(edgeKey) ? "visible" : undefined}
             markerStart="url(#connections-start-dot)"
             markerEnd="url(#connections-arrow)"
