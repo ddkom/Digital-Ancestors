@@ -131,7 +131,7 @@ export function MapSection({ nodes, shaderPalette }: Props) {
           </MapViewport>
         </div>
 
-        <MapLegend />
+        <MapLegend shaderPalette={shaderPalette} />
       {/* </div> */}
     </section>
   );
