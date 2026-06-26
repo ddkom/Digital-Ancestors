@@ -18,8 +18,8 @@
   },
   "hero": {
     "title": "Becoming Digital Ancestors",
-        "bodyBeforeProject": "How do we apply the same stewardship to our digital footprint that we apply to our physical world? This map helps you figure that out — and do something with the answer. Read a resource, change a setting, or build something new. Part of",
-    "bodyAfterProject": ", a six-month research and gallery collaboration by artists and responsible AI practitioners who care about artist autonomy and responsible technology.",
+        "bodyBeforeProject": "We will all be ancestors one day. Pick your stance, and interact with our map as a guardian, steward, or trailblazer.",
+    "bodyAfterProject": "",
     "cta": {
       "map": "Start the map",
       "why": "Read the backstory"
@@ -27,7 +27,7 @@
   },
   "why": {
     "kicker": "Backstory",
-    "title": "We will all be ancestors one day",
+    "title": "Why we care",
     "body": "Generative AI is reshaping how art is made, circulated, and valued. It can bring up grief, frustration, curiosity, and possibility all at the same time. This project brings together practicing artists, AI researchers, technologists, and policy advisors who care about artist autonomy and responsible technology.",
     "storyCard": {
       "intro": "This map grew out of months of creative research and development experiments in",
@@ -62,7 +62,7 @@
   "tracks": {
     "kicker": "Three pathways",
     "title": "Pick your AI character",
-    "body": "You can follow one track or move between them. The map starts where you are and adapts as your needs change.",
+    "body": "",
     "cards": [
       {
         "label": "Guardian",
@@ -100,17 +100,17 @@
   "map": {
     "kicker": "Interactive map",
     "title": "Click through decisions and receive guided actions",
-    "body": "Start any path and move at your own pace. Each step reveals a practical action or resource. You can explore multiple paths and revisit them anytime.",
-    "shellTitle": "AI Decision Flow • Artist Pathways",
+    "body": "",
+    "shellTitle": "Digital Ancestors Pathway Map",
     "badges": {
       "pan": "Click and drag to pan",
       "zoom": "Scroll or pinch to zoom",
       "paths": "Try more than one path"
     },
     "legend": {
-      "protect": "Protect and preserve",
-      "admin": "Studio and admin support",
-      "create": "Co-create and transform"
+      "protect": "Guardian",
+      "admin": "Steward",
+      "create": "Trailblazer"
     },
     "controls": {
       "fullscreen": "Fullscreen",
