@@ -26,9 +26,9 @@ export default function App() {
       <SiteHeader />
       <main>
         <HeroSection />
-        <WhySection />
         <TracksSection />
         <MapSection nodes={nodes} shaderPalette={shaderPalette} />
+        <WhySection />
         <WhoSection />
       </main>
       <SiteFooter />
