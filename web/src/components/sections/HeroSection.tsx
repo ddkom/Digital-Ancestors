@@ -10,9 +10,7 @@ export function HeroSection() {
           {copy.hero.title}
         </h1>
         <p className="hero-body">
-          {copy.hero.bodyBeforeProject}{" "}
-          <em>{copy.common.projectTitle}</em>
-          {copy.hero.bodyAfterProject}
+          {copy.hero.bodyBeforeProject}
         </p>
         <div className="hero-actions">
           <Button variant="primary" onClick={() => scrollToSection("map")}>
