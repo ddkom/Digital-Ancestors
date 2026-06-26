@@ -588,23 +588,118 @@ h1.hero-title {
 .track-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
+  gap: 20px;
+  justify-items: center;
 }
 
 @media (max-width: 960px) {
   .track-grid {
     grid-template-columns: minmax(0, 1fr);
+    max-width: var(--node-width);
+    margin-inline: auto;
   }
 }
 
 .track-card {
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 22px;
-  padding: 18px 18px 16px;
+  perspective: 1000px;
+  width: 100%;
+  max-width: var(--node-width);
+  aspect-ratio: 1;
+  outline: none;
+}
+
+.track-card:focus-visible .track-card-front {
+  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.05),
+    0 0 0 2px var(--accent, rgba(35, 24, 20, 0.35));
+}
+
+.track-card-inner {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.track-card:hover .track-card-inner,
+.track-card:focus-within .track-card-inner {
+  transform: rotateY(180deg);
+}
+
+.track-card-face {
+  grid-area: 1 / 1;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 32px;
+  padding: 24px 20px;
   border: 1px solid var(--border-soft);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.05);
   position: relative;
-  overflow: hidden;
+}
+
+.track-card-front {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.track-card-back {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 12px;
+  text-align: left;
+  transform: rotateY(180deg);
+}
+
+.track-card .track-pill {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.track-card .track-title {
+  font-size: 1.5rem;
+  margin: 0;
+  font-family: var(--font-sans);
+  line-height: 1.25;
+  max-width: 14ch;
+}
+
+.track-card .track-body {
+  font-size: 1rem;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.45;
+  width: 100%;
+}
+
+.track-card .track-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1rem;
+  color: var(--muted);
+  text-align: left;
+  width: 100%;
+}
+
+.track-card .track-list li::before {
+  content: "•";
+  margin-right: 6px;
+  color: rgba(35, 24, 20, 0.55);
 }
 
 .track-pill {
@@ -614,32 +709,6 @@ h1.hero-title {
   border-radius: 22px;
   font-size: 0.75rem;
   margin-bottom: 8px;
-}
-
-.track-title {
-  font-size: 1.1rem;
-  margin-bottom: 6px;
-  font-family: var(--font-sans);
-}
-
-.track-body {
-  font-size: 0.9rem;
-  color: var(--muted);
-  margin-bottom: 10px;
-}
-
-.track-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  font-size: 0.88rem;
-  color: var(--muted);
-}
-
-.track-list li::before {
-  content: "•";
-  margin-right: 6px;
-  color: rgba(35, 24, 20, 0.55);
 }
 
 .map-shell {
