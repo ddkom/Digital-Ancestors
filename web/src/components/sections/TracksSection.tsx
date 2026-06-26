@@ -23,17 +23,23 @@ export function TracksSection({ shaderPalette }: Props) {
       />
       <div className="track-grid">
         {tracks.map((t) => (
-          <article key={t.title} className="track-card">
-            <div className="track-pill" style={t.pillStyle}>
-              {t.label}
+          <article key={t.title} className="track-card" tabIndex={0}>
+            <div className="track-card-inner">
+              <div className="track-card-face track-card-front">
+                <div className="track-pill" style={t.pillStyle}>
+                  {t.label}
+                </div>
+                <h3 className="track-title">{t.title}</h3>
+              </div>
+              <div className="track-card-face track-card-back">
+                <p className="track-body">{t.body}</p>
+                <ul className="track-list">
+                  {t.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <h3 className="track-title">{t.title}</h3>
-            <p className="track-body">{t.body}</p>
-            <ul className="track-list">
-              {t.items.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
           </article>
         ))}
       </div>
