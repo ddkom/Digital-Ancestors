@@ -6,6 +6,10 @@
   --font-sans: 'Silkscreen', sans-serif;
   --font-display: 'Pixelify Sans', sans-serif;
   --font-mono: 'Dot Gothic 16', sans-serif;
+  --deep: "#68877A";
+  --light: "#fff";
+  --accent: "#A0A7E5";
+  --highlight: "#fff";
 }
 
 :root {
@@ -464,6 +468,10 @@ h1.hero-title {
   --map-btn-bg: #8ea52a;
   --map-btn-bg-hover: color-mix(in srgb, var(--map-btn-bg) 88%, white);
   --map-btn-bg-selected: color-mix(in srgb, var(--map-btn-bg) 72%, #1a1a14);
+  --shader-deep: #6d88c9;
+  --shader-light: #f2aab0;
+  --shader-accent: #97caf1;
+  --shader-highlight: #8ea52a;
   width: 100%;
   height: 75vh;
   overflow: hidden;
@@ -590,28 +598,35 @@ svg#connections path.visible {
 
 @keyframes pulse-ring {
   0% {
-    box-shadow: 0 0 0 0 rgba(228, 102, 52, 0.4);
+    box-shadow:
+      0 10px 28px rgba(35, 24, 20, 0.1),
+      0 1px 0 rgba(255, 255, 255, 0.65) inset,
+      0 0 0 0 color-mix(in srgb, var(--shader-deep) 55%, transparent),
+      0 0 12px 0 color-mix(in srgb, var(--shader-accent) 25%, transparent);
   }
 
-  70% {
-    box-shadow: 0 0 0 15px rgba(228, 102, 52, 0);
+  45% {
+    box-shadow:
+      0 10px 28px rgba(35, 24, 20, 0.1),
+      0 1px 0 rgba(255, 255, 255, 0.65) inset,
+      0 0 0 10px color-mix(in srgb, var(--shader-accent) 40%, transparent),
+      0 0 20px 2px color-mix(in srgb, var(--shader-light) 30%, transparent);
   }
 
   100% {
-    box-shadow: 0 0 0 0 rgba(228, 102, 52, 0);
+    box-shadow:
+      0 10px 28px rgba(35, 24, 20, 0.1),
+      0 1px 0 rgba(255, 255, 255, 0.65) inset,
+      0 0 0 18px transparent,
+      0 0 28px 4px transparent;
   }
 }
 
 .node-anchor.start .node-card {
-  /* border-radius: 999px; */
-  border: 1px solid rgba(255, 255, 255, 0.74);
-  /* background: radial-gradient(circle at top, #ffe4d4 0, #e46634 38%, #fffbf7 100%); */
+  border-radius: 80px;
+  border: .5px solid color-mix(in srgb, var(--shader-deep) 70%, transparent);
   color: #231814;
-  /* padding: 26px 30px 24px; */
-}
-
-.node-anchor.start {
-  animation: pulse-ring 3s infinite;
+  animation: pulse-ring 3s ease-out infinite;
 }
 
 .node-anchor.start .node-title {
@@ -840,7 +855,7 @@ svg#connections path.visible {
   background: #fff;
 }
 
-/* Fullscreen map: host includes an in-tree shader; viewport stays transparent */
+/* Fullscreen map: host includes an in-tree shader; viewport keeps the same frosted overlay */
 .map-fullscreen-host {
   position: relative;
 }
@@ -864,7 +879,6 @@ svg#connections path.visible {
 .map-fullscreen-host:-webkit-full-screen #viewport {
   width: 100%;
   height: 100%;
-  background-color: transparent;
 }
 
 .map-legend-inline {

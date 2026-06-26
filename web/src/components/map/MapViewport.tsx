@@ -45,6 +45,10 @@ export function MapViewport({
         "--map-btn-bg": shaderPalette.highlight,
         "--map-btn-bg-hover": `color-mix(in srgb, ${shaderPalette.highlight} 88%, white)`,
         "--map-btn-bg-selected": `color-mix(in srgb, ${shaderPalette.highlight} 72%, #1a1a14)`,
+        "--shader-deep": shaderPalette.deep,
+        "--shader-light": shaderPalette.light,
+        "--shader-accent": shaderPalette.accent,
+        "--shader-highlight": shaderPalette.highlight,
       } as CSSProperties)
     : undefined;
   const isDragging = useRef(false);
