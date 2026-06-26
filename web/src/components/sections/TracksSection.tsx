@@ -1,18 +1,18 @@
 import { copy } from "../../locales";
+import type { ShaderPalette } from "../ShaderBackground";
+import { trackPillStylesFromPalette } from "../../utils/trackPillStyles";
 import { SectionHeader } from "./SectionHeader";
 
-const trackStyles = [
-  { pillStyle: { background: "rgba(160,167,229,0.08)" }, dot: "#A0A7E5" },
-  { pillStyle: { background: "rgba(142,165,42,0.08)" }, dot: "#8EA52A" },
-  { pillStyle: { background: "rgba(34,197,94,0.08)" }, dot: "#22c55e" },
-] as const;
+type Props = {
+  shaderPalette: ShaderPalette;
+};
 
-const tracks = copy.tracks.cards.map((card, i) => ({
-  ...card,
-  ...trackStyles[i],
-}));
-
-export function TracksSection() {
+export function TracksSection({ shaderPalette }: Props) {
+  const styles = trackPillStylesFromPalette(shaderPalette);
+  const tracks = copy.tracks.cards.map((card, i) => ({
+    ...card,
+    pillStyle: styles[i].pillStyle,
+  }));
   return (
     <section id="tracks" className="section" aria-labelledby="tracks-heading">
       <SectionHeader
@@ -25,7 +25,6 @@ export function TracksSection() {
         {tracks.map((t) => (
           <article key={t.title} className="track-card">
             <div className="track-pill" style={t.pillStyle}>
-              <span className="dot" style={{ background: t.dot }} />
               {t.label}
             </div>
             <h3 className="track-title">{t.title}</h3>

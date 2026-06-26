@@ -1,6 +1,11 @@
+import { useEffect, type MouseEvent } from "react";
+import { useLocation } from "react-router-dom";
 import pathwayNodeDefs from "../data/pathwayNodes.json";
 import type { PathwayNodeDef } from "../types/pathway";
 import { copy } from "../locales";
+import { scrollToSection } from "../lib/scrollToSection";
+import type { ShaderPalette } from "../components/ShaderBackground";
+import { trackPillStylesFromPalette, TRACK_PILL_INDEX } from "../utils/trackPillStyles";
 import {
   countResources,
   extractResourceGroups,
@@ -36,9 +41,32 @@ const TRACK_META: Record<
   },
 };
 
-export function ResourcesPage() {
+type Props = {
+  shaderPalette: ShaderPalette;
+};
+
+export function ResourcesPage({ shaderPalette }: Props) {
+  const location = useLocation();
   const { kicker, title, body } = copy.resources;
   const totalResources = countResources(allGroups);
+  const pillStyles = trackPillStylesFromPalette(shaderPalette);
+  const pickerTracks = (["protect", "admin", "create"] as const).map((track, i) => ({
+    track,
+    meta: TRACK_META[track],
+    pillStyle: pillStyles[i].pillStyle,
+  }));
+
+  useEffect(() => {
+    const hash = location.hash.replace(/^#/, "");
+    if (!hash) return;
+    window.setTimeout(() => scrollToSection(hash), 0);
+  }, [location.pathname, location.hash]);
+
+  const handleTrackPick = (sectionId: string) => (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    scrollToSection(sectionId);
+    window.history.replaceState(null, "", `#${sectionId}`);
+  };
 
   return (
     <main>
@@ -57,9 +85,26 @@ export function ResourcesPage() {
           }
         />
 
+        <div className="track-pill-panel">
+          <nav className="resources-track-picker" aria-label={copy.map.aria.legend}>
+            {pickerTracks.map(({ track, meta, pillStyle }) => (
+              <a
+                key={track}
+                href={`#${meta.sectionId}`}
+                className="track-pill"
+                style={pillStyle}
+                onClick={handleTrackPick(meta.sectionId)}
+              >
+                {meta.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+
         <div className="resources-tracks">
           {trackSections.map(({ track, groups }) => {
             const meta = TRACK_META[track];
+            const { pillStyle } = pillStyles[TRACK_PILL_INDEX[track]];
 
             return (
               <section
@@ -68,7 +113,9 @@ export function ResourcesPage() {
                 aria-labelledby={meta.sectionId}
               >
                 <header className="resources-track-header">
-                  <div className="resources-track-kicker">{meta.label}</div>
+                  <div className="track-pill resources-track-kicker" style={pillStyle}>
+                    {meta.label}
+                  </div>
                   <h2 className="resources-track-title" id={meta.sectionId}>
                     {meta.title}
                   </h2>

@@ -31,7 +31,7 @@ export function HomePage({ shaderPalette }: Props) {
     <main>
       <HeroSection />
       <WhySection />
-      <TracksSection />
+      <TracksSection shaderPalette={shaderPalette} />
       <MapSection nodes={nodes} shaderPalette={shaderPalette} />
       <WhoSection />
     </main>

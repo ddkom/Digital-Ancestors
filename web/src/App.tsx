@@ -19,7 +19,7 @@ export default function App() {
       <SiteHeader />
       <Routes>
         <Route path="/" element={<HomePage shaderPalette={shaderPalette} />} />
-        <Route path="/resources" element={<ResourcesPage />} />
+        <Route path="/resources" element={<ResourcesPage shaderPalette={shaderPalette} />} />
       </Routes>
       <SiteFooter />
     </>

@@ -213,7 +213,7 @@ button {
 .hero-kicker span.dot {
   width: 7px;
   height: 7px;
-  /* border-radius: 999px; */
+  border-radius: 999px;
   background: var(--accent-1);
 }
 
@@ -340,6 +340,8 @@ h1.hero-title {
   margin-bottom: 4px;
   background: rgba(255, 255, 255, 0.7);
   width: fit-content;
+  border-radius: 22px;
+  padding: 4px 10px;
 }
 
 .section-title {
@@ -393,6 +395,50 @@ h1.hero-title {
   color: var(--muted);
 }
 
+.resources-track-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.resources-page .track-pill-panel {
+  margin-bottom: 32px;
+}
+
+.resources-track-picker .track-pill {
+  margin-bottom: 0;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.resources-track-picker .track-pill:hover {
+  filter: brightness(1.05);
+}
+
+.resources-track-picker .track-pill:focus-visible {
+  outline: 2px solid rgba(55, 48, 40, 0.35);
+  outline-offset: 2px;
+}
+
+.map-legend-inline .track-pill {
+  margin-bottom: 0;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.map-legend-inline .track-pill:hover {
+  filter: brightness(1.05);
+}
+
+.map-legend-inline .track-pill:focus-visible {
+  outline: 2px solid rgba(55, 48, 40, 0.35);
+  outline-offset: 2px;
+}
+
 .resources-tracks {
   display: flex;
   flex-direction: column;
@@ -407,14 +453,8 @@ h1.hero-title {
   align-items: flex-start;
 }
 
-.resources-track-kicker {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--ink);
-  margin-bottom: 4px;
-  background: rgba(255, 255, 255, 0.7);
-  width: fit-content;
+.resources-track-kicker.track-pill {
+  margin-bottom: 8px;
 }
 
 .resources-track-title {
@@ -423,6 +463,7 @@ h1.hero-title {
   font-size: 1.35rem;
   color: var(--ink);
   line-height: 1.3;
+  scroll-margin-top: 90px;
 }
 
 .resources-track-body {
@@ -430,21 +471,6 @@ h1.hero-title {
   font-size: 0.95rem;
   color: var(--muted);
   line-height: 1.65;
-}
-
-.resources-track-protect .resources-track-kicker {
-  border-left: 3px solid #f97373;
-  padding-left: 10px;
-}
-
-.resources-track-admin .resources-track-kicker {
-  border-left: 3px solid #facc15;
-  padding-left: 10px;
-}
-
-.resources-track-create .resources-track-kicker {
-  border-left: 3px solid #22c55e;
-  padding-left: 10px;
 }
 
 .resources-steps {
@@ -573,7 +599,7 @@ h1.hero-title {
 
 .track-card {
   background: rgba(255, 255, 255, 0.92);
-  /* border-radius: 20px; */
+  border-radius: 22px;
   padding: 18px 18px 16px;
   border: 1px solid var(--border-soft);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
@@ -584,17 +610,10 @@ h1.hero-title {
 .track-pill {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
   padding: 4px 10px;
-  /* border-radius: 999px; */
+  border-radius: 22px;
   font-size: 0.75rem;
   margin-bottom: 8px;
-}
-
-.track-pill span.dot {
-  width: 9px;
-  height: 9px;
-  /* border-radius: 999px; */
 }
 
 .track-title {
@@ -651,7 +670,7 @@ h1.hero-title {
 
 .map-shell-badge {
   padding: 4px 9px;
-  /* border-radius: 999px; */
+  border-radius: 22px;
   font-size: 0.72rem;
   background: rgba(255, 252, 245, 0.65);
   border: 1px solid rgba(55, 48, 40, 0.1);
@@ -685,6 +704,7 @@ h1.hero-title {
       rgba(60, 48, 36, 0.02) 5px
     ); */
   touch-action: none;
+  border-radius: 22px;
 }
 
 #world {
@@ -1077,34 +1097,31 @@ svg#connections path.visible {
   height: 100%;
 }
 
+.track-pill-panel {
+  padding: 10px 12px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(55, 48, 40, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  width: fit-content;
+  max-width: 100%;
+}
+
+.map-legend-panel {
+  margin-top: 10px;
+}
+
 .map-legend-inline {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 10px;
   font-size: 0.78rem;
   color: #3d3528;
-}
-
-.map-legend-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 3px 8px;
-  /* border-radius: 999px; */
-  background: rgba(255, 252, 245, 0.55);
-  border: 1px solid rgba(55, 48, 40, 0.1);
-}
-
-.map-legend-swatch {
-  width: 11px;
-  height: 11px;
-  /* border-radius: 50%; */
 }
 
 footer {
   /* max-width: 1120px; */
   margin: 50px auto 40px;
-  padding: 0 20px;
-  color: #8b7a74;
+  padding: 0 50px;
+  color: #000;
 }
