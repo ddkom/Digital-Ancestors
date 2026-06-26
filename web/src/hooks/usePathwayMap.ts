@@ -202,6 +202,8 @@ export function usePathwayMap(nodes: PathwayNode[]) {
 export const CONNECTION_CORNER_RADIUS = 80;
 /** Vertical run below the button center before the first turn. */
 export const CONNECTION_STEM_DOWN = 52;
+/** Nudge path ends slightly into the target card so the stroke meets the node edge. */
+export const CONNECTION_END_INSET = 8;
 
 /** Fallback when the option button is not yet in the DOM. */
 export function estimateEdgeAnchors(
@@ -226,7 +228,7 @@ export function estimateEdgeAnchors(
       btnWidth / 2,
     startY: from.y + cardHeight + btnHeight / 2,
     endX: to.x + nodeWidth / 2,
-    endY: to.y,
+    endY: to.y + CONNECTION_END_INSET,
   };
 }
 
