@@ -371,7 +371,7 @@ h1.hero-title {
 .story-card {
   padding: 22px 40px;
   border-radius: 22px;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.7);
   box-shadow: var(--shadow-soft);
   border: 1px solid var(--border-soft);
   font-size: 0.95rem;
@@ -388,6 +388,28 @@ h1.hero-title {
   padding-bottom: 80px;
 }
 
+.resources-intro {
+  margin-bottom: 32px;
+  color: var(--ink);
+}
+
+.resources-intro .section-header {
+  margin-bottom: 20px;
+}
+
+.resources-intro .section-title {
+  color: var(--ink);
+}
+
+.resources-intro .track-pill-panel {
+  margin-bottom: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  width: auto;
+}
+
 .resources-count {
   display: block;
   margin-top: 8px;
@@ -399,10 +421,6 @@ h1.hero-title {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-}
-
-.resources-page .track-pill-panel {
-  margin-bottom: 32px;
 }
 
 .resources-track-picker .track-pill {
@@ -446,11 +464,16 @@ h1.hero-title {
 }
 
 .resources-track-header {
-  margin-bottom: 22px;
-  max-width: unset;
-  border-radius: 22px;
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-bottom: 18px;
+  padding: 22px 40px 20px;
+  border-radius: 22px;
+  background: rgba(249, 244, 239, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-soft);
 }
 
 .resources-track-kicker.track-pill {
@@ -473,17 +496,19 @@ h1.hero-title {
   line-height: 1.65;
 }
 
-.resources-steps {
+.resources-track-content {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+}
+
+.resources-step + .resources-step {
+  margin-top: 28px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border-soft);
 }
 
 .resources-step-header {
-  margin-bottom: 16px;
-  padding: 8px;
-  background: unset;
-  border-radius: 22px;
+  margin-bottom: 14px;
 }
 
 .resources-step-title-row {

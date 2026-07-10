@@ -90,7 +90,7 @@ void main() {
     a uniform field of that color.
   */
   float ridge = clamp(0.5 + 0.5 * f, 0.0, 1.0);
-  vec3 color = mix(uColorDeep, uColorLight, ridge);
+  vec3 color = mix(uColorDeep, uColorLight, ridge * .6 );
 
   float tAccent = clamp(r.y + length(q), 0.0, 1.0);
   float pulseA = 0.5 + 0.5 * cos(1.5 + 0.2 * iTime);

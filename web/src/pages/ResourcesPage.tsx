@@ -71,34 +71,36 @@ export function ResourcesPage({ shaderPalette }: Props) {
   return (
     <main>
       <section className="section resources-page" aria-labelledby="resources-heading">
-        <SectionHeader
-          kicker={kicker}
-          title={title}
-          titleId="resources-heading"
-          body={
-            <>
-              {body}{" "}
-              <span className="resources-count">
-                {totalResources} resources across {allGroups.length} pathway steps.
-              </span>
-            </>
-          }
-        />
+        <div className="story-card resources-intro">
+          <SectionHeader
+            kicker={kicker}
+            title={title}
+            titleId="resources-heading"
+            body={
+              <>
+                {body}{" "}
+                <span className="resources-count">
+                  {totalResources} resources across {allGroups.length} pathway steps.
+                </span>
+              </>
+            }
+          />
 
-        <div className="track-pill-panel">
-          <nav className="resources-track-picker" aria-label={copy.map.aria.legend}>
-            {pickerTracks.map(({ track, meta, pillStyle }) => (
-              <a
-                key={track}
-                href={`#${meta.sectionId}`}
-                className="track-pill"
-                style={pillStyle}
-                onClick={handleTrackPick(meta.sectionId)}
-              >
-                {meta.label}
-              </a>
-            ))}
-          </nav>
+          <div className="track-pill-panel">
+            <nav className="resources-track-picker" aria-label={copy.map.aria.legend}>
+              {pickerTracks.map(({ track, meta, pillStyle }) => (
+                <a
+                  key={track}
+                  href={`#${meta.sectionId}`}
+                  className="track-pill"
+                  style={pillStyle}
+                  onClick={handleTrackPick(meta.sectionId)}
+                >
+                  {meta.label}
+                </a>
+              ))}
+            </nav>
+          </div>
         </div>
 
         <div className="resources-tracks">
@@ -112,7 +114,7 @@ export function ResourcesPage({ shaderPalette }: Props) {
                 className={`resources-track resources-track-${track}`}
                 aria-labelledby={meta.sectionId}
               >
-                <header className="resources-track-header">
+                <div className="resources-track-header">
                   <div className="track-pill resources-track-kicker" style={pillStyle}>
                     {meta.label}
                   </div>
@@ -120,16 +122,16 @@ export function ResourcesPage({ shaderPalette }: Props) {
                     {meta.title}
                   </h2>
                   <p className="resources-track-body">{meta.body}</p>
-                </header>
+                </div>
 
-                <div className="resources-steps">
+                <div className="story-card resources-track-content">
                   {groups.map((group) => (
-                    <article
+                    <section
                       key={group.nodeId}
-                      className="story-card resources-step"
+                      className="resources-step"
                       aria-labelledby={`step-${group.nodeId}`}
                     >
-                      <header className="resources-step-header">
+                      <div className="resources-step-header">
                         <div className="resources-step-title-row">
                           <h3
                             className="resources-step-title"
@@ -144,7 +146,7 @@ export function ResourcesPage({ shaderPalette }: Props) {
                         {group.nodeDesc ? (
                           <p className="resources-step-desc">{group.nodeDesc}</p>
                         ) : null}
-                      </header>
+                      </div>
 
                       {group.blocks.map((block, blockIndex) => (
                         <div
@@ -176,7 +178,7 @@ export function ResourcesPage({ shaderPalette }: Props) {
                           </ul>
                         </div>
                       ))}
-                    </article>
+                    </section>
                   ))}
                 </div>
               </section>
