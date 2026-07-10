@@ -11,6 +11,19 @@ export type PathwayOption = {
   target?: string;
 };
 
+export type PathwayResource = {
+  name: string;
+  link: string;
+  title?: string;
+  desc?: string;
+};
+
+export type PathwayContextBlock = {
+  "resource-type": string;
+  resources?: PathwayResource[];
+  notes?: string;
+};
+
 /** Node definition from JSON — layout is computed unless x/y are overridden. */
 export type PathwayNodeDef = {
   id: string;
@@ -20,7 +33,7 @@ export type PathwayNodeDef = {
   tag?: string;
   title: string;
   desc: string;
-  context?: string;
+  context?: PathwayContextBlock | PathwayContextBlock[];
   options?: PathwayOption[];
 };
 

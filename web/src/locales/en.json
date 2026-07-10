@@ -13,7 +13,8 @@
       "map": "Launch the map",
       "why": "Backstory",
       "tracks": "Tracks",
-      "who": "Who it's for"
+      "who": "Who it's for",
+      "resources": "All resources"
     }
   },
   "hero": {
@@ -128,6 +129,11 @@
     "resources": "Resources",
     "openResources": "Open Resources",
     "hideResources": "Hide Resources"
+  },
+  "resources": {
+    "kicker": "Resource library",
+    "title": "All pathway resources",
+    "body": "Every link surfaced in the interactive map, organized by pathway and the step where it appears."
   },
   "siteFooter": {
     "intro": "Built as part of the",
