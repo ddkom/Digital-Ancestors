@@ -29,11 +29,11 @@ export function HomePage({ shaderPalette }: Props) {
 
   return (
     <main>
-      <HeroSection />
-      <WhySection />
-      <TracksSection shaderPalette={shaderPalette} />
-      <MapSection nodes={nodes} shaderPalette={shaderPalette} />
-      <WhoSection />
+        <HeroSection />
+        <TracksSection shaderPalette={shaderPalette}/>
+        <MapSection nodes={nodes} shaderPalette={shaderPalette} />
+        <WhySection />
+        <WhoSection />
     </main>
   );
 }

@@ -7,15 +7,15 @@
     "desc": "This map helps artists explore practical tools and workflows based on your practice, location, and comfort level. Choose where to start based on what’s most suited for you right now.",
     "options": [
       {
-        "label": "Protecting my work",
+        "label": "Guardian: Protecting my work",
         "target": "p_type"
       },
       {
-        "label": "Administrative tasks",
+        "label": "Steward: Managing my studio",
         "target": "a_type"
       },
       {
-        "label": "Creating new art",
+        "label": "Trailblazer: Creating new work with AI",
         "target": "c_source"
       }
     ]
@@ -23,7 +23,7 @@
   {
     "id": "p_type",
     "type": "track-protect",
-    "tag": "Focus",
+    "tag": "Guardian",
     "title": "What kind of work are you protecting?",
     "desc": "Different media types come with different rights frameworks, unions, and support organizations.",
     "options": [
@@ -40,7 +40,7 @@
   {
     "id": "p_region_visual",
     "type": "track-protect",
-    "tag": "Location",
+    "tag": "Guardian: Location",
     "title": "Where are you based?",
     "desc": "Copyright frameworks and rights can vary by region.",
     "options": [
@@ -61,7 +61,7 @@
   {
     "id": "p_region_perf",
     "type": "track-protect",
-    "tag": "Location",
+    "tag": "Guardian: Location",
     "title": "Where are you based?",
     "desc": "Copyright frameworks and rights can vary by region.",
     "options": [
@@ -78,7 +78,7 @@
   {
     "id": "p_can_visual",
     "type": "track-protect",
-    "tag": "Canada",
+    "tag": "Guardian: Canada",
     "title": "CARFAC and Canadian copyright",
     "desc": "Canadian copyright law does not yet explicitly regulate AI training as fair dealing. Here are tips to assert your rights.",
     "options": [

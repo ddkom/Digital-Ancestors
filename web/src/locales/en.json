@@ -18,9 +18,9 @@
     }
   },
   "hero": {
-    "title": "use AI, refuse it, or find the balance in between...",
-    "bodyBeforeProject": "This framework turns complex questions about copyright, privacy, ethics, and creativity into a guided map with concrete actions and resources you can use right now. It is part of",
-    "bodyAfterProject": ", a collaboration between artists and responsible AI practitioners exploring how creative work can coexist with emerging technologies.",
+    "title": "Becoming Digital Ancestors",
+        "bodyBeforeProject": "We will all be ancestors one day. Pick your stance, and interact with our map as a guardian, steward, or trailblazer.",
+    "bodyAfterProject": "",
     "cta": {
       "map": "Start the map",
       "why": "Read the backstory"
@@ -62,11 +62,11 @@
   },
   "tracks": {
     "kicker": "Three pathways",
-    "title": "Why are you here?",
-    "body": "You can follow one track or move between them. The map starts where you are and adapts as your needs change.",
+    "title": "Pick your AI character",
+    "body": "",
     "cards": [
       {
-        "label": "Protect",
+        "label": "Guardian",
         "title": "Reduce how much work is used for AI training",
         "body": "For artists who want to minimise how much of their work ends up in training datasets or is copied by AI models.",
         "items": [
@@ -77,7 +77,7 @@
         ]
       },
       {
-        "label": "Admin Support",
+        "label": "Steward",
         "title": "Use AI for studio admin without oversharing",
         "body": "For artists who want to use AI as a studio assistant. For example, help with writing and planning while keeping control over their data.",
         "items": [
@@ -87,7 +87,7 @@
         ]
       },
       {
-        "label": "Co-create",
+        "label": "Trailblazer",
         "title": "Make new work with AI",
         "body": "For artists experimenting with AI media who want to stay grounded in ethics and transparency.",
         "items": [
@@ -101,17 +101,17 @@
   "map": {
     "kicker": "Interactive map",
     "title": "Click through decisions and receive guided actions",
-    "body": "Start any path and move at your own pace. Each step reveals a practical action or resource. You can explore multiple paths and revisit them anytime.",
-    "shellTitle": "AI Decision Flow • Artist Pathways",
+    "body": "",
+    "shellTitle": "Digital Ancestors Pathway Map",
     "badges": {
       "pan": "Click and drag to pan",
       "zoom": "Scroll or pinch to zoom",
       "paths": "Try more than one path"
     },
     "legend": {
-      "protect": "Protect and preserve",
-      "admin": "Studio and admin support",
-      "create": "Co-create and transform"
+      "protect": "Guardian",
+      "admin": "Steward",
+      "create": "Trailblazer"
     },
     "controls": {
       "fullscreen": "Fullscreen",
