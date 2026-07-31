@@ -19,7 +19,7 @@
   },
   "hero": {
     "title": "Becoming Digital Ancestors",
-        "bodyBeforeProject": "We will all be ancestors one day. Pick your stance, and interact with our map as a guardian, steward, or trailblazer.",
+        "bodyBeforeProject": "We will all be ancestors one day, so what does it mean to be a digital ancestor? Take the quiz and find out which character you are, then learn about what your path might look like by checking out our resources.",
     "bodyAfterProject": "",
     "cta": {
       "map": "Start the map",
@@ -29,12 +29,12 @@
   "why": {
     "kicker": "Backstory",
     "title": "Why we care",
-    "body": "Generative AI is reshaping how art is made, circulated, and valued. It can bring up grief, frustration, curiosity, and possibility all at the same time. This project brings together practicing artists, AI researchers, technologists, and policy advisors who care about artist autonomy and responsible technology.",
+    "body": "Generative AI is reshaping how art is made, circulated, and valued. It can bring up grief, frustration, curiosity, and possibility all at the same time. This project has brought together practicing artists, AI researchers, technologists, and policy advisors who care about artist autonomy and responsible technology. We've created a space for learning and sharing in an everchanging landscape.",
     "storyCard": {
-      "intro": "This map grew out of months of creative research and development experiments in",
-      "middle": ". It started with a question: Can AI help care for creative legacy, and cultural memory? We designed gallery works, kept process journals, and tested a number of tools over six months. Alongside our art exhibit, we turned what we learned into an",
+      "intro": "This map grew out of months of creative research and development experiments that we titled",
+      "middle": ". It started with a question: Can AI help care for creative legacy, and cultural memory? We began to imagine futures where digital ecosystems coexisted with nature and humans and from this designed gallery works, kept process journals, and tested a number of tools over six months. We hosted an art exhibit sharing our imagined futures and turned our learnings into an ",
       "middleSuffix": "that other artists can adapt, critique, and help build upon.",
-      "closing": "The map helps clarify what you might want from your own engagement with AI, from opting out entirely to collaborating on new work."
+      "closing": "Use this website to clarify what you might want from your own engagement with AI, from opting out entirely to collaborating on new work."
     }
   },
   "who": {
@@ -62,47 +62,52 @@
   },
   "tracks": {
     "kicker": "Three pathways",
-    "title": "Pick your AI character",
+    "title": "Pick your Character",
     "body": "",
-    "cards": [
-      {
-        "label": "Guardian",
-        "title": "Reduce how much work is used for AI training",
-        "body": "For artists who want to minimise how much of their work ends up in training datasets or is copied by AI models.",
-        "items": [
-          "Image cloaking tools like Glaze or Nightshade",
-          "Attribution and watermarking practices",
-          "Website-level preferences and opt-outs",
-          "Contract language for client and platform agreements"
-        ]
-      },
-      {
-        "label": "Steward",
-        "title": "Use AI for studio admin without oversharing",
-        "body": "For artists who want to use AI as a studio assistant. For example, help with writing and planning while keeping control over their data.",
-        "items": [
-          "Prompt tips to improve privacy",
-          "Automation tools and examples",
-          "Mainstream and local chat tool options"
-        ]
-      },
-      {
-        "label": "Trailblazer",
-        "title": "Make new work with AI",
-        "body": "For artists experimenting with AI media who want to stay grounded in ethics and transparency.",
-        "items": [
-          "Model choices and data sourcing basics",
-          "Train models with your own data",
-          "What current copyright law covers and what it does not"
-        ]
-      }
-    ]
+  "cards": [
+    {
+      "label": "Guardian",
+      "title": "AI-Hater",
+      "body": "",
+      "items": [
+        "Name: Guardian",
+        "Nickname: AI-Hater",
+        "Default Stance: Opt-Out",
+        "Favourite Medium: Anything Analogue",
+        "Famous Quote: \"F*ck Data Centers\""
+      ]
+    },
+    {
+      "label": "Steward",
+      "title": "Office Siren",
+      "body": "",
+      "items": [
+        "Name: Steward",
+        "Nickname: Office Siren",
+        "Default Stance: Cautious-Curious",
+        "Favourite Medium: All of it, just no AI art please",
+        "Famous Quote: \"Automate the boring sh*t\""
+      ]
+    },
+    {
+      "label": "Trailblazer",
+      "title": "Crazy Creative",
+      "body": "",
+      "items": [
+        "Name: Trailblazer",
+        "Nickname: Crazy Creative",
+        "Default Stance: Full Send",
+        "Favourite Medium: Human-Machine Collaboration",
+        "Famous Quote: \"I'll try anything once\""
+      ]
+    }
+  ]
   },
   "map": {
     "kicker": "Interactive map",
-    "title": "Click through decisions and receive guided actions",
+    "title": "Take the Quiz and Find Out Which Character You Are",
     "body": "",
-    "shellTitle": "Digital Ancestors Pathway Map",
+    "shellTitle": "Digital Ancestors Quiz Map",
     "badges": {
       "pan": "Click and drag to pan",
       "zoom": "Scroll or pinch to zoom",
