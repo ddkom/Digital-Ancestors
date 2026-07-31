@@ -139,20 +139,20 @@ export function TracksSection({ shaderPalette }: Props) {
 
                     <dl className="persona-stats">
                       <div className="persona-stat">
-                        <dt>Mission</dt>
-                        <dd>{t.mission}</dd>
+                        <dt>Nickname</dt>
+                        <dd>{t.subtitle}</dd>
                       </div>
                       <div className="persona-stat">
-                        <dt>Stance</dt>
-                        <dd>{t.stance}</dd>
+                        <dt>Default Stance</dt>
+                        <dd>{t.defaultStance}</dd>
                       </div>
                       <div className="persona-stat">
-                        <dt>Tactics</dt>
-                        <dd>{t.tactics}</dd>
+                        <dt>Favourite Medium</dt>
+                        <dd>{t.favouriteMedium}</dd>
                       </div>
                       <div className="persona-stat">
-                        <dt>Exposure</dt>
-                        <dd>{t.exposure}</dd>
+                        <dt>Famous Quote</dt>
+                        <dd>{t.famousQuote}</dd>
                       </div>
                     </dl>
 

@@ -79,7 +79,7 @@ export function ResourcesPage({ shaderPalette }: Props) {
             <>
               {body}{" "}
               <span className="resources-count">
-                {totalResources} resources across {allGroups.length} pathway steps.
+                {totalResources} resources across {trackSections.length} streams.
               </span>
             </>
           }
@@ -122,18 +122,18 @@ export function ResourcesPage({ shaderPalette }: Props) {
                   <p className="resources-track-body">{meta.body}</p>
                 </header>
 
-                <div className="resources-steps">
+                <article className="story-card resources-panel">
                   {groups.map((group) => (
-                    <article
+                    <div
                       key={group.nodeId}
-                      className="story-card resources-step"
-                      aria-labelledby={`step-${group.nodeId}`}
+                      className="resources-group"
+                      aria-labelledby={`group-${group.nodeId}`}
                     >
-                      <header className="resources-step-header">
+                      <header className="resources-group-header">
                         <div className="resources-step-title-row">
                           <h3
                             className="resources-step-title"
-                            id={`step-${group.nodeId}`}
+                            id={`group-${group.nodeId}`}
                           >
                             {group.nodeTitle}
                           </h3>
@@ -141,9 +141,6 @@ export function ResourcesPage({ shaderPalette }: Props) {
                             <span className="resources-step-tag">{group.nodeTag}</span>
                           ) : null}
                         </div>
-                        {group.nodeDesc ? (
-                          <p className="resources-step-desc">{group.nodeDesc}</p>
-                        ) : null}
                       </header>
 
                       {group.blocks.map((block, blockIndex) => (
@@ -176,9 +173,9 @@ export function ResourcesPage({ shaderPalette }: Props) {
                           </ul>
                         </div>
                       ))}
-                    </article>
+                    </div>
                   ))}
-                </div>
+                </article>
               </section>
             );
           })}

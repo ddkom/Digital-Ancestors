@@ -57,29 +57,6 @@ export function ConnectionLayer({
   return (
     <svg id="connections" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <filter
-          id="connections-ink"
-          x="-20%"
-          y="-20%"
-          width="140%"
-          height="140%"
-          filterUnits="objectBoundingBox"
-        >
-          <feTurbulence
-            type="fractalNoise"
-            baseFrequency="0.045"
-            numOctaves="2"
-            seed="2"
-            result="noise"
-          />
-          <feDisplacementMap
-            in="SourceGraphic"
-            in2="noise"
-            scale="1.15"
-            xChannelSelector="R"
-            yChannelSelector="G"
-          />
-        </filter>
         <marker
           id="connections-start-dot"
           viewBox="0 0 7 7"

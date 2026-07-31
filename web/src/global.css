@@ -473,17 +473,21 @@ h1.hero-title {
   line-height: 1.65;
 }
 
-.resources-steps {
+.resources-panel {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 0;
 }
 
-.resources-step-header {
-  margin-bottom: 16px;
+.resources-group + .resources-group {
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border-soft);
+}
+
+.resources-group-header {
+  margin-bottom: 14px;
   padding: 8px;
-  background: unset;
-  border-radius: 22px;
 }
 
 .resources-step-title-row {
@@ -491,7 +495,7 @@ h1.hero-title {
   align-items: baseline;
   flex-wrap: wrap;
   gap: 10px 14px;
-  margin-bottom: 8px;
+  /* margin-bottom: 8px; */
 }
 
 .resources-step-tag {
@@ -506,16 +510,16 @@ h1.hero-title {
 .resources-step-title {
   margin: 0;
   font-family: var(--font-sans);
-  font-size: 1.05rem;
+  font-size: 0.92rem;
   color: var(--ink);
   line-height: 1.35;
 }
 
 .resources-step-desc {
   margin: 0;
-  font-size: 0.92rem;
+  font-size: 0.84rem;
   color: var(--muted);
-  line-height: 1.65;
+  line-height: 1.55;
 }
 
 .resources-block + .resources-block {
@@ -1048,7 +1052,6 @@ svg#connections path {
   stroke-width: 10px;
   stroke-linecap: round;
   stroke-linejoin: round;
-  filter: url(#connections-ink);
   opacity: 0;
   transition: opacity 0.4s ease-out;
 }
@@ -1186,7 +1189,6 @@ svg#connections path.visible {
 }
 
 .node-anchor.warning .node-card {
-  border-left: 5px solid #f97373;
   background: #fff5f3;
 }
 

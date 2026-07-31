@@ -6,10 +6,9 @@ export type PersonaCard = {
   stanceText: string;
   image: string;
   imageAlt: string;
-  mission: string;
-  stance: string;
-  tactics: string;
-  exposure: string;
+  defaultStance: string;
+  favouriteMedium: string;
+  famousQuote: string;
 };
 
 /** Hardcoded persona flip-card copy for the tracks section. */
@@ -18,39 +17,36 @@ export const PERSONAS: PersonaCard[] = [
     id: "guardian",
     code: "DA-01",
     name: "Guardian",
-    subtitle: "The Privacy Protector",
-    stanceText: "DEFENSIVE",
+    subtitle: "AI-Hater",
+    stanceText: "OPT-OUT",
     image: "/personas/guardian.jpeg",
     imageAlt: "Stylized ID portrait of the Guardian",
-    mission: "Data Sovereignty",
-    stance: "Defensive / Anti-Training",
-    tactics: "Glaze, Nightshade, Opt-Outs",
-    exposure: "Zero-Consent (Closed)",
+    defaultStance: "Opt-Out",
+    favouriteMedium: "Anything Analogue",
+    famousQuote: '"F*ck Data Centers"',
   },
   {
     id: "steward",
     code: "DA-02",
     name: "Steward",
-    subtitle: "The Cautious Collaborator",
-    stanceText: "COLLABORATIVE",
+    subtitle: "Office Siren",
+    stanceText: "CAUTIOUS-CURIOUS",
     image: "/personas/steward.png",
     imageAlt: "Stylized ID portrait of the Steward",
-    mission: "Safe Administration",
-    stance: "Cautious Collaborator",
-    tactics: "Local LLMs, Privacy Prompts",
-    exposure: "Selective Share (Vaulted)",
+    defaultStance: "Cautious-Curious",
+    favouriteMedium: "All of it, just no AI art please",
+    famousQuote: '"Automate the boring sh*t"',
   },
   {
     id: "trailblazer",
     code: "DA-03",
     name: "Trailblazer",
-    subtitle: "The AI Pioneer",
-    stanceText: "EXPERIMENTAL",
+    subtitle: "Crazy Creative",
+    stanceText: "FULL SEND",
     image: "/personas/trailblazer.jpeg",
     imageAlt: "Stylized ID portrait of the Trailblazer",
-    mission: "Ethical Synthesis",
-    stance: "Free Bird / AI Pioneer",
-    tactics: "LoRA Training, Sourcing",
-    exposure: "Public Remix (Open)",
+    defaultStance: "Full Send",
+    favouriteMedium: "Human-Machine Collaboration",
+    famousQuote: '"I\'ll try anything once"',
   },
 ];
