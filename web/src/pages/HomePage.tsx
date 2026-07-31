@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import pathwayNodeDefs from "../data/pathwayNodes.json";
+import pathwayNodeDefs from "../data/quizNodes.json";
 import type { PathwayNodeDef } from "../types/pathway";
 import { layoutPathwayNodes } from "../utils/layoutPathwayNodes";
 import { scrollToSection } from "../lib/scrollToSection";
