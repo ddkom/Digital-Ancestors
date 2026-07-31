@@ -67,6 +67,7 @@
     "cards": [
       {
         "label": "Guardian",
+        "subtitle": "The Privacy Protector",
         "title": "Reduce how much work is used for AI training",
         "body": "For artists who want to minimise how much of their work ends up in training datasets or is copied by AI models.",
         "items": [
@@ -78,6 +79,7 @@
       },
       {
         "label": "Steward",
+        "subtitle": "The Cautious Collaborator",
         "title": "Use AI for studio admin without oversharing",
         "body": "For artists who want to use AI as a studio assistant. For example, help with writing and planning while keeping control over their data.",
         "items": [
@@ -88,6 +90,7 @@
       },
       {
         "label": "Trailblazer",
+        "subtitle": "The AI Pioneer",
         "title": "Make new work with AI",
         "body": "For artists experimenting with AI media who want to stay grounded in ethics and transparency.",
         "items": [
