@@ -67,11 +67,11 @@
   "cards": [
     {
       "label": "Guardian",
-      "title": "AI-Hater",
+      "title": "AI Hater",
       "body": "",
       "items": [
         "Name: Guardian",
-        "Nickname: AI-Hater",
+        "Nickname: AI Hater",
         "Default Stance: Opt-Out",
         "Favourite Medium: Anything Analogue",
         "Famous Quote: \"F*ck Data Centers\""
@@ -79,11 +79,11 @@
     },
     {
       "label": "Steward",
-      "title": "Office Siren",
+      "title": "Time Keeper",
       "body": "",
       "items": [
         "Name: Steward",
-        "Nickname: Office Siren",
+        "Nickname: Time Keeper",
         "Default Stance: Cautious-Curious",
         "Favourite Medium: All of it, just no AI art please",
         "Famous Quote: \"Automate the boring sh*t\""
@@ -91,14 +91,23 @@
     },
     {
       "label": "Trailblazer",
-      "title": "Crazy Creative",
+      "title": "Experimenter",
       "body": "",
       "items": [
         "Name: Trailblazer",
-        "Nickname: Crazy Creative",
+        "Nickname: Experimenter",
         "Default Stance: Full Send",
         "Favourite Medium: Human-Machine Collaboration",
         "Famous Quote: \"I'll try anything once\""
+      ]
+    },
+    {
+      "label": "Weaver",
+      "title": "Gardener",
+      "body": "",
+      "items": [
+        "Name: Weaver",
+        "Nickname: Gardener"
       ]
     }
   ]

@@ -591,12 +591,20 @@ h1.hero-title {
 
 .track-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 24px;
   justify-items: center;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1100px) {
+  .track-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 650px;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 640px) {
   .track-grid {
     grid-template-columns: minmax(0, 1fr);
     max-width: 320px;

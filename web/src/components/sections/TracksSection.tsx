@@ -48,15 +48,15 @@ function QrMark() {
 
 export function TracksSection({ shaderPalette }: Props) {
   const [flipped, setFlipped] = useState<Record<string, boolean>>({});
-  // Same order as track pills: protect / admin / create
-  const trackColors = [
-    shaderPalette?.deep ?? "#6D88C9",
-    shaderPalette?.highlight ?? "#8EA52A",
-    shaderPalette?.accent ?? "#97CAF1",
-  ];
-  const tracks = PERSONAS.map((persona, i) => ({
+  const personaColors: Record<string, string> = {
+    guardian: shaderPalette?.deep ?? "#6D88C9",
+    steward: shaderPalette?.highlight ?? "#8EA52A",
+    weaver: "#7B5CD6",
+    trailblazer: shaderPalette?.accent ?? "#97CAF1",
+  };
+  const tracks = PERSONAS.map((persona) => ({
     ...persona,
-    accent: trackColors[i],
+    accent: personaColors[persona.id],
   }));
 
   const toggleFlip = (id: string) => {
@@ -103,14 +103,16 @@ export function TracksSection({ shaderPalette }: Props) {
                   </header>
                   <div className="persona-portrait-wrap">
                     <span className="persona-portrait-label">Portrait</span>
-                    <img
-                      className="persona-portrait"
-                      src={t.image}
-                      alt={t.imageAlt}
-                      width={240}
-                      height={240}
-                      draggable={false}
-                    />
+                    {t.image ? (
+                      <img
+                        className="persona-portrait"
+                        src={t.image}
+                        alt={t.imageAlt}
+                        width={240}
+                        height={240}
+                        draggable={false}
+                      />
+                    ) : null}
                   </div>
                   <div className="persona-look-bar">
                     <span>* LOOK *</span>
