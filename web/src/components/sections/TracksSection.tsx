@@ -129,10 +129,15 @@ function PersonaFlipCard({
           </aside>
           <div className="persona-back-body">
             <header className="persona-back-header">
+              <div className="persona-front-meta">
+                <span className="persona-code">{track.code}</span>
+                <span className="persona-stamp" aria-hidden="true">
+                  DA
+                </span>
+              </div>
               <p className="persona-pass-label">PASS CARD</p>
               <h3 className="persona-back-name">{track.name}</h3>
               <p className="persona-back-sub">{track.subtitle}</p>
-              <p className="persona-card-code">CARD CODE · {track.code}</p>
             </header>
 
             <dl className="persona-stats">

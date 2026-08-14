@@ -811,11 +811,24 @@ h1.hero-title {
   min-height: 100%;
 }
 
+.track-card-front,
+.track-card-front * {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
 .track-card-front {
   display: flex;
   flex-direction: column;
   padding: 14px 14px 12px;
   gap: 10px;
+  opacity: 1;
+  transition: opacity 0s linear 0.28s;
+}
+
+.track-card.is-flipped .track-card-front {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .track-card-back {
@@ -866,9 +879,10 @@ h1.hero-title {
 
 .persona-portrait-label {
   position: absolute;
-  left: 4px;
+  left: 6px;
   top: 50%;
-  transform: translateY(-50%) rotate(-90deg);
+  writing-mode: vertical-rl;
+  transform: translateY(-50%) rotate(180deg);
   transform-origin: center;
   font-family: var(--font-mono);
   font-size: 0.55rem;
@@ -878,6 +892,8 @@ h1.hero-title {
   pointer-events: none;
   z-index: 1;
   width: max-content;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .persona-portrait {
@@ -984,13 +1000,17 @@ h1.hero-title {
 
 .persona-back-header {
   border-bottom: 1px dashed rgba(26, 20, 18, 0.35);
-  padding-bottom: 8px;
   margin: 0;
-  padding: 7px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+  padding: 0 0 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.persona-back-header .persona-front-meta {
+  width: 100%;
+  margin-bottom: 6px;
 }
 
 .persona-pass-label {
