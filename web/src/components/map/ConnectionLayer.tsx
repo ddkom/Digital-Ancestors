@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { PathwayNode } from "../../types/pathway";
 import {
   connectionPathD,
@@ -16,13 +16,18 @@ type Props = {
   layoutEpoch: string;
 };
 
+function edgeKey(from: string, to: string) {
+  return `${from}-${to}`;
+}
+
 export function ConnectionLayer({
   edges,
   nodeById,
   nodeWidth,
   layoutEpoch,
 }: Props) {
-  const [visibleKeys, setVisibleKeys] = useState<Set<string>>(new Set());
+  const drawnKeys = useRef(new Set<string>());
+  const [animatingKeys, setAnimatingKeys] = useState<Set<string>>(new Set());
   const [anchors, setAnchors] = useState<Map<string, EdgeAnchor>>(new Map());
 
   useLayoutEffect(() => {
@@ -48,11 +53,41 @@ export function ConnectionLayer({
   }, [edges, nodeById, nodeWidth, layoutEpoch]);
 
   useEffect(() => {
-    const keys = new Set(edges.map((e) => `${e.from}-${e.to}`));
-    setVisibleKeys(new Set());
-    const id = requestAnimationFrame(() => setVisibleKeys(keys));
+    const keys = new Set(edges.map((e) => edgeKey(e.from, e.to)));
+    for (const key of [...drawnKeys.current]) {
+      if (!keys.has(key)) drawnKeys.current.delete(key);
+    }
+
+    const newcomers = [...keys].filter((key) => !drawnKeys.current.has(key));
+    setAnimatingKeys((prev) => {
+      const next = new Set<string>();
+      for (const key of prev) {
+        if (keys.has(key) && !drawnKeys.current.has(key)) next.add(key);
+      }
+      return next;
+    });
+
+    if (newcomers.length === 0) return;
+
+    const id = requestAnimationFrame(() => {
+      setAnimatingKeys((prev) => {
+        const next = new Set(prev);
+        newcomers.forEach((key) => next.add(key));
+        return next;
+      });
+    });
     return () => cancelAnimationFrame(id);
   }, [edges]);
+
+  const markDrawn = (key: string) => {
+    drawnKeys.current.add(key);
+    setAnimatingKeys((prev) => {
+      if (!prev.has(key)) return prev;
+      const next = new Set(prev);
+      next.delete(key);
+      return next;
+    });
+  };
 
   return (
     <svg id="connections" xmlns="http://www.w3.org/2000/svg">
@@ -87,11 +122,13 @@ export function ConnectionLayer({
         const toNode = nodeById.get(to);
         if (!fromNode || !toNode) return null;
 
-        const edgeKey = `${from}-${to}`;
-        const measured = anchors.get(edgeKey);
+        const key = edgeKey(from, to);
+        const measured = anchors.get(key);
         const fallback = estimateEdgeAnchors(fromNode, toNode, nodeWidth);
         const { startX, startY, endX, endY } = measured ?? fallback;
         const d = connectionPathD(startX, startY, endX, endY);
+        const isDrawing = animatingKeys.has(key);
+        const isVisible = isDrawing || drawnKeys.current.has(key);
 
         return (
           <path
@@ -99,9 +136,12 @@ export function ConnectionLayer({
             id={`path-${from}-${to}`}
             d={d}
             pathLength={1}
-            className={visibleKeys.has(edgeKey) ? "visible" : undefined}
+            className={[isVisible ? "visible" : "", isDrawing ? "is-drawing" : ""]
+              .filter(Boolean)
+              .join(" ") || undefined}
             markerStart="url(#connections-start-dot)"
             markerEnd="url(#connections-arrow)"
+            onAnimationEnd={() => markDrawn(key)}
           />
         );
       })}

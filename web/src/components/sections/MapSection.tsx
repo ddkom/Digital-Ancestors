@@ -64,11 +64,19 @@ export function MapSection({ nodes, shaderPalette }: Props) {
   const recaptureRef = useRef(recaptureView);
   recaptureRef.current = recaptureView;
 
+  const enterMobileFullscreen = () => {
+    if (isMapFullscreen || !isMobileViewport()) return;
+    setIsCssExpanded(true);
+  };
+
   useLayoutEffect(() => {
     if (!isCssExpanded) return;
     const header = document.querySelector("header");
     const applyFrame = () => {
-      const headerHeight = header?.getBoundingClientRect().height ?? 68;
+      const mobile = isMobileViewport();
+      const headerHeight = mobile
+        ? (header?.getBoundingClientRect().height ?? 68)
+        : 0;
       const viewHeight = Math.max(
         window.innerHeight,
         window.visualViewport?.height ?? 0,
@@ -84,6 +92,7 @@ export function MapSection({ nodes, shaderPalette }: Props) {
       const viewport = viewportRef.current;
       if (viewport) {
         viewport.style.height = `${mapHeight}px`;
+        viewport.style.borderRadius = "0";
       }
     };
     applyFrame();
@@ -106,7 +115,10 @@ export function MapSection({ nodes, shaderPalette }: Props) {
         host.style.height = "";
       }
       const viewport = viewportRef.current;
-      if (viewport) viewport.style.height = "";
+      if (viewport) {
+        viewport.style.height = "";
+        viewport.style.borderRadius = "";
+      }
       window.removeEventListener("keydown", onKey);
       window.removeEventListener("resize", applyFrame);
       window.visualViewport?.removeEventListener("resize", applyFrame);
@@ -114,30 +126,48 @@ export function MapSection({ nodes, shaderPalette }: Props) {
     };
   }, [isCssExpanded, viewportRef]);
 
-  const enterFullscreen = () => {
-    if (isMapFullscreen) return;
-    const elem = fullscreenHostRef.current;
-    if (!elem) return;
-    if (isMobileViewport()) {
-      setIsCssExpanded(true);
-      return;
-    }
-    const req =
-      elem.requestFullscreen ||
-      (elem as unknown as { webkitRequestFullscreen?: () => Promise<void> })
-        .webkitRequestFullscreen;
-    if (!req) {
-      setIsCssExpanded(true);
-      return;
-    }
-    Promise.resolve(req.call(elem)).catch(() => setIsCssExpanded(true));
-  };
+  useLayoutEffect(() => {
+    if (!isNativeFullscreen) return;
+    const applyFrame = () => {
+      const height = window.innerHeight;
+      const width = window.innerWidth;
+      const host = fullscreenHostRef.current;
+      const viewport = viewportRef.current;
+      if (host) {
+        host.style.width = `${width}px`;
+        host.style.height = `${height}px`;
+      }
+      if (viewport) {
+        viewport.style.width = `${width}px`;
+        viewport.style.height = `${height}px`;
+        viewport.style.borderRadius = "0";
+      }
+    };
+    applyFrame();
+    window.addEventListener("resize", applyFrame);
+    return () => {
+      const host = fullscreenHostRef.current;
+      const viewport = viewportRef.current;
+      if (host) {
+        host.style.width = "";
+        host.style.height = "";
+      }
+      if (viewport) {
+        viewport.style.width = "";
+        viewport.style.height = "";
+        viewport.style.borderRadius = "";
+      }
+      window.removeEventListener("resize", applyFrame);
+    };
+  }, [isNativeFullscreen, viewportRef]);
 
   const toggleFullscreen = () => {
-    if (isCssExpanded) {
-      setIsCssExpanded(false);
+    if (isMobileViewport()) {
+      setIsCssExpanded((open) => !open);
       return;
     }
+    const elem = fullscreenHostRef.current;
+    if (!elem) return;
     if (document.fullscreenElement) {
       const exit =
         document.exitFullscreen ||
@@ -146,7 +176,14 @@ export function MapSection({ nodes, shaderPalette }: Props) {
       exit?.call(document);
       return;
     }
-    enterFullscreen();
+    const req =
+      elem.requestFullscreen ||
+      (elem as unknown as { webkitRequestFullscreen?: () => Promise<void> })
+        .webkitRequestFullscreen;
+    if (!req) return;
+    Promise.resolve(req.call(elem)).catch(() => {
+      setIsCssExpanded(true);
+    });
   };
 
   const wasFullscreen = useRef(isMapFullscreen);
@@ -192,7 +229,7 @@ export function MapSection({ nodes, shaderPalette }: Props) {
           applyZoom={applyZoom}
           wheelZoomEnabled={isMapFullscreen}
           shaderPalette={shaderPalette}
-          onActivate={enterFullscreen}
+          onActivate={enterMobileFullscreen}
         >
           <div
             id="world"
@@ -213,7 +250,7 @@ export function MapSection({ nodes, shaderPalette }: Props) {
                 visible={visibleIds.has(node.id)}
                 isOptionSelected={(toId) => isOptionSelected(node.id, toId)}
                 onToggleOption={(toId) => {
-                  enterFullscreen();
+                  enterMobileFullscreen();
                   toggleOption(node.id, toId);
                 }}
               />

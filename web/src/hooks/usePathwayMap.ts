@@ -86,11 +86,20 @@ export function usePathwayMap(nodes: PathwayNode[]) {
       const viewport = viewportRef.current;
       if (!viewport) return;
       const rect = viewport.getBoundingClientRect();
-      const targetX = node.x + 180;
-      const targetY = node.y + 80;
-      const nx = rect.width / 2 - targetX * scale;
-      let ny = rect.height / 2 - targetY * scale;
-      if (ny > 80) ny = 80;
+      const el = document.getElementById(node.id);
+      const isResult = node.type === "end";
+      const width = el?.offsetWidth || (isResult ? 420 : NODE_WIDTH);
+      const height = el?.offsetHeight || (isResult ? 520 : 200);
+      const marginLeft = el
+        ? parseFloat(getComputedStyle(el).marginLeft) || 0
+        : isResult
+          ? -30
+          : 0;
+      const centerX = node.x + marginLeft + width / 2;
+      const centerY = node.y + height / 2;
+      const nx = rect.width / 2 - centerX * scale;
+      let ny = rect.height / 2 - centerY * scale;
+      if (!isResult && ny > 80) ny = 80;
       setPointX(nx);
       setPointY(ny);
     },
@@ -122,7 +131,14 @@ export function usePathwayMap(nodes: PathwayNode[]) {
         reveal(toId);
         lastFocusId.current = toId;
         const node = nodeById.get(toId);
-        if (node) focusNode(node);
+        if (!node) return;
+        if (node.type === "end") {
+          window.requestAnimationFrame(() => {
+            window.requestAnimationFrame(() => focusNode(node));
+          });
+        } else {
+          focusNode(node);
+        }
       }
     },
     [deepCollapse, reveal, focusNode, nodeById],

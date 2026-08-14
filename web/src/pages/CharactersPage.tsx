@@ -159,6 +159,8 @@ export function CharactersPage({ shaderPalette }: Props) {
   const activeIndex = wrapIndex(deckIndex);
   const activeId = CHARACTERS[activeIndex].id;
   const { kicker, title, body, prev, next } = copy.characters;
+  const arrivedWithHash = isCharacterId(hashId);
+  const allowHashSync = useRef(arrivedWithHash);
   const drag = useRef({
     active: false,
     startX: 0,
@@ -170,16 +172,23 @@ export function CharactersPage({ shaderPalette }: Props) {
 
   const go = useCallback((step: number) => {
     if (!step) return;
+    allowHashSync.current = true;
     setDeckIndex((index) => index + step);
   }, []);
 
   useEffect(() => {
+    if (!allowHashSync.current) return;
+    if (hashId === activeId) return;
     navigate(`/characters#${activeId}`, { replace: true });
-  }, [activeId, navigate]);
+  }, [activeId, hashId, navigate]);
 
   useEffect(() => {
+    if (!arrivedWithHash) {
+      window.scrollTo({ top: 0, behavior: "auto" });
+      return;
+    }
     window.setTimeout(() => scrollToSection("characters-stack"), 0);
-  }, [location.pathname]);
+  }, [arrivedWithHash]);
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
