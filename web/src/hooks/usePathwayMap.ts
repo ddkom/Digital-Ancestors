@@ -32,6 +32,7 @@ export function usePathwayMap(nodes: PathwayNode[]) {
   const [pointX, setPointX] = useState(0);
   const [pointY, setPointY] = useState(40);
   const [scale, setScale] = useState(1);
+  const lastFocusId = useRef<string | null>(null);
   const [visibleIds, setVisibleIds] = useState<Set<string>>(() => new Set());
   /** fromNodeId -> set of selected target ids */
   const [selections, setSelections] = useState<Map<string, Set<string>>>(
@@ -40,17 +41,23 @@ export function usePathwayMap(nodes: PathwayNode[]) {
   const selectionsRef = useRef(selections);
   selectionsRef.current = selections;
 
-  const initPan = useCallback(() => {
+  const centerStart = useCallback(() => {
     const el = viewportRef.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
-    setPointX(rect.width / 2 - 190);
-    setPointY(40);
+    if (rect.width < 2 || rect.height < 2) return;
+    const sidePad = 24;
+    const fitScale = Math.min(1, (rect.width - sidePad * 2) / NODE_WIDTH);
+    const startBlockHeight = 380;
+    lastFocusId.current = null;
+    setScale(fitScale);
+    setPointX(rect.width / 2 - (NODE_WIDTH * fitScale) / 2);
+    setPointY(Math.max(24, (rect.height - startBlockHeight * fitScale) / 2));
   }, []);
 
   useLayoutEffect(() => {
-    initPan();
-  }, [initPan]);
+    centerStart();
+  }, [centerStart]);
 
   const reveal = useCallback((id: string) => {
     setVisibleIds((prev) => new Set(prev).add(id));
@@ -113,6 +120,7 @@ export function usePathwayMap(nodes: PathwayNode[]) {
           return next;
         });
         reveal(toId);
+        lastFocusId.current = toId;
         const node = nodeById.get(toId);
         if (node) focusNode(node);
       }
@@ -149,13 +157,20 @@ export function usePathwayMap(nodes: PathwayNode[]) {
     [applyZoom],
   );
 
+  const recaptureView = useCallback(() => {
+    const id = lastFocusId.current;
+    const node = id ? nodeById.get(id) : undefined;
+    if (node) focusNode(node);
+    else centerStart();
+  }, [centerStart, focusNode, nodeById]);
+
   const resetMap = useCallback(() => {
     setSelections(new Map());
     setVisibleIds(new Set());
-    setScale(1);
-    initPan();
+    lastFocusId.current = null;
+    centerStart();
     window.setTimeout(() => reveal("start"), 200);
-  }, [initPan, reveal]);
+  }, [centerStart, reveal]);
 
   useEffect(() => {
     const onFullscreen = () => {
@@ -191,6 +206,7 @@ export function usePathwayMap(nodes: PathwayNode[]) {
     isOptionSelected: (fromId: string, toId: string) =>
       selections.get(fromId)?.has(toId) ?? false,
     resetMap,
+    recaptureView,
     applyZoom,
     zoomByButton,
     focusNode,

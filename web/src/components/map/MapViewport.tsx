@@ -3,6 +3,7 @@ import {
   useEffect,
   useRef,
   type CSSProperties,
+  type PointerEvent as ReactPointerEvent,
   type ReactNode,
   type RefObject,
   type Ref,
@@ -15,6 +16,7 @@ const WHEEL_ZOOM_SENSITIVITY = 0.001;
 const PINCH_WHEEL_SENSITIVITY = 0.007;
 /** Two-finger touch pinch: scales the distance ratio into a zoom delta. */
 const TOUCH_PINCH_SENSITIVITY = 3;
+const TAP_THRESHOLD = 8;
 
 type Props = {
   viewportRef: RefObject<HTMLDivElement | null>;
@@ -25,6 +27,7 @@ type Props = {
   applyZoom: (delta: number, cx: number, cy: number) => void;
   wheelZoomEnabled?: boolean;
   shaderPalette?: ShaderPalette;
+  onActivate?: () => void;
   children: ReactNode;
 };
 
@@ -37,6 +40,7 @@ export function MapViewport({
   applyZoom,
   wheelZoomEnabled = false,
   shaderPalette,
+  onActivate,
   children,
 }: Props) {
   const paletteStyle = shaderPalette
@@ -51,9 +55,14 @@ export function MapViewport({
         "--shader-highlight": shaderPalette.highlight,
       } as CSSProperties)
     : undefined;
-  const isDragging = useRef(false);
-  const startXRef = useRef(0);
-  const startYRef = useRef(0);
+  const drag = useRef({
+    active: false,
+    startX: 0,
+    startY: 0,
+    originX: 0,
+    originY: 0,
+    moved: false,
+  });
 
   useEffect(() => {
     const el = viewportRef.current;
@@ -119,42 +128,62 @@ export function MapViewport({
     };
   }, [applyZoom, viewportRef, wheelZoomEnabled]);
 
-  const onMouseDown = useCallback(
-    (e: React.MouseEvent) => {
-      if ((e.target as HTMLElement).closest("button, a, .map-controls")) return;
-      isDragging.current = true;
-      startXRef.current = e.clientX - pointX;
-      startYRef.current = e.clientY - pointY;
-      (e.currentTarget as HTMLDivElement).style.cursor = "grabbing";
+  const onPointerDown = useCallback(
+    (event: ReactPointerEvent<HTMLDivElement>) => {
+      if (event.pointerType === "mouse" && event.button !== 0) return;
+      const target = event.target as HTMLElement;
+      if (target.closest("button, a, .map-controls")) return;
+      drag.current = {
+        active: true,
+        startX: event.clientX,
+        startY: event.clientY,
+        originX: pointX,
+        originY: pointY,
+        moved: false,
+      };
+      event.currentTarget.setPointerCapture(event.pointerId);
     },
     [pointX, pointY],
   );
 
-  useEffect(() => {
-    const onMove = (e: MouseEvent) => {
-      if (!isDragging.current) return;
-      e.preventDefault();
-      setPointX(e.clientX - startXRef.current);
-      setPointY(e.clientY - startYRef.current);
-    };
-    const onUp = () => {
-      isDragging.current = false;
-      const el = viewportRef.current;
-      if (el) el.style.cursor = "grab";
-    };
-    window.addEventListener("mousemove", onMove);
-    window.addEventListener("mouseup", onUp);
-    return () => {
-      window.removeEventListener("mousemove", onMove);
-      window.removeEventListener("mouseup", onUp);
-    };
-  }, [setPointX, setPointY, viewportRef]);
+  const onPointerMove = useCallback(
+    (event: ReactPointerEvent<HTMLDivElement>) => {
+      if (!drag.current.active) return;
+      const dx = event.clientX - drag.current.startX;
+      const dy = event.clientY - drag.current.startY;
+      if (!drag.current.moved && Math.hypot(dx, dy) > TAP_THRESHOLD) {
+        drag.current.moved = true;
+      }
+      if (!drag.current.moved) return;
+      setPointX(drag.current.originX + dx);
+      setPointY(drag.current.originY + dy);
+    },
+    [setPointX, setPointY],
+  );
+
+  const endPointer = useCallback(
+    (event: ReactPointerEvent<HTMLDivElement>) => {
+      if (!drag.current.active) return;
+      const wasTap = !drag.current.moved;
+      drag.current.active = false;
+      try {
+        event.currentTarget.releasePointerCapture(event.pointerId);
+      } catch {
+        /* already released */
+      }
+      if (wasTap) onActivate?.();
+    },
+    [onActivate],
+  );
 
   return (
     <div
       id="viewport"
       ref={viewportRef as Ref<HTMLDivElement>}
-      onMouseDown={onMouseDown}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={endPointer}
+      onPointerCancel={endPointer}
       style={{ cursor: "grab", ...paletteStyle }}
     >
       {children}

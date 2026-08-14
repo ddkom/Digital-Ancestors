@@ -9,6 +9,9 @@
   "siteHeader": {
     "brandTitle": "AI PATHWAYS FOR ARTISTS",
     "brandSubtitle": "An open framework for protection, care, and experimentation",
+    "menu": "Menu",
+    "closeMenu": "Close menu",
+    "home": "Home",
     "nav": {
       "map": "Launch the map",
       "why": "Backstory",

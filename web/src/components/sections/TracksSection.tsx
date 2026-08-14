@@ -1,12 +1,28 @@
-import { useState, type CSSProperties, type KeyboardEvent } from "react";
+import {
+  useCallback,
+  useRef,
+  useState,
+  type CSSProperties,
+  type KeyboardEvent,
+  type PointerEvent as ReactPointerEvent,
+} from "react";
 import { copy } from "../../locales";
 import type { ShaderPalette } from "../ShaderBackground";
-import { PERSONAS } from "../../data/personas";
+import { PERSONAS, type PersonaCard } from "../../data/personas";
 import { SectionHeader } from "./SectionHeader";
+
+const SWIPE_THRESHOLD = 56;
+const DECK_SIZE = PERSONAS.length;
 
 type Props = {
   shaderPalette: ShaderPalette;
 };
+
+type TrackCardData = PersonaCard & { accent: string };
+
+function wrapIndex(index: number): number {
+  return ((index % DECK_SIZE) + DECK_SIZE) % DECK_SIZE;
+}
 
 function Barcode() {
   return (
@@ -46,8 +62,133 @@ function QrMark() {
   );
 }
 
+function PersonaFlipCard({
+  track,
+  isFlipped,
+  onToggle,
+}: {
+  track: TrackCardData;
+  isFlipped: boolean;
+  onToggle: () => void;
+}) {
+  const onCardKeyDown = (event: KeyboardEvent<HTMLElement>) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      onToggle();
+    }
+  };
+
+  return (
+    <article
+      className={`track-card persona-card persona-card--${track.id}${isFlipped ? " is-flipped" : ""}`}
+      tabIndex={0}
+      role="button"
+      aria-pressed={isFlipped}
+      style={{ "--persona-accent": track.accent } as CSSProperties}
+      aria-label={`${track.name}: ${track.subtitle}. Activate to flip card.`}
+      onClick={onToggle}
+      onKeyDown={onCardKeyDown}
+    >
+      <div className="track-card-inner">
+        <div className="track-card-face track-card-front persona-front">
+          <header className="persona-front-meta">
+            <span className="persona-code">{track.code}</span>
+            <span className="persona-stamp" aria-hidden="true">
+              DA
+            </span>
+          </header>
+          <div className="persona-portrait-wrap">
+            <span className="persona-portrait-label">Portrait</span>
+            {track.image ? (
+              <img
+                className="persona-portrait"
+                src={track.image}
+                alt={track.imageAlt}
+                width={240}
+                height={240}
+                draggable={false}
+              />
+            ) : null}
+          </div>
+          <div className="persona-look-bar">
+            <span>* LOOK *</span>
+          </div>
+          <div className="persona-front-identity">
+            <h3 className="persona-name">{track.name}</h3>
+            <p className="persona-subtitle">{track.subtitle}</p>
+          </div>
+          <footer className="persona-front-codes">
+            <Barcode />
+            <QrMark />
+          </footer>
+        </div>
+
+        <div className="track-card-face track-card-back persona-back">
+          <aside className="persona-stance-rail" aria-hidden="true">
+            <span>{track.stanceText}</span>
+          </aside>
+          <div className="persona-back-body">
+            <header className="persona-back-header">
+              <p className="persona-pass-label">PASS CARD</p>
+              <h3 className="persona-back-name">{track.name}</h3>
+              <p className="persona-back-sub">{track.subtitle}</p>
+              <p className="persona-card-code">CARD CODE · {track.code}</p>
+            </header>
+
+            <dl className="persona-stats">
+              <div className="persona-stat">
+                <dt>Nickname</dt>
+                <dd>{track.subtitle}</dd>
+              </div>
+              <div className="persona-stat">
+                <dt>Default Stance</dt>
+                <dd>{track.defaultStance}</dd>
+              </div>
+              <div className="persona-stat">
+                <dt>Favourite Medium</dt>
+                <dd>{track.favouriteMedium}</dd>
+              </div>
+              <div className="persona-stat">
+                <dt>Famous Quote</dt>
+                <dd>{track.famousQuote}</dd>
+              </div>
+            </dl>
+
+            <footer className="persona-back-footer">
+              <div className="persona-icons" aria-hidden="true">
+                <span className="persona-icon-sq" />
+                <span className="persona-icon-ce">CE</span>
+                <span className="persona-icon-ring">W</span>
+                <span className="persona-icon-rec">
+                  <svg viewBox="0 0 18 18" width="16" height="16">
+                    <path
+                      d="M4 5.5a6 6 0 0 1 9.2-2.1L14 2v4h-4l1.3-1.3A4.5 4.5 0 0 0 5.5 7H4zm10 7a6 6 0 0 1-9.2 2.1L4 16v-4h4l-1.3 1.3A4.5 4.5 0 0 0 12.5 11H14z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </span>
+              </div>
+              <Barcode />
+            </footer>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 export function TracksSection({ shaderPalette }: Props) {
   const [flipped, setFlipped] = useState<Record<string, boolean>>({});
+  const [deckIndex, setDeckIndex] = useState(0);
+  const [dragX, setDragX] = useState(0);
+  const skipFlip = useRef(false);
+  const drag = useRef({
+    active: false,
+    startX: 0,
+    startY: 0,
+    delta: 0,
+    locked: null as "x" | "y" | null,
+  });
   const personaColors: Record<string, string> = {
     guardian: shaderPalette?.deep ?? "#6D88C9",
     steward: shaderPalette?.highlight ?? "#8EA52A",
@@ -60,15 +201,65 @@ export function TracksSection({ shaderPalette }: Props) {
   }));
 
   const toggleFlip = (id: string) => {
+    if (skipFlip.current) return;
     setFlipped((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
-  const onCardKeyDown = (id: string) => (event: KeyboardEvent<HTMLElement>) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      toggleFlip(id);
-    }
+  const go = useCallback((step: number) => {
+    if (!step) return;
+    setDeckIndex((index) => index + step);
+  }, []);
+
+  const onPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+    const target = event.target as HTMLElement;
+    if (target.closest("button")) return;
+    drag.current = {
+      active: true,
+      startX: event.clientX,
+      startY: event.clientY,
+      delta: 0,
+      locked: null,
+    };
+    setDragX(0);
+    event.currentTarget.setPointerCapture(event.pointerId);
   };
+
+  const onPointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (!drag.current.active) return;
+    const dx = event.clientX - drag.current.startX;
+    const dy = event.clientY - drag.current.startY;
+    if (drag.current.locked === null && Math.abs(dx) + Math.abs(dy) > 8) {
+      drag.current.locked = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+    }
+    if (drag.current.locked !== "x") return;
+    drag.current.delta = dx;
+    setDragX(dx);
+  };
+
+  const endDrag = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (!drag.current.active) return;
+    const delta = drag.current.delta;
+    const locked = drag.current.locked;
+    drag.current.active = false;
+    setDragX(0);
+    try {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    } catch {
+      /* already released */
+    }
+    if (locked !== "x") return;
+    if (Math.abs(delta) > 8) {
+      skipFlip.current = true;
+      window.setTimeout(() => {
+        skipFlip.current = false;
+      }, 0);
+    }
+    if (delta <= -SWIPE_THRESHOLD) go(1);
+    else if (delta >= SWIPE_THRESHOLD) go(-1);
+  };
+
+  const windowIndexes = [deckIndex - 1, deckIndex, deckIndex + 1];
 
   return (
     <section id="tracks" className="section" aria-labelledby="tracks-heading">
@@ -79,107 +270,70 @@ export function TracksSection({ shaderPalette }: Props) {
         body={copy.tracks.body}
       />
       <div className="track-grid">
-        {tracks.map((t) => {
-          const isFlipped = Boolean(flipped[t.id]);
-          return (
-            <article
-              key={t.id}
-              className={`track-card persona-card persona-card--${t.id}${isFlipped ? " is-flipped" : ""}`}
-              tabIndex={0}
-              role="button"
-              aria-pressed={isFlipped}
-              style={{ "--persona-accent": t.accent } as CSSProperties}
-              aria-label={`${t.name}: ${t.subtitle}. Activate to flip card.`}
-              onClick={() => toggleFlip(t.id)}
-              onKeyDown={onCardKeyDown(t.id)}
-            >
-              <div className="track-card-inner">
-                <div className="track-card-face track-card-front persona-front">
-                  <header className="persona-front-meta">
-                    <span className="persona-code">{t.code}</span>
-                    <span className="persona-stamp" aria-hidden="true">
-                      DA
-                    </span>
-                  </header>
-                  <div className="persona-portrait-wrap">
-                    <span className="persona-portrait-label">Portrait</span>
-                    {t.image ? (
-                      <img
-                        className="persona-portrait"
-                        src={t.image}
-                        alt={t.imageAlt}
-                        width={240}
-                        height={240}
-                        draggable={false}
-                      />
-                    ) : null}
-                  </div>
-                  <div className="persona-look-bar">
-                    <span>* LOOK *</span>
-                  </div>
-                  <div className="persona-front-identity">
-                    <h3 className="persona-name">{t.name}</h3>
-                    <p className="persona-subtitle">{t.subtitle}</p>
-                  </div>
-                  <footer className="persona-front-codes">
-                    <Barcode />
-                    <QrMark />
-                  </footer>
-                </div>
+        {tracks.map((track) => (
+          <PersonaFlipCard
+            key={track.id}
+            track={track}
+            isFlipped={Boolean(flipped[track.id])}
+            onToggle={() => toggleFlip(track.id)}
+          />
+        ))}
+      </div>
 
-                <div className="track-card-face track-card-back persona-back">
-                  <aside className="persona-stance-rail" aria-hidden="true">
-                    <span>{t.stanceText}</span>
-                  </aside>
-                  <div className="persona-back-body">
-                    <header className="persona-back-header">
-                      <p className="persona-pass-label">PASS CARD</p>
-                      <h3 className="persona-back-name">{t.name}</h3>
-                      <p className="persona-back-sub">{t.subtitle}</p>
-                      <p className="persona-card-code">CARD CODE · {t.code}</p>
-                    </header>
+      <div className="track-carousel character-carousel">
+        <button
+          type="button"
+          className="character-nav-btn character-nav-prev"
+          aria-label={copy.characters.prev}
+          onClick={() => go(-1)}
+        >
+          ←
+        </button>
 
-                    <dl className="persona-stats">
-                      <div className="persona-stat">
-                        <dt>Nickname</dt>
-                        <dd>{t.subtitle}</dd>
-                      </div>
-                      <div className="persona-stat">
-                        <dt>Default Stance</dt>
-                        <dd>{t.defaultStance}</dd>
-                      </div>
-                      <div className="persona-stat">
-                        <dt>Favourite Medium</dt>
-                        <dd>{t.favouriteMedium}</dd>
-                      </div>
-                      <div className="persona-stat">
-                        <dt>Famous Quote</dt>
-                        <dd>{t.famousQuote}</dd>
-                      </div>
-                    </dl>
-
-                    <footer className="persona-back-footer">
-                      <div className="persona-icons" aria-hidden="true">
-                        <span className="persona-icon-sq" />
-                        <span className="persona-icon-ce">CE</span>
-                        <span className="persona-icon-ring">W</span>
-                        <span className="persona-icon-rec">
-                          <svg viewBox="0 0 18 18" width="16" height="16">
-                            <path
-                              d="M4 5.5a6 6 0 0 1 9.2-2.1L14 2v4h-4l1.3-1.3A4.5 4.5 0 0 0 5.5 7H4zm10 7a6 6 0 0 1-9.2 2.1L4 16v-4h4l-1.3 1.3A4.5 4.5 0 0 0 12.5 11H14z"
-                              fill="currentColor"
-                            />
-                          </svg>
-                        </span>
-                      </div>
-                      <Barcode />
-                    </footer>
+        <div
+          className="character-carousel-frame"
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={endDrag}
+          onPointerCancel={endDrag}
+        >
+          <div
+            className={`character-carousel-track${dragX !== 0 ? " is-dragging" : ""}`}
+            style={{
+              transform: `translateX(calc(${-deckIndex * 100}% + ${dragX}px))`,
+            }}
+          >
+            {windowIndexes.map((index) => {
+              const track = tracks[wrapIndex(index)];
+              return (
+                <div
+                  key={index}
+                  className={`character-slide${index === deckIndex ? " is-current" : ""}`}
+                  style={{ left: `${index * 100}%` }}
+                  aria-hidden={index !== deckIndex}
+                  {...(index !== deckIndex ? { inert: true } : {})}
+                >
+                  <div className="track-slide-inner">
+                    <PersonaFlipCard
+                      track={track}
+                      isFlipped={Boolean(flipped[track.id])}
+                      onToggle={() => toggleFlip(track.id)}
+                    />
                   </div>
                 </div>
-              </div>
-            </article>
-          );
-        })}
+              );
+            })}
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className="character-nav-btn character-nav-next"
+          aria-label={copy.characters.next}
+          onClick={() => go(1)}
+        >
+          →
+        </button>
       </div>
     </section>
   );
