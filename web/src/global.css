@@ -1112,18 +1112,18 @@ svg#connections path.visible {
 
 .node-edge-options {
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 50%;
   bottom: -50px;
   z-index: 2;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  padding: 0 12px;
+  gap: 10px;
+  width: max-content;
+  max-width: none;
   box-sizing: border-box;
-  transform: translateY(50%);
+  transform: translate(-50%, 50%);
 }
 
 .node-anchor:not(.visible) .node-edge-options,
@@ -1131,13 +1131,6 @@ svg#connections path.visible {
 .node-anchor:not(.visible) .resource-btn,
 .node-anchor:not(.visible) .context-toggle {
   pointer-events: none;
-}
-
-/* Start tile: stack choices on the card’s bottom-center edge */
-.node-anchor.start .node-edge-options {
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
 }
 
 @keyframes pulse-ring {
