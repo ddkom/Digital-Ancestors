@@ -8,21 +8,17 @@ import { PathwayNodeCard } from "../map/PathwayNodeCard";
 import { MapControls } from "../map/MapControls";
 import { MapLegend } from "../map/MapLegend";
 import { SectionHeader } from "./SectionHeader";
-import {
-  ShaderBackground,
-  type ShaderPalette,
-} from "../ShaderBackground";
+import { ShaderBackground } from "../ShaderBackground";
 
 type Props = {
   nodes: PathwayNode[];
-  shaderPalette: ShaderPalette;
 };
 
 function isMobileViewport() {
   return window.matchMedia("(max-width: 880px)").matches;
 }
 
-export function MapSection({ nodes, shaderPalette }: Props) {
+export function MapSection({ nodes }: Props) {
   const fullscreenHostRef = useRef<HTMLDivElement>(null);
   const [isNativeFullscreen, setIsNativeFullscreen] = useState(false);
   const [isCssExpanded, setIsCssExpanded] = useState(false);
@@ -217,9 +213,7 @@ export function MapSection({ nodes, shaderPalette }: Props) {
         ref={fullscreenHostRef}
         className={`map-fullscreen-host${isCssExpanded ? " is-expanded" : ""}`}
       >
-        {isMapFullscreen ? (
-          <ShaderBackground palette={shaderPalette} />
-        ) : null}
+        {isMapFullscreen ? <ShaderBackground /> : null}
         <MapViewport
           viewportRef={viewportRef}
           pointX={pointX}
@@ -228,7 +222,6 @@ export function MapSection({ nodes, shaderPalette }: Props) {
           setPointY={setPointY}
           applyZoom={applyZoom}
           wheelZoomEnabled={isMapFullscreen}
-          shaderPalette={shaderPalette}
           onActivate={enterMobileFullscreen}
         >
           <div
@@ -265,7 +258,7 @@ export function MapSection({ nodes, shaderPalette }: Props) {
         </MapViewport>
       </div>
 
-      <MapLegend shaderPalette={shaderPalette} />
+      <MapLegend />
     </section>
   );
 }

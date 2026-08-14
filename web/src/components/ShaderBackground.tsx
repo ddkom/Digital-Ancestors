@@ -1,6 +1,14 @@
 import { useEffect, useRef } from "react";
 import p5 from "p5";
 
+/** Palette uniforms — values come from `--shader-*` in `global.css`. */
+type ShaderColors = {
+  deep: [number, number, number];
+  light: [number, number, number];
+  accent: [number, number, number];
+  highlight: [number, number, number];
+};
+
 /* `#version 300 es` MUST be the first byte of each shader source — no leading whitespace. */
 const VERT = `#version 300 es
 precision highp float;
@@ -38,7 +46,7 @@ uniform float iTime;
 uniform int noctaves;
 uniform float c[22];
 
-/* Editable palette — set from React with hex colors. */
+/* Palette from --shader-* tokens in global.css. */
 uniform vec3 uColorDeep;      // shadowy/cool foundation
 uniform vec3 uColorLight;     // bright midtone
 uniform vec3 uColorAccent;    // warm accent flares
@@ -111,49 +119,31 @@ void main() {
 }
 `;
 
-export type ShaderPalette = {
-  /** Cool/shadow base color */
-  deep: string;
-  /** Bright midtone */
-  light: string;
-  /** Warm accent for animated flares */
-  accent: string;
-  /** Soft highlight wash */
-  highlight: string;
-};
-
-const DEFAULT_PALETTE: ShaderPalette = {
-  deep: "#68877A",
-  light: "#fff",
-  accent: "#A0A7E5",
-  highlight: "#fff",
-};
-
-/** "#rrggbb" or "#rgb" → [r, g, b] in 0..1. Returns black on parse failure. */
-function hexToRgb(hex: string): [number, number, number] {
-  const trimmed = hex.trim().replace(/^#/, "");
-  const expanded =
-    trimmed.length === 3
-      ? trimmed
-          .split("")
-          .map((c) => c + c)
-          .join("")
-      : trimmed;
-  if (!/^[0-9a-fA-F]{6}$/.test(expanded)) return [0, 0, 0];
-  const n = parseInt(expanded, 16);
-  return [((n >> 16) & 0xff) / 255, ((n >> 8) & 0xff) / 255, (n & 0xff) / 255];
+/** Resolve a CSS custom property to [r, g, b] in 0..1 (handles `var(--color-N)` aliases). */
+function readCssRgb(varName: string, probe: HTMLElement): [number, number, number] {
+  probe.style.color = `var(${varName})`;
+  const value = getComputedStyle(probe).color;
+  const parts = value.match(/(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/) ?? value.match(/(\d+)\s+(\d+)\s+(\d+)/);
+  if (!parts) return [0, 0, 0];
+  return [Number(parts[1]) / 255, Number(parts[2]) / 255, Number(parts[3]) / 255];
 }
 
-type Props = {
-  palette?: Partial<ShaderPalette>;
-};
+function readShaderColors(): ShaderColors {
+  const probe = document.createElement("span");
+  probe.style.display = "none";
+  document.documentElement.appendChild(probe);
+  const colors = {
+    deep: readCssRgb("--shader-deep", probe),
+    light: readCssRgb("--shader-light", probe),
+    accent: readCssRgb("--shader-accent", probe),
+    highlight: readCssRgb("--shader-highlight", probe),
+  };
+  probe.remove();
+  return colors;
+}
 
-export function ShaderBackground({ palette }: Props = {}) {
+export function ShaderBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const paletteRef = useRef({ ...DEFAULT_PALETTE, ...palette });
-
-  /* Keep the latest palette accessible to the (long-lived) sketch closure. */
-  paletteRef.current = { ...DEFAULT_PALETTE, ...palette };
 
   useEffect(() => {
     const parent = containerRef.current;
@@ -168,6 +158,7 @@ export function ShaderBackground({ palette }: Props = {}) {
       const MOUSE_LERP = 0.05;
       let smoothMouseX = 0;
       let smoothMouseY = 0;
+      const pal = readShaderColors();
 
       const initc = () => {
         for (let i = 0; i < 22; i++) c[i] = p.random(-5, 5);
@@ -208,11 +199,10 @@ export function ShaderBackground({ palette }: Props = {}) {
         test.setUniform("iMouse", [smoothMouseX * MOUSE_INFLUENCE, smoothMouseY * MOUSE_INFLUENCE]);
         test.setUniform("noctaves", noctaves);
         test.setUniform("c", c);
-        const pal = paletteRef.current;
-        test.setUniform("uColorDeep", hexToRgb(pal.deep));
-        test.setUniform("uColorLight", hexToRgb(pal.light));
-        test.setUniform("uColorAccent", hexToRgb(pal.accent));
-        test.setUniform("uColorHighlight", hexToRgb(pal.highlight));
+        test.setUniform("uColorDeep", pal.deep);
+        test.setUniform("uColorLight", pal.light);
+        test.setUniform("uColorAccent", pal.accent);
+        test.setUniform("uColorHighlight", pal.highlight);
         p.shader(test);
         /* Flat fullscreen quad — no depth, no strokes, fills the entire WebGL canvas. */
         p.plane(p.width, p.height);

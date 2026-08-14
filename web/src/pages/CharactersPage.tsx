@@ -4,18 +4,15 @@ import {
   useMemo,
   useRef,
   useState,
-  type CSSProperties,
   type PointerEvent as ReactPointerEvent,
 } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import DOMPurify from "dompurify";
 import { copy } from "../locales";
-import type { ShaderPalette } from "../components/ShaderBackground";
 import { SectionHeader } from "../components/sections/SectionHeader";
 import {
   CHARACTERS,
   isCharacterId,
-  type CharacterId,
   type CharacterProfile,
 } from "../data/characterProfiles";
 import {
@@ -27,10 +24,6 @@ import { scrollToSection } from "../lib/scrollToSection";
 const SWIPE_THRESHOLD = 56;
 const DECK_SIZE = CHARACTERS.length;
 
-type Props = {
-  shaderPalette: ShaderPalette;
-};
-
 function wrapIndex(index: number): number {
   return ((index % DECK_SIZE) + DECK_SIZE) % DECK_SIZE;
 }
@@ -39,12 +32,6 @@ function shortestStep(from: number, to: number): number {
   const forward = wrapIndex(to - from);
   const backward = wrapIndex(from - to);
   return forward <= backward ? forward : -backward;
-}
-
-function characterAccent(id: CharacterId, palette: ShaderPalette): string {
-  if (id === "guardian") return palette.deep;
-  if (id === "steward") return palette.highlight;
-  return palette.accent;
 }
 
 function sanitizeHtml(markdown: string): string {
@@ -65,10 +52,8 @@ function MarkdownHtml({ markdown, className }: { markdown: string; className?: s
 
 function PersonaSlide({
   character,
-  shaderPalette,
 }: {
   character: CharacterProfile;
-  shaderPalette: ShaderPalette;
 }) {
   const parsed = useMemo(
     () => splitPersonaMarkdown(character.markdown),
@@ -77,14 +62,7 @@ function PersonaSlide({
   const [openKey, setOpenKey] = useState<string | null>(null);
 
   return (
-    <div
-      className="character-slide-inner"
-      style={
-        {
-          "--persona-accent": characterAccent(character.id, shaderPalette),
-        } as CSSProperties
-      }
-    >
+    <div className={`character-slide-inner character-slide-inner--${character.id}`}>
       <article className="character-card" id={character.id}>
         <div className="character-card-portrait">
           {character.image ? (
@@ -145,7 +123,7 @@ function PersonaSlide({
   );
 }
 
-export function CharactersPage({ shaderPalette }: Props) {
+export function CharactersPage() {
   const location = useLocation();
   const navigate = useNavigate();
   const hashId = location.hash.replace(/^#/, "");
@@ -284,10 +262,7 @@ export function CharactersPage({ shaderPalette }: Props) {
                   style={{ left: `${index * 100}%` }}
                   aria-hidden={index !== deckIndex}
                 >
-                  <PersonaSlide
-                    character={CHARACTERS[wrapIndex(index)]}
-                    shaderPalette={shaderPalette}
-                  />
+                  <PersonaSlide character={CHARACTERS[wrapIndex(index)]} />
                 </div>
               ))}
             </div>

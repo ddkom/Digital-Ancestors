@@ -11,16 +11,7 @@ import { WhoSection } from "../components/sections/WhoSection";
 
 const nodes = layoutPathwayNodes(pathwayNodeDefs as PathwayNodeDef[]);
 
-type Props = {
-  shaderPalette: {
-    deep: string;
-    light: string;
-    accent: string;
-    highlight: string;
-  };
-};
-
-export function HomePage({ shaderPalette }: Props) {
+export function HomePage() {
   useEffect(() => {
     const hash = window.location.hash.replace(/^#/, "");
     if (!hash) return;
@@ -30,8 +21,8 @@ export function HomePage({ shaderPalette }: Props) {
   return (
     <main>
         <HeroSection />
-        <TracksSection shaderPalette={shaderPalette} />
-        <MapSection nodes={nodes} shaderPalette={shaderPalette} />
+        <TracksSection />
+        <MapSection nodes={nodes} />
         <WhySection />
         <WhoSection />
     </main>

@@ -4,8 +4,7 @@ import pathwayNodeDefs from "../data/pathwayNodes.json";
 import type { PathwayNodeDef } from "../types/pathway";
 import { copy } from "../locales";
 import { scrollToSection } from "../lib/scrollToSection";
-import type { ShaderPalette } from "../components/ShaderBackground";
-import { trackPillStylesFromPalette, TRACK_PILL_INDEX } from "../utils/trackPillStyles";
+import { TRACK_CHARACTER } from "../utils/trackPillStyles";
 import {
   countResources,
   extractResourceGroups,
@@ -42,19 +41,14 @@ const TRACK_META: Record<
   },
 };
 
-type Props = {
-  shaderPalette: ShaderPalette;
-};
-
-export function ResourcesPage({ shaderPalette }: Props) {
+export function ResourcesPage() {
   const location = useLocation();
   const { kicker, title, body } = copy.resources;
   const totalResources = countResources(allGroups);
-  const pillStyles = trackPillStylesFromPalette(shaderPalette);
-  const pickerTracks = (["protect", "admin", "create"] as const).map((track, i) => ({
+  const pickerTracks = (["protect", "admin", "create"] as const).map((track) => ({
     track,
     meta: TRACK_META[track],
-    pillStyle: pillStyles[i].pillStyle,
+    character: TRACK_CHARACTER[track],
   }));
 
   useEffect(() => {
@@ -88,12 +82,11 @@ export function ResourcesPage({ shaderPalette }: Props) {
 
         <div className="track-pill-panel">
           <nav className="resources-track-picker" aria-label={copy.map.aria.legend}>
-            {pickerTracks.map(({ track, meta, pillStyle }) => (
+            {pickerTracks.map(({ track, meta, character }) => (
               <a
                 key={track}
                 href={`#${meta.sectionId}`}
-                className="track-pill"
-                style={pillStyle}
+                className={`track-pill track-pill-${character}`}
                 onClick={handleTrackPick(meta.sectionId)}
               >
                 {meta.label}
@@ -105,7 +98,7 @@ export function ResourcesPage({ shaderPalette }: Props) {
         <div className="resources-tracks">
           {trackSections.map(({ track, groups }) => {
             const meta = TRACK_META[track];
-            const { pillStyle } = pillStyles[TRACK_PILL_INDEX[track]];
+            const character = TRACK_CHARACTER[track];
 
             return (
               <section
@@ -114,7 +107,7 @@ export function ResourcesPage({ shaderPalette }: Props) {
                 aria-labelledby={meta.sectionId}
               >
                 <header className="resources-track-header">
-                  <div className="track-pill resources-track-kicker" style={pillStyle}>
+                  <div className={`track-pill track-pill-${character} resources-track-kicker`}>
                     {meta.label}
                   </div>
                   <h2 className="resources-track-title" id={meta.sectionId}>

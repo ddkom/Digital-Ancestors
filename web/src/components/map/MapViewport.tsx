@@ -2,13 +2,11 @@ import {
   useCallback,
   useEffect,
   useRef,
-  type CSSProperties,
   type PointerEvent as ReactPointerEvent,
   type ReactNode,
   type RefObject,
   type Ref,
 } from "react";
-import type { ShaderPalette } from "../ShaderBackground";
 
 /** Scroll-wheel zoom (fullscreen only). */
 const WHEEL_ZOOM_SENSITIVITY = 0.001;
@@ -26,7 +24,6 @@ type Props = {
   setPointY: (v: number) => void;
   applyZoom: (delta: number, cx: number, cy: number) => void;
   wheelZoomEnabled?: boolean;
-  shaderPalette?: ShaderPalette;
   onActivate?: () => void;
   children: ReactNode;
 };
@@ -39,22 +36,9 @@ export function MapViewport({
   setPointY,
   applyZoom,
   wheelZoomEnabled = false,
-  shaderPalette,
   onActivate,
   children,
 }: Props) {
-  const paletteStyle = shaderPalette
-    ? ({
-        "--map-edge-stroke": shaderPalette.deep,
-        "--map-btn-bg": shaderPalette.highlight,
-        "--map-btn-bg-hover": `color-mix(in srgb, ${shaderPalette.highlight} 88%, white)`,
-        "--map-btn-bg-selected": `color-mix(in srgb, ${shaderPalette.highlight} 72%, #1a1a14)`,
-        "--shader-deep": shaderPalette.deep,
-        "--shader-light": shaderPalette.light,
-        "--shader-accent": shaderPalette.accent,
-        "--shader-highlight": shaderPalette.highlight,
-      } as CSSProperties)
-    : undefined;
   const drag = useRef({
     active: false,
     startX: 0,
@@ -184,7 +168,7 @@ export function MapViewport({
       onPointerMove={onPointerMove}
       onPointerUp={endPointer}
       onPointerCancel={endPointer}
-      style={{ cursor: "grab", ...paletteStyle }}
+      style={{ cursor: "grab" }}
     >
       {children}
     </div>

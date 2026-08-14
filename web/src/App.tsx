@@ -6,22 +6,15 @@ import { HomePage } from "./pages/HomePage";
 import { ResourcesPage } from "./pages/ResourcesPage";
 import { CharactersPage } from "./pages/CharactersPage";
 
-const shaderPalette = {
-  deep: "#6D88C9",
-  light: "#F2AAB0",
-  accent: "#97CAF1",
-  highlight: "#8EA52A",
-};
-
 export default function App() {
   return (
     <>
-      <ShaderBackground palette={shaderPalette} />
+      <ShaderBackground />
       <SiteHeader />
       <Routes>
-        <Route path="/" element={<HomePage shaderPalette={shaderPalette} />} />
-        <Route path="/resources" element={<ResourcesPage shaderPalette={shaderPalette} />} />
-        <Route path="/characters" element={<CharactersPage shaderPalette={shaderPalette} />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/resources" element={<ResourcesPage />} />
+        <Route path="/characters" element={<CharactersPage />} />
       </Routes>
       <SiteFooter />
     </>

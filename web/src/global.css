@@ -2,17 +2,45 @@
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Silkscreen:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Pixelify+Sans:wght@400..700&family=Silkscreen:wght@400;700&display=swap');
 
-:root {
-  --font-sans: 'Silkscreen', sans-serif;
-  --font-display: 'Pixelify Sans', sans-serif;
-  --font-mono: 'Dot Gothic 16', sans-serif;
-  --deep: "#68877A";
-  --light: "#fff";
-  --accent: "#A0A7E5";
-  --highlight: "#fff";
-}
+/* ==========================================================================
+   COLOUR CONFIG — edit this :root block. There is no other colour file.
+
+   1. Shared swatches     --color-1 … --color-4
+   2. Background shader   --shader-deep / light / accent / highlight
+                          (shader-only names; they point at the swatches)
+   3. Digital ancestors   --guardian --steward --trailblazer --weaver
+                          (use these in CSS: color: var(--guardian);)
+   4. Page UI             --bg --ink --accent-1 … --accent-4
+
+   Change a swatch to update everything that points at it. To give an ancestor
+   its own colour, replace `var(--color-N)` with a hex on that ancestor token.
+   ========================================================================== */
 
 :root {
+  /* Shared swatches */
+  --color-1: #6d88c9;
+  --color-2: #f2aab0;
+  --color-3: #97caf1;
+  --color-4: #8ea52a;
+
+  --color-1: #165C7A;
+  --color-2: #72A6AC;
+  --color-3: #DC7C42;
+  --color-4: #ACBD39;
+
+  /* Background shader only — do not use these names elsewhere */
+  --shader-deep: var(--color-1);
+  --shader-light: var(--color-2);
+  --shader-accent: var(--color-3);
+  --shader-highlight: var(--color-4);
+
+  /* Digital ancestors — reference a swatch or set a unique hex */
+  --guardian: var(--color-1);
+  --steward: var(--color-4);
+  --trailblazer: var(--color-3);
+  --weaver: #72A6AC;
+
+  /* Page UI */
   --bg: #f9f4ef;
   --bg-alt: #fff7ec;
   --ink: #231814;
@@ -23,6 +51,10 @@
   --accent-3: #f2b134;
   --accent-4: #7b5cd6;
   --pill-bg: rgba(255, 255, 255, 0.7);
+
+  --font-sans: 'Silkscreen', sans-serif;
+  --font-display: 'Pixelify Sans', sans-serif;
+  --font-mono: 'Dot Gothic 16', sans-serif;
   --radius-lg: 20px;
   --radius-sm: 999px;
   --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.08);
@@ -775,6 +807,26 @@ h1.hero-title {
   cursor: pointer;
 }
 
+.persona-card--guardian,
+.character-slide-inner--guardian {
+  --persona-accent: var(--guardian);
+}
+
+.persona-card--steward,
+.character-slide-inner--steward {
+  --persona-accent: var(--steward);
+}
+
+.persona-card--trailblazer,
+.character-slide-inner--trailblazer {
+  --persona-accent: var(--trailblazer);
+}
+
+.persona-card--weaver,
+.character-slide-inner--weaver {
+  --persona-accent: var(--weaver);
+}
+
 .track-card:focus-visible .track-card-front {
   box-shadow:
     0 16px 40px rgba(0, 0, 0, 0.1),
@@ -1143,6 +1195,26 @@ h1.hero-title {
   margin-bottom: 8px;
 }
 
+.track-pill-guardian {
+  background: color-mix(in srgb, var(--guardian) 8%, transparent);
+  border: 1px solid var(--guardian);
+}
+
+.track-pill-steward {
+  background: color-mix(in srgb, var(--steward) 8%, transparent);
+  border: 1px solid var(--steward);
+}
+
+.track-pill-trailblazer {
+  background: color-mix(in srgb, var(--trailblazer) 8%, transparent);
+  border: 1px solid var(--trailblazer);
+}
+
+.track-pill-weaver {
+  background: color-mix(in srgb, var(--weaver) 8%, transparent);
+  border: 1px solid var(--weaver);
+}
+
 .map-shell {
   margin-top: 24px;
   background: white;
@@ -1180,14 +1252,10 @@ h1.hero-title {
 }
 
 #viewport {
-  --map-edge-stroke: #6d88c9;
-  --map-btn-bg: #8ea52a;
+  --map-edge-stroke: var(--guardian);
+  --map-btn-bg: var(--steward);
   --map-btn-bg-hover: color-mix(in srgb, var(--map-btn-bg) 88%, white);
   --map-btn-bg-selected: color-mix(in srgb, var(--map-btn-bg) 72%, #1a1a14);
-  --shader-deep: #6d88c9;
-  --shader-light: #f2aab0;
-  --shader-accent: #97caf1;
-  --shader-highlight: #8ea52a;
   width: 100%;
   height: 75vh;
   overflow: hidden;
@@ -1282,14 +1350,10 @@ svg#connections path.visible.is-drawing {
     0 1px 0 rgba(255, 255, 255, 0.65) inset;
 }
 
-.node-card:has(.node-edge-options) {
-  padding-bottom: 52px;
-}
-
 .node-edge-options {
   position: absolute;
   left: 50%;
-  bottom: -50px;
+  top: calc(100% - 8px);
   z-index: 2;
   display: flex;
   flex-direction: column;
@@ -1299,7 +1363,7 @@ svg#connections path.visible.is-drawing {
   width: max-content;
   max-width: none;
   box-sizing: border-box;
-  transform: translate(-50%, 50%);
+  transform: translateX(-50%);
 }
 
 .node-anchor:not(.visible) .node-edge-options,
@@ -1315,14 +1379,14 @@ svg#connections path.visible.is-drawing {
       0 10px 28px rgba(35, 24, 20, 0.1),
       0 1px 0 rgba(255, 255, 255, 0.65) inset,
       0 0 0 0 color-mix(in srgb, var(--shader-deep) 55%, transparent),
-      0 0 12px 0 color-mix(in srgb, var(--shader-accent) 25%, transparent);
+      0 0 12px 0 color-mix(in srgb, var(--shader-light) 25%, transparent);
   }
 
   45% {
     box-shadow:
       0 10px 28px rgba(35, 24, 20, 0.1),
       0 1px 0 rgba(255, 255, 255, 0.65) inset,
-      0 0 0 10px color-mix(in srgb, var(--shader-accent) 40%, transparent),
+      0 0 0 10px color-mix(in srgb, var(--shader-light) 40%, transparent),
       0 0 20px 2px color-mix(in srgb, var(--shader-light) 30%, transparent);
   }
 

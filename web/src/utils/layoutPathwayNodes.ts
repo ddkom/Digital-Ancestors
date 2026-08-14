@@ -1,21 +1,32 @@
 import type { PathwayNode, PathwayNodeDef } from "../types/pathway";
 
+/**
+ * Map spacing — edit these, then refresh.
+ *
+ * Height (the path between questions):
+ *   LAYOUT_ROW_GAP         pixels from the TOP of one row to the TOP of the next
+ *   LAYOUT_START_CLEARANCE extra pixels after the start node only (3 stacked buttons)
+ *
+ * Width (usually leave these):
+ *   Column x positions live in quizNodes.json (-900 / 0 / 900).
+ *   LAYOUT_H_GAP is only used if a node has no x in the JSON.
+ *   LAYOUT_NODE_WIDTH is the card width.
+ */
 export const LAYOUT_NODE_WIDTH = 360;
 export const LAYOUT_H_GAP = 100;
-export const LAYOUT_ROW_GAP = 500;
-/** Extra vertical clearance below the tall start node (stacked option buttons). */
-export const LAYOUT_START_CLEARANCE = 160;
+export const LAYOUT_ROW_GAP = 520;
+export const LAYOUT_START_CLEARANCE = 80;
 
 function depthToY(depth: number): number {
   if (depth <= 0) return 0;
   return LAYOUT_ROW_GAP + LAYOUT_START_CLEARANCE + (depth - 1) * LAYOUT_ROW_GAP;
 }
 
-/** Column anchor for each top-level track branch. */
+/** Fallback columns if a node has no x in quizNodes.json. */
 const TRACK_ANCHOR_X: Record<number, number> = {
-  [-1]: -1800,
-  0: 250,
-  1: 1800,
+  [-1]: -900,
+  0: 0,
+  1: 900,
 };
 
 function buildGraph(nodes: PathwayNodeDef[]) {
@@ -251,7 +262,7 @@ export function layoutPathwayNodes(defs: PathwayNodeDef[]): PathwayNode[] {
     return {
       ...def,
       x: def.x ?? computed.x,
-      y: def.y ?? computed.y,
+      y: computed.y,
     };
   });
 }

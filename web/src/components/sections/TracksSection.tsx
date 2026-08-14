@@ -2,23 +2,15 @@ import {
   useCallback,
   useRef,
   useState,
-  type CSSProperties,
   type KeyboardEvent,
   type PointerEvent as ReactPointerEvent,
 } from "react";
 import { copy } from "../../locales";
-import type { ShaderPalette } from "../ShaderBackground";
 import { PERSONAS, type PersonaCard } from "../../data/personas";
 import { SectionHeader } from "./SectionHeader";
 
 const SWIPE_THRESHOLD = 56;
 const DECK_SIZE = PERSONAS.length;
-
-type Props = {
-  shaderPalette: ShaderPalette;
-};
-
-type TrackCardData = PersonaCard & { accent: string };
 
 function wrapIndex(index: number): number {
   return ((index % DECK_SIZE) + DECK_SIZE) % DECK_SIZE;
@@ -67,7 +59,7 @@ function PersonaFlipCard({
   isFlipped,
   onToggle,
 }: {
-  track: TrackCardData;
+  track: PersonaCard;
   isFlipped: boolean;
   onToggle: () => void;
 }) {
@@ -84,7 +76,6 @@ function PersonaFlipCard({
       tabIndex={0}
       role="button"
       aria-pressed={isFlipped}
-      style={{ "--persona-accent": track.accent } as CSSProperties}
       aria-label={`${track.name}: ${track.subtitle}. Activate to flip card.`}
       onClick={onToggle}
       onKeyDown={onCardKeyDown}
@@ -182,7 +173,7 @@ function PersonaFlipCard({
   );
 }
 
-export function TracksSection({ shaderPalette }: Props) {
+export function TracksSection() {
   const [flipped, setFlipped] = useState<Record<string, boolean>>({});
   const [deckIndex, setDeckIndex] = useState(0);
   const [dragX, setDragX] = useState(0);
@@ -194,16 +185,7 @@ export function TracksSection({ shaderPalette }: Props) {
     delta: 0,
     locked: null as "x" | "y" | null,
   });
-  const personaColors: Record<string, string> = {
-    guardian: shaderPalette?.deep ?? "#6D88C9",
-    steward: shaderPalette?.highlight ?? "#8EA52A",
-    weaver: "#7B5CD6",
-    trailblazer: shaderPalette?.accent ?? "#97CAF1",
-  };
-  const tracks = PERSONAS.map((persona) => ({
-    ...persona,
-    accent: personaColors[persona.id],
-  }));
+  const tracks = PERSONAS;
 
   const toggleFlip = (id: string) => {
     if (skipFlip.current) return;

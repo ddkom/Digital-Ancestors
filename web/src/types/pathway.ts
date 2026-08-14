@@ -24,7 +24,7 @@ export type PathwayContextBlock = {
   notes?: string;
 };
 
-/** Node definition from JSON — layout is computed unless x/y are overridden. */
+/** Node definition from JSON — x is a column override; y is always computed from LAYOUT_ROW_GAP. */
 export type PathwayNodeDef = {
   id: string;
   type: PathwayNodeType;
