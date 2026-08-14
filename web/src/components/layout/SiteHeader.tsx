@@ -46,6 +46,12 @@ export function SiteHeader() {
           {nav.who}
         </PillNavButton>
         <NavLink
+          to="/characters"
+          className={({ isActive }) => (isActive ? "primary" : undefined)}
+        >
+          {nav.characters}
+        </NavLink>
+        <NavLink
           to="/resources"
           className={({ isActive }) => (isActive ? "primary" : undefined)}
         >

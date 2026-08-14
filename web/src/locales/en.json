@@ -14,12 +14,13 @@
       "why": "Backstory",
       "tracks": "Tracks",
       "who": "Who it's for",
-      "resources": "All resources"
+      "resources": "All resources",
+      "characters": "Characters"
     }
   },
   "hero": {
     "title": "Becoming Digital Ancestors",
-        "bodyBeforeProject": "We will all be ancestors one day, so what does it mean to be a digital ancestor? Take the quiz and find out which character you are, then learn about what your path might look like by checking out our resources.",
+    "bodyBeforeProject": "We will all be ancestors one day, so what does it mean to be a digital ancestor? Take the quiz and find out which character you are, then learn about what your path might look like by checking out our resources.",
     "bodyAfterProject": "",
     "cta": {
       "map": "Start the map",
@@ -64,53 +65,53 @@
     "kicker": "Three pathways",
     "title": "Pick your Character",
     "body": "",
-  "cards": [
-    {
-      "label": "Guardian",
-      "title": "AI Hater",
-      "body": "",
-      "items": [
-        "Name: Guardian",
-        "Nickname: AI Hater",
-        "Default Stance: Opt-Out",
-        "Favourite Medium: Anything Analogue",
-        "Famous Quote: \"F*ck Data Centers\""
-      ]
-    },
-    {
-      "label": "Steward",
-      "title": "Time Keeper",
-      "body": "",
-      "items": [
-        "Name: Steward",
-        "Nickname: Time Keeper",
-        "Default Stance: Cautious-Curious",
-        "Favourite Medium: All of it, just no AI art please",
-        "Famous Quote: \"Automate the boring sh*t\""
-      ]
-    },
-    {
-      "label": "Trailblazer",
-      "title": "Experimenter",
-      "body": "",
-      "items": [
-        "Name: Trailblazer",
-        "Nickname: Experimenter",
-        "Default Stance: Full Send",
-        "Favourite Medium: Human-Machine Collaboration",
-        "Famous Quote: \"I'll try anything once\""
-      ]
-    },
-    {
-      "label": "Weaver",
-      "title": "Gardener",
-      "body": "",
-      "items": [
-        "Name: Weaver",
-        "Nickname: Gardener"
-      ]
-    }
-  ]
+    "cards": [
+      {
+        "label": "Guardian",
+        "title": "AI Hater",
+        "body": "",
+        "items": [
+          "Name: Guardian",
+          "Nickname: AI Hater",
+          "Default Stance: Opt-Out",
+          "Favourite Medium: Anything Analogue",
+          "Famous Quote: \"F*ck Data Centers\""
+        ]
+      },
+      {
+        "label": "Steward",
+        "title": "Time Keeper",
+        "body": "",
+        "items": [
+          "Name: Steward",
+          "Nickname: Time Keeper",
+          "Default Stance: Cautious-Curious",
+          "Favourite Medium: All of it, just no AI art please",
+          "Famous Quote: \"Automate the boring sh*t\""
+        ]
+      },
+      {
+        "label": "Trailblazer",
+        "title": "Experimenter",
+        "body": "",
+        "items": [
+          "Name: Trailblazer",
+          "Nickname: Experimenter",
+          "Default Stance: Full Send",
+          "Favourite Medium: Human-Machine Collaboration",
+          "Famous Quote: \"I'll try anything once\""
+        ]
+      },
+      {
+        "label": "Weaver",
+        "title": "Gardener",
+        "body": "",
+        "items": [
+          "Name: Weaver",
+          "Nickname: Gardener"
+        ]
+      }
+    ]
   },
   "map": {
     "kicker": "Interactive map",
@@ -141,8 +142,15 @@
   "pathwayNodeCard": {
     "defaultTag": "Step",
     "resources": "Resources",
-    "openResources": "Open Resources",
-    "hideResources": "Hide Resources"
+    "hideResources": "Hide Resources",
+    "readMoreAbout": "Read more about the {name}"
+  },
+  "characters": {
+    "kicker": "The three types",
+    "title": "Characters",
+    "body": "Swipe the card or use the arrows to meet each type. Open a section below to read the landscape, action plan, and resources.",
+    "prev": "Previous character",
+    "next": "Next character"
   },
   "resources": {
     "kicker": "Resource library",

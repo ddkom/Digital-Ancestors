@@ -13,6 +13,7 @@ import {
   type PathwayTrack,
 } from "../utils/extractPathwayResources";
 import { SectionHeader } from "../components/sections/SectionHeader";
+import { ResourceGroupList } from "../components/resources/ResourceGroupList";
 
 const trackSections = extractResourceGroupsByTrack(pathwayNodeDefs as PathwayNodeDef[]);
 const allGroups = extractResourceGroups(pathwayNodeDefs as PathwayNodeDef[]);
@@ -123,58 +124,7 @@ export function ResourcesPage({ shaderPalette }: Props) {
                 </header>
 
                 <article className="story-card resources-panel">
-                  {groups.map((group) => (
-                    <div
-                      key={group.nodeId}
-                      className="resources-group"
-                      aria-labelledby={`group-${group.nodeId}`}
-                    >
-                      <header className="resources-group-header">
-                        <div className="resources-step-title-row">
-                          <h3
-                            className="resources-step-title"
-                            id={`group-${group.nodeId}`}
-                          >
-                            {group.nodeTitle}
-                          </h3>
-                          {group.nodeTag ? (
-                            <span className="resources-step-tag">{group.nodeTag}</span>
-                          ) : null}
-                        </div>
-                      </header>
-
-                      {group.blocks.map((block, blockIndex) => (
-                        <div
-                          key={`${group.nodeId}-${block.category}-${blockIndex}`}
-                          className="resources-block"
-                        >
-                          {group.blocks.length > 1 ? (
-                            <p className="resources-block-label">{block.category}</p>
-                          ) : null}
-                          {block.notes ? (
-                            <p className="resources-block-notes">{block.notes}</p>
-                          ) : null}
-                          <ul className="resources-list">
-                            {block.resources.map((resource) => (
-                              <li key={resource.link} className="resources-item">
-                                <a
-                                  href={resource.link}
-                                  className="resource-link"
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                >
-                                  {resource.title ?? resource.name}
-                                </a>
-                                {resource.desc ? (
-                                  <p className="resource-desc">{resource.desc}</p>
-                                ) : null}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
-                  ))}
+                  <ResourceGroupList groups={groups} />
                 </article>
               </section>
             );

@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { copy } from "../../locales";
 import type { PathwayContextBlock, PathwayNode } from "../../types/pathway";
+import { characterById, personaIdForEndNode } from "../../data/characterProfiles";
 
 function normalizeContext(
   context: PathwayNode["context"],
@@ -48,25 +50,56 @@ export function PathwayNodeCard({
 }: Props) {
   const [contextOpen, setContextOpen] = useState(false);
   const labels = copy.pathwayNodeCard;
-  const resourceLabel =
-    node.type === "end" ? labels.openResources : labels.resources;
-  const toggleLabel = contextOpen ? labels.hideResources : resourceLabel;
-  const contextBlocks = normalizeContext(node.context);
+  const personaId =
+    node.type === "end" ? personaIdForEndNode(node.id) : null;
+  const persona = personaId ? characterById(personaId) : null;
+  const contextBlocks = persona ? [] : normalizeContext(node.context);
+  const toggleLabel = contextOpen ? labels.hideResources : labels.resources;
 
   return (
     <div
       id={node.id}
-      className={`node-anchor ${node.type}${visible ? " visible" : ""}`.trim()}
+      className={`node-anchor ${node.type}${persona ? " has-persona" : ""}${visible ? " visible" : ""}`.trim()}
       style={{ left: node.x, top: node.y }}
       {...(!visible ? { inert: true } : {})}
       aria-hidden={!visible}
     >
-      <div className="node node-card">
-        <div className="node-header">
-          <span className="node-tag">{node.tag ?? labels.defaultTag}</span>
-        </div>
-        <div className="node-title">{node.title}</div>
-        <div className="node-desc">{node.desc}</div>
+      <div className={`node node-card${persona ? " node-card-result" : ""}`}>
+        {persona ? (
+          <>
+            <div className="result-portrait">
+              {persona.image ? (
+                <img
+                  src={persona.image}
+                  alt={persona.imageAlt}
+                  width={280}
+                  height={280}
+                />
+              ) : null}
+              <span className="result-stamp">{node.tag ?? labels.defaultTag}</span>
+            </div>
+            <div className="result-body">
+              <p className="result-code">{persona.code}</p>
+              <div className="node-title">{persona.name}</div>
+              <p className="result-subtitle">{persona.subtitle}</p>
+              <div className="node-desc">{node.desc}</div>
+              <Link
+                to={`/characters#${persona.id}`}
+                className="character-read-more"
+              >
+                {labels.readMoreAbout.replace("{name}", persona.name)}
+              </Link>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="node-header">
+              <span className="node-tag">{node.tag ?? labels.defaultTag}</span>
+            </div>
+            <div className="node-title">{node.title}</div>
+            <div className="node-desc">{node.desc}</div>
+          </>
+        )}
 
         {contextBlocks.length ? (
           <>

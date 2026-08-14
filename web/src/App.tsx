@@ -4,6 +4,7 @@ import { SiteHeader } from "./components/layout/SiteHeader";
 import { SiteFooter } from "./components/layout/SiteFooter";
 import { HomePage } from "./pages/HomePage";
 import { ResourcesPage } from "./pages/ResourcesPage";
+import { CharactersPage } from "./pages/CharactersPage";
 
 const shaderPalette = {
   deep: "#6D88C9",
@@ -20,6 +21,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage shaderPalette={shaderPalette} />} />
         <Route path="/resources" element={<ResourcesPage shaderPalette={shaderPalette} />} />
+        <Route path="/characters" element={<CharactersPage shaderPalette={shaderPalette} />} />
       </Routes>
       <SiteFooter />
     </>
