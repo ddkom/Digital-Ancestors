@@ -4,7 +4,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 const webRoot = path.dirname(fileURLToPath(import.meta.url));
-const personasDir = path.resolve(webRoot, "../personas");
+const personasDir = path.resolve(webRoot, "personas");
 
 export default defineConfig({
   plugins: [react()],

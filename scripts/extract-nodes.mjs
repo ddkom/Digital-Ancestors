@@ -7,7 +7,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const htmlPath = path.join(__dirname, "../../ai-framework-23.html");
+const htmlPath = path.join(__dirname, "../ai-framework-23.html");
 const outPath = path.join(__dirname, "../src/data/pathwayNodes.json");
 
 const html = fs.readFileSync(htmlPath, "utf8");
