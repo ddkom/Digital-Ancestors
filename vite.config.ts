@@ -7,6 +7,7 @@ const webRoot = path.dirname(fileURLToPath(import.meta.url));
 const personasDir = path.resolve(webRoot, "personas");
 
 export default defineConfig({
+  base: process.env.GITHUB_PAGES ? "/Digital-Ancestors/" : "/",
   plugins: [react()],
   resolve: {
     alias: {
