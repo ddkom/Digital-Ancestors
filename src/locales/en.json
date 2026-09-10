@@ -1,19 +1,19 @@
 {
   "common": {
-    "projectTitle": "Digital Ancestors: Mortality, Memory, Machine",
-    "openFramework": "open framework"
+    "projectTitle": "Can AI help care for creative legacy, and cultural memory?",
+    "openFramework": "a tangible how-to guide"
   },
   "meta": {
     "pageTitle": "Open Framework for Artists · AI Pathways Map"
   },
   "siteHeader": {
-    "brandTitle": "AI PATHWAYS FOR ARTISTS",
-    "brandSubtitle": "An open framework for protection, care, and experimentation",
+    "brandTitle": "RESPONSIBLE AI HOW-TO GUIDE FOR ARTISTS",
+    "brandSubtitle": "Take our personality quiz and get your tailored guide",
     "menu": "Menu",
     "closeMenu": "Close menu",
     "home": "Home",
     "nav": {
-      "map": "Launch the map",
+      "map": "Take the quiz",
       "why": "Backstory",
       "tracks": "Tracks",
       "who": "Who it's for",
@@ -22,21 +22,21 @@
     }
   },
   "hero": {
-    "title": "Becoming Digital Ancestors",
-    "bodyBeforeProject": "We will all be ancestors one day, so what does it mean to be a digital ancestor? Take the quiz and find out which character you are, then learn about what your path might look like by checking out our resources.",
+    "title": "The Story",
+    "bodyBeforeProject": "People of the future are doing digital archeology, and in the same way we describe hunter gatherers, they'll also personify us. an to be a digital ancestor?",
     "bodyAfterProject": "",
     "cta": {
-      "map": "Start the map",
+      "map": "Take the quiz",
       "why": "Read the backstory"
     }
   },
   "why": {
     "kicker": "Backstory",
-    "title": "Why we care",
-    "body": "Generative AI is reshaping how art is made, circulated, and valued. It can bring up grief, frustration, curiosity, and possibility all at the same time. This project has brought together practicing artists, AI researchers, technologists, and policy advisors who care about artist autonomy and responsible technology. We've created a space for learning and sharing in an everchanging landscape.",
+    "title": "Who we are & Why we care",
+    "body": "We are practicing artists, AI researchers, technologists, and policy advisors who care about artist autonomy and responsible technology. Generative AI is reshaping how art is made, circulated, and valued. It can bring up grief, frustration, curiosity, and possibility all at the same time. The goal of this is to create a space for learning and sharing in an everchanging landscape.",
     "storyCard": {
-      "intro": "This map grew out of months of creative research and development experiments that we titled",
-      "middle": ". It started with a question: Can AI help care for creative legacy, and cultural memory? We began to imagine futures where digital ecosystems coexisted with nature and humans and from this designed gallery works, kept process journals, and tested a number of tools over six months. We hosted an art exhibit sharing our imagined futures and turned our learnings into an ",
+      "intro": "It all started with a question: ",
+      "middle": "We began to imagine futures where digital ecosystems coexisted with nature and humans and from this designed gallery works, kept process journals, and tested a number of tools over six months. We hosted an art exhibit sharing our imagined futures and turned our learnings into",
       "middleSuffix": "that other artists can adapt, critique, and help build upon.",
       "closing": "Use this website to clarify what you might want from your own engagement with AI, from opting out entirely to collaborating on new work."
     }
@@ -65,8 +65,8 @@
     }
   },
   "tracks": {
-    "kicker": "Three pathways",
-    "title": "Pick your Character",
+    "kicker": "Four pathways",
+    "title": "The Characters",
     "body": "",
     "cards": [
       {
@@ -120,7 +120,7 @@
     "kicker": "Interactive map",
     "title": "Take the Quiz and Find Out Which Character You Are",
     "body": "",
-    "shellTitle": "Digital Ancestors Quiz Map",
+    "shellTitle": "The Digital Ancestors Quiz Map gathers your preferences about AI",
     "badges": {
       "pan": "Click and drag to pan",
       "zoom": "Scroll or pinch to zoom",
@@ -149,7 +149,7 @@
     "readMoreAbout": "Read more about the {name}"
   },
   "characters": {
-    "kicker": "The three types",
+    "kicker": "The four archetypes",
     "title": "Characters",
     "body": "Swipe the card or use the arrows to meet each type. Open a section below to read the landscape, action plan, and resources.",
     "prev": "Previous character",
