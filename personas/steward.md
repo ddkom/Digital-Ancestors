@@ -1,9 +1,9 @@
-# Map Maker
+# Scribe
 
 ## "AI for mundane only."
 
 ### The Archetype
-The Map Maker draws the lines in the sand. They say no to certain versions of AI, and yes only where it can help eliviate mundane tasks. For them the value starts and ends with getting more time for things that matter, like making art or spending time outdoors. Map makers care about the extractive nature of AI systems too, so they pick and choose where and when to use versus not. 
+The Scribe draws the lines in the sand. They say no to certain versions of AI, and yes only where it can help eliviate mundane tasks. For them the value starts and ends with getting more time for things that matter, like making art or spending time outdoors. Scribes care about the extractive nature of AI systems too, so they pick and choose where and when to use versus not. 
 
 ### Do This
 
@@ -32,8 +32,5 @@ The Map Maker draws the lines in the sand. They say no to certain versions of AI
 | [Google Alerts](https://www.google.com/alerts) | Free mention monitoring | Evergreen |
 | [Permacomputing](https://permacomputing.net) | Low-impact computing community | Evergreen |
 
-### Regional notes
-- **Canada:** Canada Council's FASTER-based guidance is the reference point; you own every word you submit.
-- **UK:** ACE permits cautious use; human-only assessment; enterprise tools favored; the [Digital Culture Network](https://digitalculturenetwork.org.uk/) offers free 1:1 tech support for artists.
-- **US:** No blanket funder bans; disclosure norms are emerging — when in doubt, disclose.
-- **EU:** GDPR shapes tool choice; prefer enterprise tiers or local models for anything involving personal data.
+### Want to add a tip?
+- Share your resources and help keep this list up to date (yay, open source). 
