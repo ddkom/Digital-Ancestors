@@ -128,7 +128,8 @@
     },
     "legend": {
       "protect": "Guardian",
-      "admin": "Steward",
+      "admin": "Scribe",
+      "tend": "Weaver",
       "create": "Trailblazer"
     },
     "controls": {

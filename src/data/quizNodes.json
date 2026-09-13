@@ -4,20 +4,24 @@
     "type": "start",
     "x": 0,
     "tag": "Start",
-    "title": "A gallery you like just posted that they're using AI to write their show descriptions. 👀 What's your gut reaction?",
+    "title": "AI-generated posters everywhere. What are your thoughts?",
     "desc": "🎨✨",
     "options": [
       {
-        "label": "🕵️ I check details, which tool are they using and where does the tool's data come from.",
+        "label": "🚀 How can I make one?",
+        "target": "quiz_t_q2"
+      },
+      {
+        "label": "🌿 Who gets the benefits from all this?",
+        "target": "quiz_w_q2"
+      },
+      {
+        "label": "😤 Ugh, hire artists.",
         "target": "quiz_g_q2"
       },
       {
-        "label": "😌 I think, \"that's a good time saver\"",
+        "label": "🙄 There's no originality.",
         "target": "quiz_s_q2"
-      },
-      {
-        "label": "🔍 I'm curious to try the tool myself.",
-        "target": "quiz_t_q2"
       }
     ]
   },
@@ -26,42 +30,64 @@
     "type": "track-protect",
     "x": -900,
     "tag": "Round 2",
-    "title": "😤 A friend tells you their photo got used to train an AI model without permission. What's your response?",
+    "title": "A company wants to use your photos and posts to make its AI smarter. Your response?",
     "desc": "",
     "options": [
       {
-        "label": "\"That's messed up. Did you look into what you can do about it?\"",
+        "label": "🚫 Yuck, the thought of giving big corp my data.",
         "target": "quiz_g_q3"
       },
       {
-        "label": "\"Annoying, but hard to avoid unless you're chronically offline.\"",
-        "target": "quiz_s_q3"
+        "label": "⚖️ I'll decide case by case.",
+        "target": "quiz_t_q3"
       },
       {
-        "label": "\"Do you know which tool? I kind of want to see how it works. 👀\"",
-        "target": "quiz_t_q3"
+        "label": "🌿 Who gets the benefits?",
+        "target": "quiz_w_q3"
       }
     ]
   },
   {
     "id": "quiz_s_q2",
     "type": "track-admin",
-    "x": 0,
+    "x": -300,
     "tag": "Round 2",
-    "title": "😩 You're behind on three emails, a grant deadline, and a form you've been avoiding for two weeks. A friend says \"just have AI do it.\" Your response?",
+    "title": "You're behind on emails. Are you going to get help from AI?",
     "desc": "",
     "options": [
       {
-        "label": "\"Yeah, that's the plan. 🙌\"",
-        "target": "quiz_s_q3"
-      },
-      {
-        "label": "\"I'd rather not, honestly.\"",
+        "label": "🚫 Not for me, no.",
         "target": "quiz_g_q3"
       },
       {
-        "label": "\"Yes and I'll have it help with drafting my next artwork too. 👀\"",
+        "label": "📎 Small stuff, minimally.",
+        "target": "quiz_s_q3"
+      },
+      {
+        "label": "✅ Yes, it's likely — and for other things too.",
         "target": "quiz_t_q3"
+      }
+    ]
+  },
+  {
+    "id": "quiz_w_q2",
+    "type": "track-tend",
+    "x": 300,
+    "tag": "Round 2",
+    "title": "Your favourite show gets a new season written with AI help.",
+    "desc": "",
+    "options": [
+      {
+        "label": "✍️ Why didn't they hire more writers?",
+        "target": "quiz_w_q3"
+      },
+      {
+        "label": "🔍 I'll watch it and judge the difference.",
+        "target": "quiz_t_q3"
+      },
+      {
+        "label": "😕 Something about this doesn't sit right.",
+        "target": "quiz_s_q3"
       }
     ]
   },
@@ -70,20 +96,20 @@
     "type": "track-create",
     "x": 900,
     "tag": "Round 2",
-    "title": "🎨 You're stuck on a piece and someone suggests running a rough version through an image generator, just to see what comes back. You...",
+    "title": "You see AI-generated artwork in the style of a famous artist. How do you respond?",
     "desc": "",
     "options": [
       {
-        "label": "Try it that afternoon.",
+        "label": "👀 How do I make one of those?",
         "target": "quiz_t_q3"
       },
       {
-        "label": "😬 feel a little weird about it and don't.",
+        "label": "🔎 Did the artist 'OK' this?",
         "target": "quiz_g_q3"
       },
       {
-        "label": "🙃 would rather spend that time on literally anything else.",
-        "target": "quiz_s_q3"
+        "label": "🌿 I'd look into the broader conversation around this.",
+        "target": "quiz_w_q3"
       }
     ]
   },
@@ -92,19 +118,19 @@
     "type": "track-protect",
     "x": -900,
     "tag": "Round 3",
-    "title": "🤔 Someone says to you, \"at some point you have to just accept this is happening.\" Do you agree?",
+    "title": "How tired are you of hearing \"AI will take our jobs\"?",
     "desc": "",
     "options": [
       {
-        "label": "🔥 No, accepting it is exactly the problem.",
+        "label": "🔥 Very, and I'm over it.",
         "target": "quiz_g_q4"
       },
       {
-        "label": "😮‍💨 Sure, I'd rather spend my energy elsewhere.",
-        "target": "quiz_s_q4"
+        "label": "🌿 Tired, but ignoring won't help anyone.",
+        "target": "quiz_w_q4"
       },
       {
-        "label": "🧐 Kind of, I'd rather understand it than resist it.",
+        "label": "🧐 I think about it differently.",
         "target": "quiz_t_q4"
       }
     ]
@@ -112,21 +138,43 @@
   {
     "id": "quiz_s_q3",
     "type": "track-admin",
-    "x": 0,
+    "x": -300,
     "tag": "Round 3",
-    "title": "🚧 What's the one thing AI never gets to touch?",
+    "title": "What are your thoughts on all these insane tech advancements as of late?",
     "desc": "",
     "options": [
       {
-        "label": "🎨 My craft. All the other stuff is fair game.",
+        "label": "😔 Sigh *reminisce on simpler times*.",
         "target": "quiz_s_q4"
       },
       {
-        "label": "🔒 Anything of mine, period, is preferred.",
+        "label": "🤯 Fascinating, scary, exciting, all at once.",
+        "target": "quiz_w_q4"
+      },
+      {
+        "label": "🌿 Eye roll. Can we touch grass please?",
+        "target": "quiz_g_q4"
+      }
+    ]
+  },
+  {
+    "id": "quiz_w_q3",
+    "type": "track-tend",
+    "x": 300,
+    "tag": "Round 3",
+    "title": "Instagram now puts an \"AI info\" label on some posts. Thoughts?",
+    "desc": "",
+    "options": [
+      {
+        "label": "🤔 Good start. What does it mean though?",
+        "target": "quiz_w_q4"
+      },
+      {
+        "label": "✅ Good. I want to see this feature more.",
         "target": "quiz_g_q4"
       },
       {
-        "label": "🤷 Nothing, really. I'm curious where the line even is.",
+        "label": "😌 Fine. Doesn't change whether I like the post.",
         "target": "quiz_t_q4"
       }
     ]
@@ -136,19 +184,19 @@
     "type": "track-create",
     "x": 900,
     "tag": "Round 3",
-    "title": "💬 A stranger online says your latest piece \"lost credibility\" because AI was involved somewhere in the process. How does that land with you?",
+    "title": "Do you think that artwork loses credibility if AI was involved?",
     "desc": "",
     "options": [
       {
-        "label": "😎 That's fine they felt that way, I'm proud of the work.",
+        "label": "🎨 Depends how it was used.",
         "target": "quiz_t_q4"
       },
       {
-        "label": "😅 That couldn't have been my artwork, no AI involved ever.",
+        "label": "🚫 Yes, always.",
         "target": "quiz_g_q4"
       },
       {
-        "label": "🙄 Agree with the sentiment.",
+        "label": "📝 Depends on MANY factors.",
         "target": "quiz_s_q4"
       }
     ]
@@ -158,19 +206,19 @@
     "type": "track-protect",
     "x": -900,
     "tag": "Final Round",
-    "title": "📋 You're filling out an artist bio for a group show and there's an optional box: \"Was any part of this work made using AI?\" What goes through your head?",
+    "title": "What do you use AI for today?",
     "desc": "",
     "options": [
       {
-        "label": "🔎 I triple check what the implications are.",
+        "label": "🚫 Nothing.",
         "target": "result_guardian"
       },
       {
-        "label": "⚡ Not sure how I'll answer.",
+        "label": "📎 Small stuff, minimally.",
         "target": "quiz_wildcard"
       },
       {
-        "label": "💭 I'm glad they asked.",
+        "label": "🚀 Whatever I'm curious about this week.",
         "target": "quiz_wildcard"
       }
     ]
@@ -178,21 +226,43 @@
   {
     "id": "quiz_s_q4",
     "type": "track-admin",
-    "x": 0,
+    "x": -300,
     "tag": "Final Round",
-    "title": "🙊 A friend asks what you use AI for, expecting you to say \"nothing.\" What's the honest answer?",
+    "title": "What do you use AI for today?",
     "desc": "",
     "options": [
       {
-        "label": "📎 \"Not much except admin stuff, to be fair.\"",
-        "target": "result_steward"
+        "label": "📎 Small stuff, minimally.",
+        "target": "result_scribe"
       },
       {
-        "label": "🚫 \"Nothing now, but I am curious about it.\"",
+        "label": "🚫 Nothing.",
         "target": "quiz_wildcard"
       },
       {
-        "label": "😏 \"I use it for a lot of things.\"",
+        "label": "🚀 Whatever I'm curious about.",
+        "target": "quiz_wildcard"
+      }
+    ]
+  },
+  {
+    "id": "quiz_w_q4",
+    "type": "track-tend",
+    "x": 300,
+    "tag": "Final Round",
+    "title": "A company wants to use your photos and posts to make its AI smarter. Your response?",
+    "desc": "",
+    "options": [
+      {
+        "label": "🌿 Who gets the benefits from this?",
+        "target": "result_weaver"
+      },
+      {
+        "label": "⚖️ I'll decide case by case.",
+        "target": "quiz_wildcard"
+      },
+      {
+        "label": "🚫 Not comfortable giving them my data.",
         "target": "quiz_wildcard"
       }
     ]
@@ -202,19 +272,19 @@
     "type": "track-create",
     "x": 900,
     "tag": "Final Round",
-    "title": "✨ You finish a piece you're proud of and someone asks, unprompted, \"did AI help create that?\" How do you feel about being asked that?",
+    "title": "What do you use AI for today?",
     "desc": "",
     "options": [
       {
-        "label": "😊 Fine, if I've used it I'll share that.",
+        "label": "🚀 Whatever I'm curious about this week.",
         "target": "result_trailblazer"
       },
       {
-        "label": "😳 A little defensive.",
+        "label": "📎 Small stuff, minimally.",
         "target": "quiz_wildcard"
       },
       {
-        "label": "😤 Annoyed they even asked.",
+        "label": "🚫 Nothing.",
         "target": "quiz_wildcard"
       }
     ]
@@ -232,8 +302,12 @@
         "target": "result_guardian"
       },
       {
-        "label": "⚖️ \"I want this to be useful without becoming my whole personality.\"",
-        "target": "result_steward"
+        "label": "🌿 \"I want this to serve community, not just individual efficiency.\"",
+        "target": "result_weaver"
+      },
+      {
+        "label": "⚖️ \"I want to use it where it helps, draw lines where it doesn't.\"",
+        "target": "result_scribe"
       },
       {
         "label": "🚀 \"I want to test and experiment myself, before I decide anything.\"",
@@ -251,13 +325,21 @@
     "context": "<strong>\"My work, my terms.\"</strong><br><br><strong>Your lens</strong><br>You didn't ask for any of this. You built a practice and a style over years, and machines trained on it without asking first. Consent matters to you, plainly, and \"everyone's doing it\" was never a good enough reason to let it slide.<br><br>You've also learned that no single tool is going to fix this, so you focus on what actually helps: making scraping more expensive, making your terms clear, keeping records of your process, and backing the collective efforts that are winning in courtrooms and legislatures. You know the numbers because you live them: a third of illustrators report losing commissions to AI, and most say opting out on their own barely makes a dent. That's the reason to organize, not to give up. And your reasons for saying no aren't only about copyright. Water, energy, land, and labor are part of it too. A flat no is a fine answer on its own.<br><br><strong>The landscape</strong><br>• Glaze and Nightshade (UChicago) are still maintained and widely used, but treat them as a signal of non-consent, not a guarantee. A 2025-2026 study found simple upscaling can defeat Glaze more than half the time.<br>• Cloudflare now blocks AI crawlers by default and offers Pay Per Crawl.<br>• Content Credentials (C2PA) are growing fast: 6,000+ member orgs, built into Leica, Nikon, Canon, Sony cameras and the Pixel 10.<br>• Bartz v. Anthropic settled for $1.5B+. Andersen v. Stability AI (the visual artists' case) goes to trial September 2026. The NO FAKES Act is advancing in the US Senate.<br>• The IEA puts data-centre electricity use at about 1.5% of the global total and rising fast.<br><br><strong>Quick wins</strong><br>• Flip the opt-outs that exist: Meta, LinkedIn (Settings > Data Privacy > Data for Generative AI Improvement > off), X, TikTok, and add GPTBot, ClaudeBot, CCBot, Google-Extended to your robots.txt.<br>• Try Have I Been Trained and register with Spawning. Add an ai.txt file and noai/noimageai meta tags to your site either way.<br>• Turn on Content Credentials wherever your camera or Adobe workflow supports it.<br><br><strong>Medium effort</strong><br>• Put your site behind Cloudflare and turn on AI-crawler blocking.<br>• Keep a presence on Cara, the artist-built anti-scraping platform. If you'd rather stay on Instagram, TikTok, or YouTube, use their AI-disclosure toggles paired with a clear caption about your terms.<br>• Glaze/Nightshade what you post and keep records of your process (layered files, timestamps, process video).<br><br><strong>Deep engagement</strong><br>• Join the Concept Art Association, Human Artistry Campaign, Authors Guild, or your regional body.<br>• Look into The AI Resist List for the wider organizing landscape, and Data & Society or the AI Now Institute if you want the research behind it.<br><br><strong>Key resources</strong><br>• <a href='https://glaze.cs.uchicago.edu/' target='_blank'>Glaze / Nightshade</a><br>• <a href='https://haveibeentrained.com/' target='_blank'>Have I Been Trained</a> / <a href='https://spawning.ai/' target='_blank'>Spawning</a><br>• <a href='https://developers.cloudflare.com/ai-crawl-control/' target='_blank'>Cloudflare AI Crawl Control</a><br>• <a href='https://cara.app/' target='_blank'>Cara</a><br>• <a href='https://contentcredentials.org/' target='_blank'>Content Credentials</a><br>• <a href='https://www.copyright.gov/ai/' target='_blank'>US Copyright Office: AI</a><br>• <a href='https://airesistlist.org/' target='_blank'>The AI Resist List</a><br>• <a href='https://datasociety.net/' target='_blank'>Data & Society</a> / <a href='https://ainowinstitute.org/' target='_blank'>AI Now Institute</a><br>• <a href='https://www.iea.org/reports/energy-and-ai' target='_blank'>IEA: Energy and AI</a><br><br><strong>Regional notes</strong><br>• Canada: <a href='https://www.carfac.ca/' target='_blank'>CARFAC</a>, <a href='https://www.raav.org/' target='_blank'>RAAV</a>, <a href='https://www.actra.ca/' target='_blank'>ACTRA</a><br>• UK: <a href='https://www.dacs.org.uk/' target='_blank'>DACS</a>, <a href='https://theaoi.com/' target='_blank'>Association of Illustrators</a>, <a href='https://www.equity.org.uk/' target='_blank'>Equity</a>, <a href='https://creatorsrightsalliance.org/' target='_blank'>Creators' Rights Alliance</a><br>• US: Tennessee ELVIS Act, California AB 1836/2602, NO FAKES Act pending<br>• EU: GDPR gives you a real right to object; AI Act transparency rules start August 2026"
   },
   {
-    "id": "result_steward",
+    "id": "result_scribe",
     "type": "end",
-    "x": 0,
+    "x": -300,
     "tag": "Your Result",
-    "title": "🗂️ Steward",
+    "title": "🗂️ Scribe",
     "desc": "You've drawn a line and it's staying put. AI gets the inbox, never the studio. 💼",
-    "context": "<strong>\"AI for logistics, not my creative work.\"</strong><br><br><strong>Your lens</strong><br>You're the pragmatist. You didn't become an artist to spend Sunday nights on grant portals and rewriting your bio for the third time, so if a machine wants that job, fine, on your terms. AI runs the back office. It never touches the work.<br><br>What actually worries you is more practical: which tools can you trust with your data, and whether a funder will care that you used one. You read the terms of service before you paste anything in. You know one unpublished proposal dropped into a free chatbot can cause problems later. So you keep a simple rule: nothing sensitive leaves the studio without knowing where it's going. Meanwhile your admin time keeps shrinking and your studio time keeps growing, and you're not mad about it.<br><br><strong>The landscape</strong><br>• Funders are on board with limits: Canada Council permits AI for outlines, grammar, and translation, but warns against pasting sensitive data in. Arts Council England allows cautious use and confirms humans always assess applications.<br>• Automation has moved past drag-and-drop connectors. Claude Cowork, ChatGPT Agent, Gemini's agent mode, and Copilot Tasks can now carry out multi-step admin work directly. Zapier has shifted into the plumbing underneath these agents rather than being the tool itself.<br>• Business/enterprise tiers of ChatGPT, Claude, and Copilot exclude your data from training, which is the level funders themselves recommend.<br>• Local models (Ollama, LM Studio) run entirely on your machine. Good current picks: Phi-4-mini, Gemma 3, Qwen3.<br><br><strong>Quick wins</strong><br>• Turn off training in every consumer AI tool. One rule: nothing unpublished, financial, or about other people goes into a public chatbot.<br>• Use AI for grant outlines and plain-language edits, disclose per each funder's rules, and rewrite until it sounds like you.<br>• Set Google Alerts for your name and project titles.<br><br><strong>Medium effort</strong><br>• Move sensitive drafting to a business/enterprise tier.<br>• Pick one agent (Claude Cowork, ChatGPT Agent, Gemini, or Copilot Tasks) and hand it one real recurring job, like open-call research or deadline tracking. Start read-only until you trust it.<br><br><strong>Deep engagement</strong><br>• Run a fully local assistant (LM Studio + Phi-4-mini or Gemma 3) for private, zero-cloud drafting.<br>• Consolidate your studio ops in one system, like Notion, with clear rules about what data lives where.<br><br><strong>Key resources</strong><br>• <a href='https://canadacouncil.ca/funding/resources/guidance-on-ai-in-grant-applications' target='_blank'>Canada Council AI guidance</a><br>• <a href='https://www.artscouncil.org.uk/' target='_blank'>Arts Council England</a><br>• <a href='https://claude.com/' target='_blank'>Claude Cowork</a> / ChatGPT Agent / Gemini / Copilot Tasks<br>• <a href='https://ollama.com/' target='_blank'>Ollama</a> / <a href='https://lmstudio.ai/' target='_blank'>LM Studio</a><br>• <a href='https://www.google.com/alerts' target='_blank'>Google Alerts</a><br>• <a href='https://permacomputing.net' target='_blank'>Permacomputing</a><br><br><strong>Regional notes</strong><br>• Canada: Canada Council's FASTER-based guidance is the reference point.<br>• UK: ACE permits cautious use; the <a href='https://digitalculturenetwork.org.uk/' target='_blank'>Digital Culture Network</a> offers free tech support.<br>• US: No blanket funder bans; disclose when in doubt.<br>• EU: GDPR shapes tool choice; prefer enterprise tiers or local models for personal data."
+    "context": "<strong>\"AI for mundane only.\"</strong><br><br><strong>Your lens</strong><br>You're the pragmatist. You didn't become an artist to spend Sunday nights on grant portals and rewriting your bio for the third time, so if a machine wants that job, fine, on your terms. AI runs the back office. It never touches the work.<br><br>What actually worries you is more practical: which tools can you trust with your data, and whether a funder will care that you used one. You read the terms of service before you paste anything in. You know one unpublished proposal dropped into a free chatbot can cause problems later. So you keep a simple rule: nothing sensitive leaves the studio without knowing where it's going. Meanwhile your admin time keeps shrinking and your studio time keeps growing, and you're not mad about it.<br><br><strong>The landscape</strong><br>• Funders are on board with limits: Canada Council permits AI for outlines, grammar, and translation, but warns against pasting sensitive data in. Arts Council England allows cautious use and confirms humans always assess applications.<br>• Automation has moved past drag-and-drop connectors. Claude Cowork, ChatGPT Agent, Gemini's agent mode, and Copilot Tasks can now carry out multi-step admin work directly. Zapier has shifted into the plumbing underneath these agents rather than being the tool itself.<br>• Business/enterprise tiers of ChatGPT, Claude, and Copilot exclude your data from training, which is the level funders themselves recommend.<br>• Local models (Ollama, LM Studio) run entirely on your machine. Good current picks: Phi-4-mini, Gemma 3, Qwen3.<br><br><strong>Quick wins</strong><br>• Turn off training in every consumer AI tool. One rule: nothing unpublished, financial, or about other people goes into a public chatbot.<br>• Use AI for grant outlines and plain-language edits, disclose per each funder's rules, and rewrite until it sounds like you.<br>• Set Google Alerts for your name and project titles.<br><br><strong>Medium effort</strong><br>• Move sensitive drafting to a business/enterprise tier.<br>• Pick one agent (Claude Cowork, ChatGPT Agent, Gemini, or Copilot Tasks) and hand it one real recurring job, like open-call research or deadline tracking. Start read-only until you trust it.<br><br><strong>Deep engagement</strong><br>• Run a fully local assistant (LM Studio + Phi-4-mini or Gemma 3) for private, zero-cloud drafting.<br>• Consolidate your studio ops in one system, like Notion, with clear rules about what data lives where.<br><br><strong>Key resources</strong><br>• <a href='https://canadacouncil.ca/funding/resources/guidance-on-ai-in-grant-applications' target='_blank'>Canada Council AI guidance</a><br>• <a href='https://www.artscouncil.org.uk/' target='_blank'>Arts Council England</a><br>• <a href='https://claude.com/' target='_blank'>Claude Cowork</a> / ChatGPT Agent / Gemini / Copilot Tasks<br>• <a href='https://ollama.com/' target='_blank'>Ollama</a> / <a href='https://lmstudio.ai/' target='_blank'>LM Studio</a><br>• <a href='https://www.google.com/alerts' target='_blank'>Google Alerts</a><br>• <a href='https://permacomputing.net' target='_blank'>Permacomputing</a><br><br><strong>Regional notes</strong><br>• Canada: Canada Council's FASTER-based guidance is the reference point.<br>• UK: ACE permits cautious use; the <a href='https://digitalculturenetwork.org.uk/' target='_blank'>Digital Culture Network</a> offers free tech support.<br>• US: No blanket funder bans; disclose when in doubt.<br>• EU: GDPR shapes tool choice; prefer enterprise tiers or local models for personal data."
+  },
+  {
+    "id": "result_weaver",
+    "type": "end",
+    "x": 300,
+    "tag": "Your Result",
+    "title": "🌿 Weaver",
+    "desc": "You think in systems, not just solo. Who benefits matters as much as what's possible. 🤝"
   },
   {
     "id": "result_trailblazer",

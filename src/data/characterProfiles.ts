@@ -1,14 +1,16 @@
 import { PERSONAS, type PersonaCard } from "./personas";
 import guardianMd from "@personas/guardian.md?raw";
-import stewardMd from "@personas/steward.md?raw";
+import scribeMd from "@personas/steward.md?raw";
+import weaverMd from "@personas/weaver.md?raw";
 import trailblazerMd from "@personas/trailblazer.md?raw";
 
-export const CHARACTER_IDS = ["guardian", "steward", "trailblazer"] as const;
+export const CHARACTER_IDS = ["guardian", "scribe", "weaver", "trailblazer"] as const;
 export type CharacterId = (typeof CHARACTER_IDS)[number];
 
 const MARKDOWN: Record<CharacterId, string> = {
   guardian: guardianMd,
-  steward: stewardMd,
+  scribe: scribeMd,
+  weaver: weaverMd,
   trailblazer: trailblazerMd,
 };
 
@@ -44,7 +46,7 @@ export function personaIdForEndNode(nodeId: string): CharacterId | null {
     return isCharacterId(id) ? id : null;
   }
   if (nodeId.startsWith("p_")) return "guardian";
-  if (nodeId.startsWith("a_")) return "steward";
+  if (nodeId.startsWith("a_")) return "scribe";
   if (nodeId.startsWith("c_")) return "trailblazer";
   return null;
 }
