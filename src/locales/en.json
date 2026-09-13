@@ -7,8 +7,8 @@
     "pageTitle": "Open Framework for Artists · AI Pathways Map"
   },
   "siteHeader": {
-    "brandTitle": "RESPONSIBLE AI HOW-TO GUIDE FOR ARTISTS",
-    "brandSubtitle": "Take our personality quiz and get your tailored guide",
+    "brandTitle": "RESPONSIBLE AI GUIDE FOR ARTISTS",
+    "brandSubtitle": "Personality quiz -> tailored how-to or resist guides",
     "menu": "Menu",
     "closeMenu": "Close menu",
     "home": "Home",
@@ -23,7 +23,7 @@
   },
   "hero": {
     "title": "The Story",
-    "bodyBeforeProject": "People of the future are doing digital archeology, and in the same way we describe hunter gatherers, they'll also personify us. an to be a digital ancestor?",
+    "bodyBeforeProject": "People of the future are doing digital archeology, and in the same way we describe hunter gatherers, they'll also personify us. What does it mean to be a digital ancestor?",
     "bodyAfterProject": "",
     "cta": {
       "map": "Take the quiz",
