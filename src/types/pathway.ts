@@ -2,6 +2,7 @@ export type PathwayNodeType =
   | "start"
   | "track-protect"
   | "track-admin"
+  | "track-tend"
   | "track-create"
   | "warning"
   | "end";

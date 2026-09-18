@@ -298,7 +298,7 @@ export function TracksSection() {
                   className={`character-slide${index === deckIndex ? " is-current" : ""}`}
                   style={{ left: `${index * 100}%` }}
                   aria-hidden={index !== deckIndex}
-                  {...(index !== deckIndex ? { inert: true } : {})}
+                  {...(index !== deckIndex ? { inert: "" } : {})}
                 >
                   <div className="track-slide-inner">
                     <PersonaFlipCard

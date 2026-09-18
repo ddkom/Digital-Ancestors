@@ -61,7 +61,7 @@ export function PathwayNodeCard({
       id={node.id}
       className={`node-anchor ${node.type}${persona ? " has-persona" : ""}${visible ? " visible" : ""}`.trim()}
       style={{ left: node.x, top: node.y }}
-      {...(!visible ? { inert: true } : {})}
+      {...(!visible ? { inert: "" } : {})}
       aria-hidden={!visible}
     >
       <div className={`node node-card${persona ? " node-card-result" : ""}`}>

@@ -813,7 +813,9 @@ h1.hero-title {
 }
 
 .persona-card--steward,
-.character-slide-inner--steward {
+.persona-card--scribe,
+.character-slide-inner--steward,
+.character-slide-inner--scribe {
   --persona-accent: var(--steward);
 }
 
@@ -1200,7 +1202,8 @@ h1.hero-title {
   border: 1px solid var(--guardian);
 }
 
-.track-pill-steward {
+.track-pill-steward,
+.track-pill-scribe {
   background: color-mix(in srgb, var(--steward) 8%, transparent);
   border: 1px solid var(--steward);
 }
@@ -1421,6 +1424,10 @@ svg#connections path.visible.is-drawing {
 
 .node-anchor.track-admin .node-card {
   /* border-left: 5px solid #facc15; */
+  border-radius: 80px;
+}
+
+.node-anchor.track-tend .node-card {
   border-radius: 80px;
 }
 
