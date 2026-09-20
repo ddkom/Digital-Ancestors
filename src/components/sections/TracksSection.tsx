@@ -75,7 +75,7 @@ function Barcode({ seed }: { seed: string }) {
     x += width + 1 + random() * 2.5;
   }
   return (
-    <svg className="persona-barcode" viewBox="0 0 120 28" aria-hidden="true">
+    <svg className="persona-barcode" viewBox="0 0 120 26" aria-hidden="true">
       {bars.map((bar, i) => (
         <rect
           key={i}
