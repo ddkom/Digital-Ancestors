@@ -40,7 +40,7 @@
   --guardian: var(--color-1);
   --steward: var(--color-4);
   --trailblazer: var(--color-3);
-  --weaver: #72A6AC;
+  --weaver: var(--color-2);
 
   /* Page UI */
   --bg: #f9f4ef;
@@ -65,6 +65,9 @@
   --padding: 0 var(--page-gutter);
   --header-height: 68px;
   --map-expanded-height: calc(100lvh - 68px);
+  --persona-paper: #f4f0ea;
+  --persona-ink: #1a1412;
+  --persona-accent: var(--accent-1);
 }
 
 * {
@@ -807,9 +810,7 @@ h1.hero-title {
 }
 
 .track-card {
-  --persona-paper: #f4f0ea;
-  --persona-ink: #1a1412;
-  --persona-accent: var(--accent-1);
+
   perspective: 1200px;
   width: 100%;
   max-width: 300px;
@@ -1970,8 +1971,9 @@ color-mix(in srgb, var(--btn-accent, var(--accent-1)) 75%, var(--ink));
 
 .character-nav-btn {
   appearance: none;
-  position: absolute;
-  top: clamp(140px, 22vw, 250px);
+  position: fixed;
+  top: 50%;
+  /* top: clamp(140px, 22vw, 250px); */
   z-index: 6;
   width: 48px;
   height: 48px;
@@ -2080,8 +2082,8 @@ color-mix(in srgb, var(--btn-accent, var(--accent-1)) 75%, var(--ink));
 /* Static strip of symbols along the right edge of the viewport. It is fixed, so
    it stays put while the page scrolls, and slides with the carousel on swipe. */
 .character-symbol-strip {
-  --symbol-size: clamp(120px, 20vw, 260px);
-  position: fixed;
+  --symbol-size: clamp(120px, 40vw, 260px);
+  position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
@@ -2104,9 +2106,9 @@ color-mix(in srgb, var(--btn-accent, var(--accent-1)) 75%, var(--ink));
 
 .character-symbol-column {
   position: absolute;
-  top: 0;
+  top: 10vh;
   right: calc(var(--symbol-size) * -0.3); /* hang partly off the edge */
-  width: var(--symbol-size);
+  width: 62vw;
   display: flex;
   flex-direction: column;
 }
@@ -2118,6 +2120,7 @@ color-mix(in srgb, var(--btn-accent, var(--accent-1)) 75%, var(--ink));
   flex: none;
   margin-bottom: calc(var(--symbol-size) * -0.3); /* overlap */
   user-select: none;
+  filter: drop-shadow(26px -26px 20px #D8D5CF);
 }
 
 .character-card-portrait {
@@ -2396,8 +2399,10 @@ color-mix(in srgb, var(--btn-accent, var(--accent-1)) 75%, var(--ink));
   .character-nav-btn {
     width: 40px;
     height: 40px;
-    top: clamp(110px, 28vw, 180px);
     font-size: 1rem;
+    position: fixed;
+    /* top: clamp(110px, 28vw, 180px); */
+    top: 50%;
   }
 
   .character-nav-prev {
