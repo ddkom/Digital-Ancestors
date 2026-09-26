@@ -176,11 +176,11 @@
     "shareResource": "Share a resource"
   },
   "resourceSuggestion": {
-    "title": "Share a resource",
+    "title": "Share a resource or feedback",
     "intro": "Know a tool, guide, or tip that belongs here? Fill in whatever you like.",
     "linksLabel": "Suggested resource",
     "linksPlaceholder": "Paste one or more links, one per line",
-    "notesLabel": "Notes",
+    "notesLabel": "Notes & comments",
     "notesPlaceholder": "What is it, and why is it useful?",
     "archetypesLabel": "Which guides does this fit? (optional)",
     "submit": "Send suggestion",
