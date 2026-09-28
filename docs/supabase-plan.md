@@ -13,13 +13,12 @@ One row per finished quiz:
 | Field | Example | Notes |
 | --- | --- | --- |
 | `session_id` | random UUID | New for every quiz run, never saved in the browser |
-| `answers` | `[{"questionId":"poster","optionIndex":1}, …]` | Which answer was picked for each question |
 | `x`, `y` | `3`, `-2` | Final position on the map |
 | `character` | `weaver` | Resulting quadrant |
 | `question_count` | `6` | 6–8 |
 | `created_at` | timestamp | Set by the database |
 
-**Not stored:** names, emails, accounts, IP addresses, location, device, or cookies. (Supabase's own request logs keep IPs briefly, which is why the popover copy says "we don't store" rather than "we never see.")
+**Not stored:** which answer was picked for each question, names, emails, accounts, IP addresses, location, device, or cookies. (Supabase's own request logs keep IPs briefly, which is why the popover copy says "we don't store" rather than "we never see.")
 
 ## Setup (one time)
 
@@ -32,7 +31,6 @@ create table public.quiz_responses (
   id             uuid primary key default gen_random_uuid(),
   created_at     timestamptz not null default now(),
   session_id     uuid not null,
-  answers        jsonb not null check (jsonb_typeof(answers) = 'array'),
   x              numeric not null check (x between -30 and 30),
   y              numeric not null check (y between -30 and 30),
   character      text not null check (character in ('guardian','scribe','trailblazer','weaver')),

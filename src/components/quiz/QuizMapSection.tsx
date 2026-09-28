@@ -5,6 +5,7 @@ import { SectionHeader } from "../sections/SectionHeader";
 import { MapLegend } from "../map/MapLegend";
 import { QuizMarkers, QuizPlotLayer } from "./QuizPlotLayer";
 import { QuizResult } from "./QuizResult";
+import { PrivacyNotice } from "./PrivacyNotice";
 
 /** Tracks a min-width media query so we can render the result differently above it. */
 function useIsDesktop(minWidth: number): boolean {
@@ -208,6 +209,7 @@ export function QuizMapSection() {
       />
 
       <div className="map-shell-header">
+        <PrivacyNotice />
         <div className="map-shell-badges">
           <div className="map-shell-badge">{copy.map.badges.pan}</div>
           <div className="map-shell-badge">{copy.map.badges.zoom}</div>

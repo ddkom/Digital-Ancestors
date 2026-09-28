@@ -126,6 +126,15 @@
       "zoom": "Scroll or pinch to zoom",
       "paths": "Try more than one path"
     },
+    "privacy": {
+      "notice": "Answers are saved anonymously.",
+      "infoLabel": "What we save",
+      "saveHeading": "What we save:",
+      "save": "your spot on the map · your character · the date",
+      "dontHeading": "What we don't:",
+      "dont": "your name, email, location, or anything that links back to you",
+      "why": "We use this to understand how artists think about AI."
+    },
     "legend": {
       "protect": "Guardian",
       "admin": "Scribe",

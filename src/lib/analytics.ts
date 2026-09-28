@@ -10,10 +10,6 @@ export async function saveQuizResponse(
   try {
     const { error } = await supabase.from("quiz_responses").insert({
       session_id: crypto.randomUUID(),
-      answers: score.answers.map(({ questionId, optionIndex }) => ({
-        questionId,
-        optionIndex,
-      })),
       x: position.x,
       y: position.y,
       character: position.character,
