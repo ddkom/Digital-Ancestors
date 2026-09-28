@@ -174,7 +174,7 @@
     "defaultTag": "Step",
     "resources": "Resources",
     "hideResources": "Hide Resources",
-    "readMoreAbout": "Read more about the {name}"
+    "readMore": "Read more"
   },
   "characters": {
     "kicker": "The Guides",

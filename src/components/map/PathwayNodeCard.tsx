@@ -55,7 +55,6 @@ export function PathwayNodeCard({
   const persona = personaId ? characterById(personaId) : null;
   const contextBlocks = persona ? [] : normalizeContext(node.context);
   const toggleLabel = contextOpen ? labels.hideResources : labels.resources;
-  const [readMorePrefix, readMoreSuffix] = labels.readMoreAbout.split("{name}");
 
   return (
     <div
@@ -84,23 +83,16 @@ export function PathwayNodeCard({
                   height={280}
                 />
               ) : null}
-              <span className="result-stamp">{node.tag ?? labels.defaultTag}</span>
+              <span className={`result-stamp result-stamp--${persona.id}`}>
+                {node.tag ?? labels.defaultTag}
+              </span>
             </div>
             <div className="result-body">
               <div className="node-title">{persona.name}</div>
               <p className="result-subtitle">{persona.subtitle}</p>
               <div className="node-desc">{node.desc}</div>
-              <Link
-                to={`/characters#${persona.id}`}
-                className={`character-read-more character-read-more--${persona.id}`}
-              >
-                <span className="character-read-more-line">
-                  {readMorePrefix.trim()}
-                </span>
-                <span className="character-read-more-name">
-                  {persona.name}
-                  {readMoreSuffix}
-                </span>
+              <Link to={`/characters#${persona.id}`} className="character-read-more">
+                {labels.readMore}
               </Link>
             </div>
           </>

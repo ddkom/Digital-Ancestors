@@ -230,10 +230,11 @@ export function useQuizTrail() {
   );
 
   /** Pull the camera back to fit the quadrant map and, on desktop, the result
-   * (card + close-call note + actions). The result sits dead centre in the
-   * viewport, at "real size"; the quadrant — shrunk to match the card's own
-   * portrait image, see setQuadrantScale — is just a small detail that fits
-   * in the space left of it, down to the viewport's edges. */
+   * (card + close-call note + actions), at "real size". Rather than centring
+   * the card itself — which crowds the quadrant off to one side when the
+   * card is much taller/narrower than it — this centres the gap between the
+   * two, so the quadrant and the card sit balanced on either side of the
+   * viewport's centre. */
   const fitPlot = useCallback(
     (fitSteps: QuizStep[], position: QuizPosition, animate: boolean) => {
       const el = viewportRef.current;
@@ -263,15 +264,22 @@ export function useQuizTrail() {
       const quadScale = quadrantScaleRef.current;
       const quadVisual = quadrant * quadScale;
       const gap = quadVisual * RESULT_GAP_RATIO;
-      const sWidth = (rect.width / 2 - margin) / (quadVisual + gap + dims.w / 2);
+      // Everything left of the centre (the whole quadrant, plus half the gap)
+      // must fit the left half of the viewport; everything right of it (half
+      // the gap, plus the whole card) must fit the right half. Take whichever
+      // side needs more room.
+      const leftSpan = quadVisual + gap / 2;
+      const rightSpan = gap / 2 + dims.w;
+      const sWidth = (rect.width / 2 - margin) / Math.max(leftSpan, rightSpan);
       const sHeight = (rect.height - 2 * margin) / Math.max(quadVisual, dims.h);
       const s = Math.max(MIN_SCALE, Math.min(1, sWidth, sHeight));
-      // The result's anchor sits at map x = extent * quadScale + gap, y =
-      // -extent (see QuizMapSection); its own centre is offset from that by
-      // half its measured size. Put that centre at the viewport's centre.
-      const resultMidX = extent * quadScale + gap + dims.w / 2;
+      // The quadrant is centred at map x = 0, so its right edge sits at
+      // extent * quadScale; the result's anchor starts `gap` past that (see
+      // QuizMapSection's resultAnchorLeft). Halfway between those two edges —
+      // the seam — is what goes at the viewport's centre.
+      const gapMidX = extent * quadScale + gap / 2;
       const resultMidY = -extent + dims.h / 2;
-      setView(rect.width / 2 - s * resultMidX, rect.height / 2 - s * resultMidY, s, animate);
+      setView(rect.width / 2 - s * gapMidX, rect.height / 2 - s * resultMidY, s, animate);
     },
     [setView],
   );

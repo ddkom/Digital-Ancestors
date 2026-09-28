@@ -57,6 +57,12 @@ function isTipSection(title: string): boolean {
   return /add a tip/i.test(title);
 }
 
+/** On desktop, "The Archetype" section starts open; on phones everything starts closed. */
+function initiallyOpenSection(titles: string[]): string | null {
+  if (!window.matchMedia("(min-width: 881px)").matches) return null;
+  return titles.find((title) => /archetype/i.test(title)) ?? null;
+}
+
 function PersonaSlide({
   character,
   onShareResource,
@@ -68,7 +74,9 @@ function PersonaSlide({
     () => splitPersonaMarkdown(character.markdown),
     [character.markdown],
   );
-  const [openKey, setOpenKey] = useState<string | null>(null);
+  const [openKey, setOpenKey] = useState<string | null>(() =>
+    initiallyOpenSection(parsed.details.map((section) => section.title)),
+  );
 
   return (
     <div className={`character-slide-inner character-slide-inner--${character.id}`}>
