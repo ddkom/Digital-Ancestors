@@ -22,7 +22,7 @@ Trailblazers try things. They'd rather test new technology and see for themselve
 - Prepare for [EU AI Act Article 50](https://artificialintelligenceact.eu/article/50/) labeling (August 2026) if your work reaches EU audiences.
 - Work in the open — process posts, model cards for your LoRAs, honest credits — in the lineage of Holly Herndon & Mat Dryhurst (whose [Spawning](https://spawning.ai/) builds consent infrastructure), Refik Anadol, and Claire Silver. Transparency converts skeptics; secrecy confirms them.
 
-### Key resources
+<!-- ### Key resources
 
 | Resource | What it is | Stability |
 |---|---|---|
@@ -35,7 +35,7 @@ Trailblazers try things. They'd rather test new technology and see for themselve
 | [EU AI Act Article 50](https://artificialintelligenceact.eu/article/50/) | Transparency obligations (Aug 2026) | Evergreen reference |
 | [Exactly.ai](https://exactly.ai/) | Train/license your own style | Active, but now positioned more toward brand/agency clients than individual artists — read the current pricing before assuming it's artist-first |
 | [Created by Humans](https://www.createdbyhumans.ai/) | AI rights licensing (with Authors Guild) | Emerging — verify status |
-| [PD12M on Hugging Face](https://huggingface.co/datasets/Spawning/PD12M) | Public-domain training dataset (Spawning) | Dataset itself is stable; Spawning's own site (source.plus) is currently down |
+| [PD12M on Hugging Face](https://huggingface.co/datasets/Spawning/PD12M) | Public-domain training dataset (Spawning) | Dataset itself is stable; Spawning's own site (source.plus) is currently down | -->
 
 ### Want to add a tip?
 - Share your resources and help keep this list up to date (yay, open source). 

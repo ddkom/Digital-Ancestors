@@ -10,7 +10,6 @@ export type PersonaSection = {
 
 export type PersonaMarkdown = {
   quote: string;
-  lensTitle: string;
   lensMarkdown: string;
   details: PersonaSection[];
 };
@@ -60,7 +59,6 @@ export function splitPersonaMarkdown(markdown: string): PersonaMarkdown {
 
   return {
     quote,
-    lensTitle: lens?.title ?? "Your lens",
     lensMarkdown: lens?.lines.join("\n").trim() ?? "",
     details,
   };

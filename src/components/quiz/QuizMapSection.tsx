@@ -210,11 +210,6 @@ export function QuizMapSection() {
 
       <div className="map-shell-header">
         <PrivacyNotice />
-        <div className="map-shell-badges">
-          <div className="map-shell-badge">{copy.map.badges.pan}</div>
-          <div className="map-shell-badge">{copy.map.badges.zoom}</div>
-          <div className="map-shell-badge">{trail.badgePaths}</div>
-        </div>
       </div>
 
       <div className="qm-stage">

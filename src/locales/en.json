@@ -135,6 +135,7 @@
       "dont": "your name, email, location, or anything that links back to you",
       "why": "We use this to understand how artists think about AI."
     },
+    "legendLabel": "Read more:",
     "legend": {
       "protect": "Guardian",
       "admin": "Scribe",
@@ -154,7 +155,6 @@
     "trail": {
       "startTag": "Start",
       "questionTag": "Question {n}",
-      "badgePaths": "Change an answer to take a new path",
       "youAreHere": "You are here",
       "axis": {
         "boundaries": "Boundaries",

@@ -14,6 +14,7 @@ export function MapLegend() {
   return (
     <div className="track-pill-panel map-legend-panel">
       <nav className="map-legend-inline" aria-label={copy.map.aria.legend}>
+        <span className="map-legend-label">{copy.map.legendLabel}</span>
         {legendItems.map((item) => (
           <Link
             key={item.hash}

@@ -20,7 +20,7 @@ The Scribe draws the lines in the sand. They say no to certain versions of AI, a
 - Stand up a fully local assistant: [LM Studio](https://lmstudio.ai/) + Phi-4-mini or Gemma 3 for private, zero-cloud drafting — the privacy-maximal *and* lowest-footprint option. If minimal-impact computing appeals to you as an ethic, not just a tactic, the [Permacomputing](https://permacomputing.net) community *(featured on [The AI Resist List](https://airesistlist.org/))* is your people.
 - Consolidate your studio ops (contacts, applications, deadlines) in one system — e.g., [Notion](https://www.notion.com/) with its built-in AI kept on a leash — with clear rules about what data lives where, and let a connected agent read from it rather than pasting things in ad hoc.
 
-### Key resources
+<!-- ### Key resources
 
 | Resource | What it is | Stability |
 |---|---|---|
@@ -30,7 +30,7 @@ The Scribe draws the lines in the sand. They say no to certain versions of AI, a
 | [Ollama](https://ollama.com/) / [LM Studio](https://lmstudio.ai/) | Run private models locally | Evergreen platforms; model picks (Phi-4-mini, Gemma 3, Qwen3) date quickly |
 | [Perplexity Comet](https://www.perplexity.ai/comet) | Browser-native research agent | Emerging — verify current name/version |
 | [Google Alerts](https://www.google.com/alerts) | Free mention monitoring | Evergreen |
-| [Permacomputing](https://permacomputing.net) | Low-impact computing community | Evergreen |
+| [Permacomputing](https://permacomputing.net) | Low-impact computing community | Evergreen | -->
 
 ### Want to add a tip?
 - Share your resources and help keep this list up to date (yay, open source). 

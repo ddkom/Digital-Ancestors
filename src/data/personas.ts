@@ -54,7 +54,7 @@ export const PERSONAS: PersonaCard[] = [
     image: `${import.meta.env.BASE_URL}personas/weaver.PNG`,
     imageAlt: "Stylized ID portrait of the Weaver",
     defaultStance: "Tending",
-    favouriteMedium: "To be defined",
+    favouriteMedium: "Learning new mediums all the time",
     famousQuote: "Let's Grow Together",
     quadrantBoundary: "P",
     quadrantSocial: "CM",
