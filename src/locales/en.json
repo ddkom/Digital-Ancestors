@@ -66,7 +66,7 @@
   },
   "tracks": {
     "kicker": "The Archetypes",
-    "title": "Choose your Fighter",
+    "title": "Which Digital Ancestor Are You?",
     "body": "",
     "cards": [
       {
@@ -123,7 +123,7 @@
     "shellTitle": "The Digital Ancestors Quiz Map gathers your preferences about AI",
     "badges": {
       "pan": "Click and drag to pan",
-      "zoom": "Scroll or pinch to zoom",
+      "zoom": "Pinch to zoom",
       "paths": "Try more than one path"
     },
     "privacy": {
@@ -166,7 +166,7 @@
       "restart": "Take it again",
       "closeCall": "Close call: you sit near the line between {a} and {b}.",
       "mapLabel": "Quiz map",
-      "hint": "Drag to move · scroll to zoom",
+      "hint": "Drag to move · pinch to zoom",
       "findMe": "Find me"
     }
   },

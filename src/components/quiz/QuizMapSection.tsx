@@ -157,10 +157,14 @@ export function QuizMapSection() {
       }
     };
     const onWheel = (e: WheelEvent) => {
+      // Trackpad pinch is reported as a wheel event with ctrlKey set — that's
+      // the only wheel input that should zoom. Plain scrolling (mouse wheel or
+      // a two-finger trackpad scroll) must fall through to the page's normal
+      // scroll instead of being captured here.
+      if (!e.ctrlKey) return;
       e.preventDefault();
       const rect = el.getBoundingClientRect();
-      const sensitivity = e.ctrlKey ? 0.01 : 0.0015;
-      zoomAt(Math.exp(-e.deltaY * sensitivity), e.clientX - rect.left, e.clientY - rect.top);
+      zoomAt(Math.exp(-e.deltaY * 0.01), e.clientX - rect.left, e.clientY - rect.top);
     };
 
     el.addEventListener("pointerdown", onDown);

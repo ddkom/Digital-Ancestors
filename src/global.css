@@ -891,6 +891,9 @@ h1.hero-title {
 .character-slide-inner--guardian {
   --persona-accent: var(--guardian);
 }
+.persona-card--guardian .persona-look-bar {
+  color: white;
+}
 
 .persona-card--steward,
 .persona-card--scribe,
@@ -1656,7 +1659,7 @@ svg#connections path.visible.is-drawing {
   width: auto;
   aspect-ratio: 1;
   margin: 0 18px 16px;
-  background: #c8c2ba;
+  /* background: #c8c2ba; */
   border: 1.5px solid #1a1412;
   overflow: hidden;
 }
@@ -1667,7 +1670,7 @@ svg#connections path.visible.is-drawing {
   height: 100%;
   object-fit: contain;
   object-position: center top;
-  filter: contrast(1.15) grayscale(0.15);
+  /* filter: contrast(1.15) grayscale(0.15); */
   background-color: white;
 }
 
