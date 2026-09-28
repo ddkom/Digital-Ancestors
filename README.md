@@ -28,3 +28,11 @@ npm run dev
 4. No environment variables are required for the JSON-backed build.
 
 Optional headless CMS notes: [`web/sanity-optional.txt`](web/sanity-optional.txt).
+
+## Credits and license
+
+This project is released under [CC0 1.0](LICENSE), **except** the background shader:
+
+- [`src/components/ShaderBackground.tsx`](src/components/ShaderBackground.tsx) is adapted from ["procedural night reflections II"](https://openprocessing.org/sketch/623979) by [Pierre Marzin](https://openprocessing.org/user/19666), licensed [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/). Our modified version is shared under the same license.
+
+Built with [p5.js](https://p5js.org/) (LGPL-2.1).

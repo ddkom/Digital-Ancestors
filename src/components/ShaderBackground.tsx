@@ -1,3 +1,11 @@
+/*
+ * Background shader adapted from "procedural night reflections II" by Pierre Marzin
+ * (itself a fork of his "procedural night reflections"):
+ *   https://openprocessing.org/sketch/623979
+ * Original licensed CC BY-SA 3.0: https://creativecommons.org/licenses/by-sa/3.0/
+ * Modified for Digital Ancestors (palette uniforms from CSS, React/p5 wrapper, animation).
+ * This file is shared under the same license, CC BY-SA 3.0, not the repo's CC0.
+ */
 import { useEffect, useRef } from "react";
 import p5 from "p5";
 
@@ -149,6 +157,9 @@ export function ShaderBackground() {
     const parent = containerRef.current;
     if (!parent) return;
 
+    let instance: p5 | null = null;
+    let disposed = false;
+
     const sketch = (p: p5) => {
       let test: p5.Shader;
       let shaderOK = false;
@@ -174,16 +185,43 @@ export function ShaderBackground() {
         initc();
 
         try {
-          test = p.createShader(VERT, FRAG);
           /*
-            Force compile/link now so we get the real WebGL error here instead of inside draw,
-            where p5 swallows it. setDefaultUniforms() invokes init() on the shader.
+            Force compile/link now so we get the real WebGL error here instead of inside
+            draw, where p5 swallows it. setDefaultUniforms() invokes init() on the shader.
           */
+          test = p.createShader(VERT, FRAG);
           p.shader(test);
           shaderOK = true;
         } catch (err) {
           console.error("[ShaderBackground] Shader compile/link failed:", err);
         }
+
+        /*
+          WebGL contexts get force-evicted under GPU/memory pressure (e.g. too many
+          contexts open across tabs) — without handling this, the canvas is left
+          showing solid black forever instead of the animation. preventDefault()
+          tells the browser we want it back. Recompiling just this shader in place
+          isn't enough on restore, though: p5's own internal WEBGL buffers (used by
+          plane(), for instance) don't survive the context loss either, so the
+          reliable fix is tearing the whole sketch down and remounting it fresh.
+        */
+        gl.canvas.addEventListener(
+          "webglcontextlost",
+          (event: Event) => {
+            event.preventDefault();
+            console.warn("[ShaderBackground] WebGL context lost — will remount on restore.");
+          },
+          false,
+        );
+        gl.canvas.addEventListener(
+          "webglcontextrestored",
+          () => {
+            console.info("[ShaderBackground] WebGL context restored — remounting sketch.");
+            instance?.remove();
+            if (!disposed) mount();
+          },
+          false,
+        );
       };
 
       p.draw = () => {
@@ -213,10 +251,14 @@ export function ShaderBackground() {
       };
     };
 
-    const instance = new p5(sketch, parent);
+    const mount = () => {
+      instance = new p5(sketch, parent);
+    };
+    mount();
 
     return () => {
-      instance.remove();
+      disposed = true;
+      instance?.remove();
     };
   }, []);
 
