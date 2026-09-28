@@ -100,7 +100,6 @@ function PersonaSlide({
             <p className="character-card-quote">“{parsed.quote}”</p>
           ) : null}
           <p className="character-card-stance">{character.defaultStance}</p>
-          <p className="character-lens-kicker">{parsed.lensTitle}</p>
           {parsed.lensMarkdown ? (
             <MarkdownHtml markdown={parsed.lensMarkdown} className="character-lens" />
           ) : null}
