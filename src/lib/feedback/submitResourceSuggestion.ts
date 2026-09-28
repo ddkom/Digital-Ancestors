@@ -1,4 +1,5 @@
 import type { CharacterId } from "../../data/characterProfiles";
+import { supabase } from "../supabaseClient";
 
 export type ResourceSuggestion = {
   /** One or more links, one per line. */
@@ -19,12 +20,16 @@ export function hasContent(s: ResourceSuggestion): boolean {
   );
 }
 
-/**
- * Save a suggestion. Not connected yet: this only logs it.
- * TODO: insert into Supabase `resource_suggestions` (docs/feedback-form-plan.md).
- */
+/** Save a suggestion to Supabase. See docs/feedback-form-plan.md. Throws on
+ * failure so the popup can show its error message. */
 export async function submitResourceSuggestion(
   suggestion: ResourceSuggestion,
 ): Promise<void> {
-  console.info("[resource suggestion] not saved yet:", suggestion);
+  const { error } = await supabase.from("resource_suggestions").insert({
+    links: suggestion.links,
+    notes: suggestion.notes,
+    archetypes: suggestion.archetypes,
+    source_guide: suggestion.sourceGuide,
+  });
+  if (error) throw error;
 }

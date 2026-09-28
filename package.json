@@ -12,6 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.78.0",
     "dompurify": "^3.2.4",
     "marked": "^15.0.12",
     "p5": "^2.2.3",

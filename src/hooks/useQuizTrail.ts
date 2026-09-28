@@ -6,6 +6,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { saveQuizResponse } from "../lib/analytics";
 import { FIRST_QUESTION_ID } from "../lib/quiz/bank";
 import { getQuizRules } from "../lib/quiz/rules";
 import {
@@ -314,7 +315,9 @@ export function useQuizTrail() {
 
       if (isFinished(score, rules)) {
         setSteps(kept);
-        reveal(kept, finalPosition(score));
+        const position = finalPosition(score);
+        reveal(kept, position);
+        void saveQuizResponse(score, position);
         return;
       }
 
