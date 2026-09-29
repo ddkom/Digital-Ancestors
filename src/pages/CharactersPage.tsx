@@ -9,7 +9,6 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import DOMPurify from "dompurify";
 import { copy } from "../locales";
-import { SectionHeader } from "../components/sections/SectionHeader";
 import {
   CHARACTERS,
   isCharacterId,
@@ -220,7 +219,7 @@ export function CharactersPage() {
   const [deckIndex, setDeckIndex] = useState(hashIndex);
   const activeIndex = wrapIndex(deckIndex);
   const activeId = CHARACTERS[activeIndex].id;
-  const { kicker, title, body, prev, next } = copy.characters;
+  const { title, body, prev, next } = copy.characters;
   const arrivedWithHash = isCharacterId(hashId);
   const allowHashSync = useRef(arrivedWithHash);
   const drag = useRef({

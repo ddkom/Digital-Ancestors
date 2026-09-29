@@ -291,7 +291,7 @@ export function connectionPathD(
   const dy1 = routeY - startY;
   const dy2 = endY - routeY;
 
-  let r = Math.min(cornerRadius, Math.abs(dx) / 2, Math.abs(dy1), Math.abs(dy2));
+  const r = Math.min(cornerRadius, Math.abs(dx) / 2, Math.abs(dy1), Math.abs(dy2));
   if (r < 2) {
     return `M ${startX} ${startY} L ${startX} ${routeY} L ${endX} ${routeY} L ${endX} ${endY}`;
   }
