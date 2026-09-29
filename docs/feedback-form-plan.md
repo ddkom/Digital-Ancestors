@@ -67,7 +67,7 @@ Review submissions in the Supabase dashboard (Table editor or CSV export). Nothi
 - [ ] Run the SQL above in Supabase.
 - [ ] Add `@supabase/supabase-js` and the `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` env vars (see [supabase-plan.md](supabase-plan.md)).
 - [ ] Replace the stub in `submitResourceSuggestion.ts` with the insert. Show the error message if it fails.
-- [ ] Test a submission, check the row in the dashboard, merge, push to `ddkom`, sync the fork.
+- [ ] Test a submission, check the row in the dashboard, merge to `main` on `ddkom` (deploys automatically).
 
 ## Open questions
 

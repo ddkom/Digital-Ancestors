@@ -1,6 +1,6 @@
 # Supabase plan: anonymous quiz responses
 
-Status: planned, not built yet. See [How the quiz works](how-the-quiz-works.md) for the quiz itself.
+Status: live. See [How the quiz works](how-the-quiz-works.md) for the quiz itself.
 
 ## Goal
 
@@ -16,9 +16,12 @@ One row per finished quiz:
 | `x`, `y` | `3`, `-2` | Final position on the map |
 | `character` | `weaver` | Resulting quadrant |
 | `question_count` | `6` | 6–8 |
+| `answers` | `[{"question":"poster","answer":1,"label":"Ugh, hire artists."}, …]` | Which answer was picked for each question, in order |
 | `created_at` | timestamp | Set by the database |
 
-**Not stored:** which answer was picked for each question, names, emails, accounts, IP addresses, location, device, or cookies. (Supabase's own request logs keep IPs briefly, which is why the popover copy says "we don't store" rather than "we never see.")
+Nothing is saved for visitors who opt out (link in the footer and the quiz's "i" popover).
+
+**Not stored:** names, emails, accounts, IP addresses, location, device, or cookies. (Supabase's own request logs keep IPs briefly, which is why the popover copy says "we don't store" rather than "we never see.")
 
 ## Setup (one time)
 
@@ -34,7 +37,8 @@ create table public.quiz_responses (
   x              numeric not null check (x between -30 and 30),
   y              numeric not null check (y between -30 and 30),
   character      text not null check (character in ('guardian','scribe','trailblazer','weaver')),
-  question_count smallint not null check (question_count between 1 and 8)
+  question_count smallint not null check (question_count between 1 and 8),
+  answers        jsonb check (answers is null or jsonb_typeof(answers) = 'array')
 );
 
 alter table public.quiz_responses enable row level security;
@@ -47,6 +51,15 @@ create policy "anyone can insert"
   with check (true);
 ```
 
+**Already created the table without `answers`?** Run this once:
+
+```sql
+alter table public.quiz_responses
+  add column answers jsonb check (answers is null or jsonb_typeof(answers) = 'array');
+```
+
+Until it's run, the site keeps saving everything except the answers.
+
 We read the data in the Supabase dashboard (Table editor, SQL editor, or CSV export), which isn't limited by these rules.
 
 ## Site changes
@@ -55,13 +68,11 @@ We read the data in the Supabase dashboard (Table editor, SQL editor, or CSV exp
 - Call it once when the quiz finishes (`isFinished`), from the quiz hook.
 - Add the notice near the quiz: "Answers are saved anonymously." with an "i" popover:
 
-  > **What we save:** your answer to each question · your spot on the map · your character · the date
-  > **What we don't:** your name, email, location, or anything that links back to you
-  > We use this to understand how artists think about AI.
+  Current copy lives in `src/locales/en.json` under `map.privacy`, followed by the opt-out link.
 
 ## Keeping the free project awake
 
-Free projects pause after about 7 days without activity. A scheduled GitHub Action in **`ddkom/Digital-Ancestors`** makes a small request every 3 days. It doesn't go in the fork, because scheduled workflows are off in forks by default. GitHub also turns off scheduled workflows after 60 days with no commits and sends an email; click "enable" to turn it back on. The Pro plan ($25/month) removes pausing entirely.
+Free projects pause after about 7 days without activity. A scheduled GitHub Action in **`ddkom/Digital-Ancestors`** makes a small request every 3 days. GitHub also turns off scheduled workflows after 60 days with no commits and sends an email; click "enable" to turn it back on. The Pro plan ($25/month) removes pausing entirely.
 
 ## Capacity
 
@@ -73,4 +84,4 @@ Add a database function that returns only totals (for example, counts per charac
 
 ## Workflow
 
-Build on a branch, push to `ddkom`, then sync the `hollyhilts` fork, which is what deploys.
+Build on a branch, then merge to `main` on `ddkom`, which deploys.

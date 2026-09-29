@@ -313,13 +313,9 @@ export function CharactersPage() {
   return (
     <main>
       <SymbolStrip indexes={windowIndexes} deckIndex={deckIndex} dragX={dragX} />
+      <h1 id="hero-heading" className="hero-title">The Guides</h1>
+      <p className="section-body">{body}</p>
       <section className="section characters-page" aria-labelledby="characters-heading">
-        <SectionHeader
-          kicker={kicker}
-          title={title}
-          titleId="characters-heading"
-          body={body}
-        />
 
         <div id="characters-stack" className="character-carousel">
           <button

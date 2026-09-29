@@ -4,7 +4,7 @@
     "openFramework": "a tangible how-to guide"
   },
   "meta": {
-    "pageTitle": "Open Framework for Artists · AI Pathways Map"
+    "pageTitle": "Becoming Digital Ancestors"
   },
   "siteHeader": {
     "brandTitle": "RESPONSIBLE AI GUIDE FOR ARTISTS",
@@ -130,10 +130,10 @@
       "notice": "Answers are saved anonymously.",
       "infoLabel": "What we save",
       "saveHeading": "What we save:",
-      "save": "your spot on the map · your character · the date",
+      "save": "which answer you picked for each question · your spot on the map · your character · the date",
       "dontHeading": "What we don't:",
-      "dont": "your name, email, location, or anything that links back to you",
-      "why": "We use this to understand how artists think about AI."
+      "dont": "your name, email, IP address, exact location, or anything that links back to you",
+      "why": "We also count visits without cookies (pages viewed, country, device type) and which quiz question people reach. We use this to understand how artists think about AI."
     },
     "legendLabel": "Read more:",
     "legend": {
@@ -205,6 +205,11 @@
     "kicker": "Resource library",
     "title": "All pathway resources",
     "body": "Every link surfaced in the interactive map, organized by pathway and the step where it appears."
+  },
+  "analyticsOptOut": {
+    "optOut": "Opt out of anonymous data collection",
+    "optedOut": "You're opted out: your visits and quiz answers aren't recorded.",
+    "undo": "Opt back in"
   },
   "siteFooter": {
     "intro": "Built as part of the",

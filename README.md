@@ -1,38 +1,53 @@
-# Digital-Ancestors
-AI Pathways for Artists: Iterative open decision-support tool for artists navigating AI choices around protection, administrative use, and co-creation.
+# Digital Ancestors
 
-**New here?** Read [How the quiz works](docs/how-the-quiz-works.md) for a one-page overview of the scoring, question picking, and the four characters. Planned analytics: [Supabase plan](docs/supabase-plan.md) and [resource suggestion form](docs/feedback-form-plan.md).
+AI Pathways for Artists: an open decision-support tool for artists navigating AI choices around protection, administrative use, and co-creation.
 
-## Legacy single-file app
+## Docs
 
-Download [`ai-framework-23.html`](ai-framework-23.html) and open it on your device (desktop or laptop, not mobile) to interact with it.
+- [How the quiz works](docs/how-the-quiz-works.md)
+- [Quiz responses in Supabase](docs/supabase-plan.md)
+- [Resource suggestion form](docs/feedback-form-plan.md)
+- [Visitor analytics with Umami](docs/umami.md)
 
-## React app (Vite)
+## What we use
 
-The interactive map and marketing page live in [`web/`](web/): TypeScript, React 18, and Vite. Graph content is [`web/src/data/pathwayNodes.json`](web/src/data/pathwayNodes.json) (generated from the legacy file via [`web/scripts/extract-nodes.mjs`](web/scripts/extract-nodes.mjs)).
+| | |
+| --- | --- |
+| App | [React 18](https://react.dev), [TypeScript](https://www.typescriptlang.org), [Vite](https://vitejs.dev), [React Router](https://reactrouter.com) |
+| Background | [p5.js](https://p5js.org) shader (see Credits) |
+| Guide content | Markdown in [`personas/`](personas/), rendered with [marked](https://marked.js.org) + [DOMPurify](https://github.com/cure53/DOMPurify) |
+| QR codes | [react-qr-code](https://github.com/rosskhanas/react-qr-code) |
+| Data | [Supabase](https://supabase.com): anonymous quiz results and resource suggestions |
+| Visitor analytics | [Umami Cloud](https://umami.is), cookieless |
+| Hosting | GitHub Pages, deployed by [GitHub Actions](.github/workflows/deploy-pages.yml) on every push to `main` |
+| Settings | [`src/config/site.ts`](src/config/site.ts) (quiz length, event pop-up, analytics); copy in [`src/locales/en.json`](src/locales/en.json) |
+
+## Run it
 
 ```bash
-cd web
+git clone git@github.com:ddkom/Digital-Ancestors.git
+cd Digital-Ancestors
 npm install
 npm run dev
 ```
 
-- `npm run build` — production build to `web/dist`
-- `npm run validate:pathway` — ensure every option `target` points at a real node id
+Add a `.env` with `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` (from Supabase → Project Settings → API). The live build reads the same two values from the repo's GitHub Actions secrets.
 
-### Deploy on Vercel (Hobby)
+- `npm run build`: production build to `dist/`
+- `npm run lint`: lint
+- `npm run audit:quiz`: check the quiz doesn't favour a character
+- `npm run validate:pathway`: check every pathway link points at a real node
 
-1. Push this repository to GitHub (or GitLab / Bitbucket).
-2. In Vercel, **Import** the repo and set **Root Directory** to `web`.
-3. Framework preset **Vite**; install `npm install`, build `npm run build`, output `dist` (see [`web/vercel.json`](web/vercel.json)).
-4. No environment variables are required for the JSON-backed build.
+## Deploying
 
-Optional headless CMS notes: [`web/sanity-optional.txt`](web/sanity-optional.txt).
+Push to `main` on [`ddkom/Digital-Ancestors`](https://github.com/ddkom/Digital-Ancestors). GitHub Actions builds and publishes the site to GitHub Pages (progress in the repo's **Actions** tab).
+
+## Legacy version
+
+[`ai-framework-23.html`](ai-framework-23.html) is the original single-file app. Download it and open it on a desktop or laptop.
 
 ## Credits and license
 
-This project is released under [CC0 1.0](LICENSE), **except** the background shader:
+Released under [CC0 1.0](LICENSE), **except** [`src/components/ShaderBackground.tsx`](src/components/ShaderBackground.tsx), adapted from ["procedural night reflections II"](https://openprocessing.org/sketch/623979) by [Pierre Marzin](https://openprocessing.org/user/19666) under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/). Our modified version is shared under the same license.
 
-- [`src/components/ShaderBackground.tsx`](src/components/ShaderBackground.tsx) is adapted from ["procedural night reflections II"](https://openprocessing.org/sketch/623979) by [Pierre Marzin](https://openprocessing.org/user/19666), licensed [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/). Our modified version is shared under the same license.
-
-Built with [p5.js](https://p5js.org/) (LGPL-2.1).
+p5.js is LGPL-2.1.
