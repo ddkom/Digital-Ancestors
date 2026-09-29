@@ -1,4 +1,5 @@
 import { copy } from "../../locales";
+import { AnalyticsOptOut } from "./AnalyticsOptOut";
 
 export function SiteFooter() {
   const { intro, projectQuoted, outro, backgroundCredit: credit } = copy.siteFooter;
@@ -20,7 +21,8 @@ export function SiteFooter() {
           {credit.license}
         </a>
         .
-      </span>
+      </span>{" "}
+      <AnalyticsOptOut />
     </footer>
   );
 }

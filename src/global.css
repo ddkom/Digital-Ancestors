@@ -273,7 +273,6 @@ button {
 .pill-nav a.primary {
   background: #231814;
   color: #ffe9d8;
-
 }
 
 .pill-nav a {
@@ -287,10 +286,6 @@ button {
   cursor: pointer;
   text-decoration: none;
   font-family: var(--font-sans);
-}
-
-.pill-nav a:hover {
-  color: var(--ink);
 }
 
 @media (max-width: 880px) {
@@ -583,9 +578,14 @@ h1.hero-title {
   color: var(--ink);
   line-height: 1.7;
   background: rgba(255, 255, 255, 0.7);
-  margin-left: calc(-1 * var(--page-gutter));
+  /* margin-left: calc(-1 * var(--page-gutter)); */
   padding-left: var(--page-gutter);
   max-width: 42rem;
+}
+
+.section-body p{
+  padding: var(--padding);
+  
 }
 
 .two-col {
@@ -2082,6 +2082,10 @@ body.is-map-expanded main {
   overflow: hidden;
 }
 
+.characters-page.section {
+  margin-top: 0;
+}
+
 .character-carousel {
   --persona-paper: #f4f0ea;
   --persona-ink: #1a1412;
@@ -2490,6 +2494,7 @@ body.is-map-expanded main {
 
 .character-prose strong {
   color: var(--persona-ink);
+  font-family: var(--font-sans);
 }
 
 .character-prose em {
@@ -2566,6 +2571,17 @@ footer {
   background: rgba(255, 255, 255, 0.7);
 }
 
+/* Opt-out switch (src/components/layout/AnalyticsOptOut.tsx): looks like a text link. */
+.analytics-opt-out-btn {
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 /* Attribution for the background shader (CC BY-SA requires a visible credit). */
 .footer-credit a {
   text-decoration: underline;
@@ -2599,7 +2615,11 @@ footer {
   border-radius: var(--qm-radius);
   background: var(--qm-ground);
   cursor: grab;
-  touch-action: none;
+  /* pan-y (not none): a single finger should scroll the page normally, not
+     drag the map — only mouse-drag and two-finger pinch are handled in JS.
+     pinch-zoom is deliberately left out so a two-finger gesture stays ours
+     to handle (zoomAt), rather than the browser zooming the whole page. */
+  touch-action: pan-y;
   user-select: none;
   transition: background-color 1.8s ease;
 }

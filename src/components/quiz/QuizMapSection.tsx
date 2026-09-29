@@ -118,12 +118,25 @@ export function QuizMapSection() {
       if (isControl(e.target)) return;
       if (e.pointerType === "mouse" && e.button !== 0) return;
       pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
-      el.setPointerCapture(e.pointerId);
-      if (pointers.size === 1) startDrag(e.clientX, e.clientY);
-      else if (pointers.size === 2) {
+
+      if (pointers.size === 2) {
+        // A second finger just landed — this is a pinch, not a scroll.
+        for (const id of pointers.keys()) el.setPointerCapture(id);
         drag = null;
         pinchDistance = distance();
+        return;
       }
+
+      if (e.pointerType === "touch") {
+        // One finger, on touch: let the browser scroll the page (touch-action:
+        // pan-y on .qm-viewport allows this) instead of panning the map —
+        // dragging shouldn't fight the user's scroll. Still tracked in
+        // `pointers` above so a second finger landing is detected as a pinch.
+        return;
+      }
+
+      el.setPointerCapture(e.pointerId);
+      startDrag(e.clientX, e.clientY);
     };
     const onMove = (e: PointerEvent) => {
       if (!pointers.has(e.pointerId)) return;
@@ -149,8 +162,11 @@ export function QuizMapSection() {
       if (!pointers.delete(e.pointerId)) return;
       pinchDistance = null;
       if (pointers.size === 1) {
+        // Coming out of a pinch back down to one finger — only resume
+        // dragging for mouse/pen. A single remaining touch should go back to
+        // scrolling the page, same as if it had been the only finger down.
         const [p] = [...pointers.values()];
-        startDrag(p.x, p.y);
+        if (e.pointerType !== "touch") startDrag(p.x, p.y);
       } else if (pointers.size === 0) {
         drag = null;
         el.classList.remove("is-dragging");

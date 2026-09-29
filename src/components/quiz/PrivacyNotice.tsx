@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { copy } from "../../locales";
+import { AnalyticsOptOut } from "../layout/AnalyticsOptOut";
 
 /** "Answers are saved anonymously." + an "i" popover explaining what's kept. */
 export function PrivacyNotice() {
@@ -44,6 +45,9 @@ export function PrivacyNotice() {
             <strong>{text.dontHeading}</strong> {text.dont}
           </p>
           <p>{text.why}</p>
+          <p>
+            <AnalyticsOptOut />
+          </p>
         </div>
       ) : null}
     </div>

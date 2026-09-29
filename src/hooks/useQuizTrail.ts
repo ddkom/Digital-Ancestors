@@ -7,6 +7,7 @@ import {
   useState,
 } from "react";
 import { saveQuizResponse } from "../lib/analytics";
+import { track } from "../lib/umami";
 import { FIRST_QUESTION_ID } from "../lib/quiz/bank";
 import { getQuizRules } from "../lib/quiz/rules";
 import {
@@ -320,12 +321,15 @@ export function useQuizTrail() {
         .slice(0, index + 1)
         .map((s, i) => (i === index ? { ...s, selected: optionIndex } : s));
       const score = scoreOf(kept, rules);
+      // Which question number was answered (never which answer): shows where people stop.
+      track("quiz_answered", { step: index + 1, question: kept[index].questionId });
 
       if (isFinished(score, rules)) {
         setSteps(kept);
         const position = finalPosition(score);
         reveal(kept, position);
         void saveQuizResponse(score, position);
+        track("quiz_finished", { character: position.character, questions: kept.length });
         return;
       }
 
@@ -336,6 +340,7 @@ export function useQuizTrail() {
         memo.current.set(memoKey, questionId);
       }
       const next = makeStep(questionId, score.x, score.y, kept.length, kept);
+      track("quiz_question_shown", { step: kept.length + 1, question: questionId });
       setSteps([...kept, next]);
       centerOn(next, { resetZoom: wasRevealed });
     },
@@ -382,6 +387,23 @@ export function useQuizTrail() {
   useLayoutEffect(() => {
     centerOn(stepsRef.current[0], { resetZoom: true, animate: false });
   }, [centerOn]);
+
+  // The first question counts as "shown" once the map is actually on screen,
+  // not just because someone loaded the page. Later questions are counted in `choose`.
+  useEffect(() => {
+    const el = viewportRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        track("quiz_question_shown", { step: 1, question: FIRST_QUESTION_ID });
+        observer.disconnect();
+      },
+      { threshold: 0.5 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   // If the window changes width while the plot is showing, fit it again.
   useEffect(() => {

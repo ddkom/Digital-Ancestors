@@ -25,6 +25,10 @@ export type SiteConfig = {
      */
     storageKey: string;
   };
+  analytics: {
+    /** Umami website ID (Umami → Settings → Websites). Empty = visitor analytics off. See docs/umami.md. */
+    umamiWebsiteId: string;
+  };
 };
 
 export const siteConfig: SiteConfig = {
@@ -37,5 +41,8 @@ export const siteConfig: SiteConfig = {
     enabled: true,
     showUntil: "2026-10-08",
     storageKey: "da-event-popup-stackt-2026",
+  },
+  analytics: {
+    umamiWebsiteId: "",
   },
 };

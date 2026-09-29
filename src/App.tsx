@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import { loadUmami } from "./lib/umami";
 import { ShaderBackground } from "./components/ShaderBackground";
 import { SiteHeader } from "./components/layout/SiteHeader";
 import { SiteFooter } from "./components/layout/SiteFooter";
@@ -8,6 +10,8 @@ import { ResourcesPage } from "./pages/ResourcesPage";
 import { CharactersPage } from "./pages/CharactersPage";
 
 export default function App() {
+  useEffect(loadUmami, []);
+
   return (
     <>
       <ShaderBackground />
