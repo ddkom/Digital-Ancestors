@@ -177,9 +177,10 @@
     "readMore": "Read more"
   },
   "characters": {
-    "kicker": "The Guides",
+    "kicker": "The Guide",
     "title": "",
-    "body": "Swipe the card or use the arrows to meet each type. Open a section below to read the landscape, action plan, and resources.",
+    "body": "Each ancestor archetype approaches AI in a unique and distinct way. This guide contains suggested actions, ranging from quick and easy steps to more thoughtful and methodical engagement for each archetype.",
+    "body2": "Expand a section to read more on how to turn your AI values and beliefs into actions, and swipe to learn about the other archetypes.",
     "prev": "Previous character",
     "next": "Next character",
     "shareResource": "Share a resource"

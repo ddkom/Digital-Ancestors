@@ -1,6 +1,6 @@
 import { PERSONAS, type PersonaCard } from "./personas";
 import guardianMd from "@personas/guardian.md?raw";
-import scribeMd from "@personas/steward.md?raw";
+import scribeMd from "@personas/scribe.md?raw";
 import weaverMd from "@personas/weaver.md?raw";
 import trailblazerMd from "@personas/trailblazer.md?raw";
 

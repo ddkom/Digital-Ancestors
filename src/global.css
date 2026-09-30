@@ -8,7 +8,7 @@
    1. Shared swatches     --color-1 … --color-4
    2. Background shader   --shader-deep / light / accent / highlight
                           (shader-only names; they point at the swatches)
-   3. Digital ancestors   --guardian --steward --trailblazer --weaver
+   3. Digital ancestors   --guardian --scribe --trailblazer --weaver
                           (use these in CSS: color: var(--guardian);)
    4. Page UI             --bg --ink --accent-1 … --accent-4
 
@@ -38,7 +38,7 @@
 
   /* Digital ancestors — reference a swatch or set a unique hex */
   --guardian: var(--color-1);
-  --steward: var(--color-4);
+  --scribe: var(--color-4);
   --trailblazer: var(--color-3);
   --weaver: var(--color-2);
 
@@ -194,6 +194,11 @@ header {
   z-index: 100;
   background: rgba(249, 244, 239, 0.95);
   backdrop-filter: blur(10px);
+}
+
+.characters-page header {
+  background: unset;
+  backdrop-filter: unset;
 }
 
 html {
@@ -891,15 +896,15 @@ h1.hero-title {
 .character-slide-inner--guardian {
   --persona-accent: var(--guardian);
 }
-.persona-card--guardian .persona-look-bar {
+.persona-card--guardian .persona-look-bar, .character-slide-inner--guardian .character-card-stance{
   color: white;
 }
 
-.persona-card--steward,
 .persona-card--scribe,
-.character-slide-inner--steward,
+.persona-card--scribe,
+.character-slide-inner--scribe,
 .character-slide-inner--scribe {
-  --persona-accent: var(--steward);
+  --persona-accent: var(--scribe);
 }
 
 .persona-card--trailblazer,
@@ -1045,6 +1050,27 @@ header.persona-front-meta {
   object-position: center center;
   filter: contrast(1.15) grayscale(0.15);
   background-color: #fff;
+}
+
+.persona-portrait-guide {
+  font-family: var(--font-sans);
+  /* position: absolute; */
+  z-index: 3;
+  font-size: 2rem;
+  /* top: 0; */
+  /* left: 0; */
+  line-height: 0.7;
+}
+
+.persona-portrait-guide-text {
+  font-family: var(--font-sans);
+  /* position: absolute; */
+  z-index: 3;
+  font-size: 2rem;
+    /* bottom: 0; */
+  /* right: 0; */
+  line-height: 1;
+
 }
 
 .persona-look-bar {
@@ -1312,10 +1338,10 @@ footer.persona-back-footer {
   border: 1px solid var(--guardian);
 }
 
-.track-pill-steward,
+.track-pill-scribe,
 .track-pill-scribe {
-  background: color-mix(in srgb, var(--steward) 8%, transparent);
-  border: 1px solid var(--steward);
+  background: color-mix(in srgb, var(--scribe) 8%, transparent);
+  border: 1px solid var(--scribe);
 }
 
 .track-pill-trailblazer {
@@ -1435,7 +1461,7 @@ footer.persona-back-footer {
 
 #viewport {
   --map-edge-stroke: var(--guardian);
-  --map-btn-bg: var(--steward);
+  --map-btn-bg: var(--scribe);
   --map-btn-bg-hover: color-mix(in srgb, var(--map-btn-bg) 88%, white);
   --map-btn-bg-selected: color-mix(in srgb, var(--map-btn-bg) 72%, #1a1a14);
   width: 100%;
@@ -1680,7 +1706,7 @@ svg#connections path.visible.is-drawing {
 }
 
 .result-stamp--scribe {
-  --stamp-accent: var(--steward);
+  --stamp-accent: var(--scribe);
 }
 
 .result-stamp--trailblazer {
@@ -2082,6 +2108,10 @@ body.is-map-expanded main {
   overflow: hidden;
 }
 
+.characters-page .character-card-media {
+
+}
+
 .characters-page.section {
   margin-top: 0;
 }
@@ -2209,7 +2239,7 @@ body.is-map-expanded main {
    the right side, overlapping each other and hanging out past the card edge. */
 .character-card-media {
   position: relative;
-  margin: 0 18px 16px;
+  margin: 0 18px;
 }
 
 /* Static strip of symbols along the right edge of the viewport. It is fixed, so
@@ -2282,7 +2312,7 @@ body.is-map-expanded main {
 .character-card-body {
   position: relative;
   z-index: 1; /* text stays above the symbols */
-  padding: 20px 22px 24px;
+  padding: 0px 22px 24px;
   /* border: 8px solid var(--persona-accent); */
   /* border-radius: 0 0 12px 12px; */
 }
@@ -2417,7 +2447,7 @@ body.is-map-expanded main {
 }
 
 .character-prose {
-  padding: 22px 24px 28px;
+  padding: 22px 0 28px;
   font-size: 0.95rem;
   line-height: 1.7;
   color: #3e312d;
@@ -2450,11 +2480,11 @@ body.is-map-expanded main {
 
 .character-prose h4 {
   margin: 18px 0 8px;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: rgba(26, 20, 18, 0.7);
+  color: var(--ink);
 }
 
 .character-prose h4:first-child {
@@ -2818,7 +2848,7 @@ footer {
   background: color-mix(in srgb, var(--guardian) 16%, var(--qm-paper));
 }
 .qm-quad--scribe {
-  background: color-mix(in srgb, var(--steward) 24%, var(--qm-paper));
+  background: color-mix(in srgb, var(--scribe) 24%, var(--qm-paper));
 }
 .qm-quad--trailblazer {
   background: color-mix(in srgb, var(--trailblazer) 20%, var(--qm-paper));
@@ -2831,7 +2861,7 @@ footer {
   background: color-mix(in srgb, var(--guardian) 48%, var(--qm-paper));
 }
 .qm-plot.is-on .qm-quad--scribe.is-mine {
-  background: color-mix(in srgb, var(--steward) 62%, var(--qm-paper));
+  background: color-mix(in srgb, var(--scribe) 62%, var(--qm-paper));
 }
 .qm-plot.is-on .qm-quad--trailblazer.is-mine {
   background: color-mix(in srgb, var(--trailblazer) 52%, var(--qm-paper));
@@ -3166,7 +3196,7 @@ footer {
    ========================================================================== */
 
 .character-share-btn {
-  margin-top: 8px;
+  /* margin: 8px 24px 0; */
   font-family: inherit;
 }
 

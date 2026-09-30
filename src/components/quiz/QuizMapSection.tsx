@@ -320,8 +320,6 @@ export function QuizMapSection() {
                   <QuizResult
                     result={quiz.result}
                     visible={quiz.resultVisible}
-                    onChangeLast={quiz.changeLastAnswer}
-                    onRestart={quiz.restart}
                     resultRef={resultRef}
                   />
                 </div>
@@ -368,8 +366,6 @@ export function QuizMapSection() {
           <QuizResult
             result={quiz.result}
             visible={quiz.resultVisible}
-            onChangeLast={quiz.changeLastAnswer}
-            onRestart={quiz.restart}
             resultRef={resultRef}
           />
         ) : null}

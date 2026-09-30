@@ -3,7 +3,7 @@
 ## "Try new things."
 
 ### The Archetype
-Trailblazers try things. They prefer tesing new technology and seeing for themselves what it can and can't do. Trailblazers see AI as something that progresses them forward. Through experimentation they decide which tools are worth the hype. 
+Trailblazers try things. They prefer testing new technology and seeing for themselves what it can and can't do. Trailblazers see AI as something that progresses them forward. Through experimentation they decide which tools are worth the hype. 
 
 ### Do This
 
@@ -18,7 +18,7 @@ Trailblazers try things. They prefer tesing new technology and seeing for themse
 
 #### Ongoing
 - **Connect:** Follow the [NeurIPS Creative AI Track](https://neurips.cc/Conferences/2026/CallForCreativeAI), where artists show AI work at the world's biggest AI conference. Join the mailing list to catch next year's call.
-- **Learn:** Train AI on your own work using Lora via ([Kohya_ss](https://github.com/bmaltais/kohya_ss) or [AI-Toolkit](https://github.com/ostris/ai-toolkit) locally; [fal.ai](https://fal.ai/)/[Replicate](https://replicate.com/) in the cloud).
+- **Learn:** Train AI on your own work using a LoRA, via [Kohya_ss](https://github.com/bmaltais/kohya_ss) or [AI-Toolkit](https://github.com/ostris/ai-toolkit) locally; [fal.ai](https://fal.ai/)/[Replicate](https://replicate.com/) in the cloud.
 
 
 <!-- ### Key resources
@@ -37,4 +37,4 @@ Trailblazers try things. They prefer tesing new technology and seeing for themse
 | [PD12M on Hugging Face](https://huggingface.co/datasets/Spawning/PD12M) | Public-domain training dataset (Spawning) | Dataset itself is stable; Spawning's own site (source.plus) is currently down | -->
 
 ### Want to add a tip?
-- Share your resources and help keep this list up to date (yay, open source). 
+Share your resources and help keep this list up to date (yay, open source). 

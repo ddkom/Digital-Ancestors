@@ -18,4 +18,4 @@ Weavers see new technology in a hopeful light. They see it as an opportunity for
 
 
 ### Want to add a tip?
-- Share your resources and help keep this list up to date (yay, open source). 
+Share your resources and help keep this list up to date (yay, open source). 

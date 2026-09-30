@@ -19,7 +19,6 @@ import {
   markdownToHtml,
   splitPersonaMarkdown,
 } from "../utils/markdownToHtml";
-import { scrollToSection } from "../lib/scrollToSection";
 import { ResourceSuggestionDialog } from "../components/feedback/ResourceSuggestionDialog";
 
 const SWIPE_THRESHOLD = 56;
@@ -81,14 +80,17 @@ function PersonaSlide({
     <div className={`character-slide-inner character-slide-inner--${character.id}`}>
       <article className="character-card" id={character.id}>
         <header className="persona-front-meta">
+          <span className="persona-portrait-guide">{character.name}</span>
           <span className="persona-code">{character.code}</span>
-          <span className="persona-stamp" aria-hidden="true">
+          {/* <span className="persona-stamp" aria-hidden="true">
             DA
-          </span>
+          </span> */}
         </header>
         <div className="character-card-media">
           <div className="character-card-portrait">
+            {/* <span className="persona-portrait-guide">{character.name}</span> */}
             <span className="persona-portrait-label">Portrait</span>
+            {/* <span className="persona-portrait-guide-text">The Guide</span> */}
             {character.image ? (
               <img
                 src={character.image}
@@ -101,8 +103,10 @@ function PersonaSlide({
 
         </div>
         <div className="character-card-body">
-          <h2 className="character-card-name">{character.name}</h2>
-          <p className="character-card-sub">{character.subtitle}</p>
+          {/* <span className="persona-portrait-guide-text">The Guide</span> */}
+
+          {/* <h2 className="character-card-name">{character.name}</h2> */}
+          {/* <p className="character-card-sub">{character.subtitle}</p> */}
           {parsed.quote ? (
             <p className="character-card-quote">“{parsed.quote}”</p>
           ) : null}
@@ -219,7 +223,7 @@ export function CharactersPage() {
   const [deckIndex, setDeckIndex] = useState(hashIndex);
   const activeIndex = wrapIndex(deckIndex);
   const activeId = CHARACTERS[activeIndex].id;
-  const { title, body, prev, next } = copy.characters;
+  const { title, body, body2, prev, next, kicker } = copy.characters;
   const arrivedWithHash = isCharacterId(hashId);
   const allowHashSync = useRef(arrivedWithHash);
   const drag = useRef({
@@ -244,13 +248,13 @@ export function CharactersPage() {
     navigate(`/characters#${activeId}`, { replace: true });
   }, [activeId, hashId, navigate]);
 
+  // Always open at the top, even when arriving on a specific ancestor
+  // (e.g. "Read more" from a quiz result): the intro there matters.
+  // The #hash still picks which ancestor's card is showing.
   useEffect(() => {
-    if (!arrivedWithHash) {
-      window.scrollTo({ top: 0, behavior: "auto" });
-      return;
-    }
-    window.setTimeout(() => scrollToSection("characters-stack"), 0);
-  }, [arrivedWithHash]);
+    const id = window.setTimeout(() => window.scrollTo({ top: 0, behavior: "instant" }), 0);
+    return () => window.clearTimeout(id);
+  }, []);
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
@@ -312,10 +316,11 @@ export function CharactersPage() {
   return (
     <main>
       <SymbolStrip indexes={windowIndexes} deckIndex={deckIndex} dragX={dragX} />
-      <h1 id="hero-heading" className="hero-title">The Guides</h1>
+      <h1 id="hero-heading" className="hero-title">{kicker}</h1>
       <p className="section-body">{body}</p>
+      <p className="section-body">{body2}</p>
       <section className="section characters-page" aria-labelledby="characters-heading">
-
+        
         <div id="characters-stack" className="character-carousel">
           <button
             type="button"
