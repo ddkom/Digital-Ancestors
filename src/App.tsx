@@ -8,6 +8,7 @@ import { EventPopup } from "./components/layout/EventPopup";
 import { HomePage } from "./pages/HomePage";
 import { ResourcesPage } from "./pages/ResourcesPage";
 import { CharactersPage } from "./pages/CharactersPage";
+import { AboutPage } from "./pages/AboutPage";
 
 export default function App() {
   useEffect(loadUmami, []);
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/resources" element={<ResourcesPage />} />
         <Route path="/characters" element={<CharactersPage />} />
+        <Route path="/about" element={<AboutPage />} />
       </Routes>
       <SiteFooter />
       <EventPopup />

@@ -578,6 +578,14 @@ h1.hero-title {
   max-width: fit-content;
 }
 
+/* Section headings and their intro text: background runs to the left edge of the page,
+   like the hero title. The padding keeps the text lined up with the rest of the section. */
+.section-header .section-title,
+.section-header .section-body {
+  margin-left: calc(-1 * var(--page-gutter));
+  padding-left: var(--page-gutter);
+}
+
 .section-body {
   font-size: 0.96rem;
   color: var(--ink);
@@ -3307,4 +3315,29 @@ footer {
   margin: 0 0 12px;
   color: #a33;
   font-size: 0.9rem;
+}
+
+/* In-person event photos and videos (src/components/sections/EventSection.tsx) */
+.event-media {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.event-media img,
+.event-media video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+/* ==========================================================================
+   About page (src/pages/AboutPage.tsx)
+   ========================================================================== */
+
+.about-living p {
+  margin: 0 0 18px;
 }

@@ -18,13 +18,15 @@
       "tracks": "Archetypes",
       "who": "Who it's for",
       "resources": "All resources",
-      "characters": "Guides"
+      "characters": "Guides",
+      "about": "About"
     }
   },
   "hero": {
     "title": "Becoming Digital Ancestors",
     "bodyBeforeProject": "People of the future are doing digital archeology, and in the same way we describe hunter gatherers, they'll also personify us. What does it mean to be a digital ancestor?",
     "bodyAfterProject": "",
+    "purpose": "A short quiz and practical guides to help artists decide how they want to engage with AI, from opting out entirely to experimenting on their own terms.",
     "cta": {
       "map": "Take the quiz",
       "why": "Read the backstory"
@@ -39,6 +41,33 @@
       "middle": "We began to imagine futures where digital ecosystems coexisted with nature and humans and from this designed gallery works, kept process journals, and tested a number of tools over six months. We hosted an art exhibit sharing our imagined futures and turned our learnings into",
       "middleSuffix": "that other artists can adapt, critique, and help build upon.",
       "closing": "Use this website to clarify what you might want from your own engagement with AI, from opting out entirely to collaborating on new work."
+    }
+  },
+  "inPerson": {
+    "kicker": "In person",
+    "title": "Multifest @ STACKT Market, Toronto",
+    "body": "October 1–8, 2026. Artist Talk October 7th 6:30pm. Come visit our interactive display titled Digital Footprints in 3026. ",
+    "photos": [
+      { "src": "stackt-1.jpeg", "alt": "Digital Ancestors topographic map installation" },
+      { "src": "map.mp4", "alt": "Digital Ancestors topographic map close up" },
+      { "src": "stackt.jpeg", "alt": "Digital Ancestors topographic map installation" }
+    ]
+  },
+  "about": {
+    "title": "About",
+    "intro": "The Digital Ancestors Collective is a group of artists and researchers imagining futures where digital ecosystems coexist with nature and humans, working between emerging technology and analogue craft.",
+    "hope": {
+      "kicker": "What we hope for",
+      "title": "What we want from this",
+      "body": "We want people to think critically about the way they are interacting with AI. While there are many fascinating and innovative parts of AI, there is also a lot of fear about its social & ecological impacts. We would like to help guide people to consider how their use may affect others & the planet, while also helping provide tools for expanding & exploring."
+    },
+    "living": {
+      "kicker": "A living resource",
+      "title": "This guide keeps growing",
+      "body": "This is an ever-growing resource, so you'll notice resources change or update each time you visit. That's because we're receiving and acting on feedback all the time. We'd love to hear yours.",
+      "button": "Share your thoughts",
+      "dialogTitle": "Share your thoughts",
+      "dialogIntro": "Suggestions, resources, or anything that felt off: fill in whatever you like."
     }
   },
   "who": {
@@ -191,7 +220,7 @@
     "linksLabel": "Suggested resource",
     "linksPlaceholder": "Paste one or more links, one per line",
     "notesLabel": "Notes & comments",
-    "notesPlaceholder": "What is it, and why is it useful?",
+    "notesPlaceholder": "Feedback on your shared resource(s) or this project",
     "archetypesLabel": "Which guides does this fit? (optional)",
     "submit": "Send suggestion",
     "sending": "Sending…",

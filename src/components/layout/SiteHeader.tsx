@@ -4,7 +4,7 @@ import { copy } from "../../locales";
 import { PillNavButton } from "../ui/PillNavButton";
 import { scrollToSection } from "../../lib/scrollToSection";
 
-type HomeSection = "map" | "why" | "tracks" | "who";
+type HomeSection = "map" | "tracks";
 
 export function SiteHeader() {
   const [activePill, setActivePill] = useState<HomeSection>("map");
@@ -81,14 +81,8 @@ export function SiteHeader() {
         <PillNavButton active={isHome && activePill === "map"} onClick={() => handlePillClick("map")}>
           {nav.map}
         </PillNavButton>
-        <PillNavButton active={isHome && activePill === "why"} onClick={() => handlePillClick("why")}>
-          {nav.why}
-        </PillNavButton>
         <PillNavButton active={isHome && activePill === "tracks"} onClick={() => handlePillClick("tracks")}>
           {nav.tracks}
-        </PillNavButton>
-        <PillNavButton active={isHome && activePill === "who"} onClick={() => handlePillClick("who")}>
-          {nav.who}
         </PillNavButton>
         <NavLink
           to="/characters"
@@ -96,6 +90,13 @@ export function SiteHeader() {
           onClick={close}
         >
           {nav.characters}
+        </NavLink>
+        <NavLink
+          to="/about"
+          className={({ isActive }) => (isActive ? "primary" : undefined)}
+          onClick={close}
+        >
+          {nav.about}
         </NavLink>
       </nav>
     </header>

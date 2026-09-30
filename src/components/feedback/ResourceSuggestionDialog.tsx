@@ -14,10 +14,15 @@ export function ResourceSuggestionDialog({
   open,
   sourceGuide,
   onClose,
+  title,
+  intro,
 }: {
   open: boolean;
   sourceGuide: CharacterId | null;
   onClose: () => void;
+  /** Override the heading and intro, e.g. "Share your thoughts" on the About page. */
+  title?: string;
+  intro?: string;
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const text = copy.resourceSuggestion;
@@ -88,7 +93,7 @@ export function ResourceSuggestionDialog({
           ×
         </button>
         <h2 id="resource-popup-title" className="event-popup-title">
-          {status === "sent" ? text.thanksTitle : text.title}
+          {status === "sent" ? text.thanksTitle : (title ?? text.title)}
         </h2>
 
         {status === "sent" ? (
@@ -100,7 +105,7 @@ export function ResourceSuggestionDialog({
           </>
         ) : (
           <form className="resource-form" onSubmit={onSubmit} noValidate>
-            <p className="event-popup-text resource-form-intro">{text.intro}</p>
+            <p className="event-popup-text resource-form-intro">{intro ?? text.intro}</p>
 
             <label className="resource-field">
               <span className="resource-label">{text.linksLabel}</span>
