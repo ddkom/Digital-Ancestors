@@ -3,9 +3,11 @@
 ## "Try new things."
 
 ### The Archetype
-Trailblazers try things for themselves. They prefer testing new technology firsthand than taking anyone's word for what it can or can't do. Trailblazers see AI as a way to push their practice forward. Through experimentation they decide which tools are worth the hype. 
+**Trailblazers** try things for themselves. They prefer testing new technology firsthand than taking anyone's word for what it can or can't do. Trailblazers see AI as a way to push their practice forward. Through experimentation they decide which tools are worth the hype. 
 
 ### Do This
+
+So you're a **trailblazer**! Here are some ways to experiment boldly & responsibly:
 
 #### In minutes
 - Upload a photo of a sketch to [Gemini](https://gemini.google.com/) and ask it to restyle it. This uses Nano Banana, Google's image model. Already on Google AI Pro? Try the brand-new [pics.new](https://pics.new/).

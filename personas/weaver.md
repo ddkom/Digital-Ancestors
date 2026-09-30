@@ -3,9 +3,11 @@
 ## "Let's grow together."
 
 ### The Archetype
-Weavers see new technology in a hopeful light. They see it as an opportunity for humanity and want to find ways it can foster connections and deepen commitments to their community. They ask: can new tech help us solve big problems in the world? Weavers find meaning in sharing with others what they learn.
+**Weavers** see new technology in a hopeful light. They see it as an opportunity for humanity and want to find ways it can foster connections and deepen commitments to their community. They ask: can new tech help us solve big problems in the world? Weavers find meaning in sharing with others what they learn.
 
 ### Do This
+
+So you're a **Weaver**, where do we go from here? Here are some ideas for sharing what AI makes possible, while ensuring the benefits reach your whole community:
 
 #### In minutes
 - Decide how others can reuse your work. The [Creative Commons license chooser](https://creativecommons.org/chooser/) walks you through it in five clicks.
