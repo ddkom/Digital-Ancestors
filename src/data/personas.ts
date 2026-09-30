@@ -55,7 +55,7 @@ export const PERSONAS: PersonaCard[] = [
     imageAlt: "Stylized ID portrait of the Weaver",
     defaultStance: "Tending",
     favouriteMedium: "Learning new mediums all the time",
-    famousQuote: "Let's Grow Together",
+    famousQuote: `"Let's Grow Together"`,
     quadrantBoundary: "P",
     quadrantSocial: "CM",
   },
