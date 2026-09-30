@@ -20,6 +20,7 @@ import {
   splitPersonaMarkdown,
 } from "../utils/markdownToHtml";
 import { ResourceSuggestionDialog } from "../components/feedback/ResourceSuggestionDialog";
+import { EmailSignupPopup } from "../components/layout/EmailSignupPopup";
 
 const SWIPE_THRESHOLD = 56;
 const DECK_SIZE = CHARACTERS.length;
@@ -389,6 +390,7 @@ export function CharactersPage() {
         sourceGuide={suggestFrom}
         onClose={() => setSuggestFrom(null)}
       />
+      <EmailSignupPopup source="guides" />
     </main>
   );
 }

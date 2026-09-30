@@ -8,6 +8,7 @@ AI Pathways for Artists: an open decision-support tool for artists navigating AI
 - [Quiz responses in Supabase](docs/supabase-plan.md)
 - [Resource suggestion form](docs/feedback-form-plan.md)
 - [Visitor analytics with Umami](docs/umami.md)
+- [Email sign-up](docs/email-signup.md)
 
 ## What we use
 
@@ -17,7 +18,7 @@ AI Pathways for Artists: an open decision-support tool for artists navigating AI
 | Background | [p5.js](https://p5js.org) shader (see Credits) |
 | Guide content | Markdown in [`personas/`](personas/), rendered with [marked](https://marked.js.org) + [DOMPurify](https://github.com/cure53/DOMPurify) |
 | QR codes | [react-qr-code](https://github.com/rosskhanas/react-qr-code) |
-| Data | [Supabase](https://supabase.com): anonymous quiz results and resource suggestions |
+| Data | [Supabase](https://supabase.com): anonymous quiz results, resource suggestions, and opt-in email sign-ups |
 | Visitor analytics | [Umami Cloud](https://umami.is), cookieless |
 | Hosting | GitHub Pages, deployed by [GitHub Actions](.github/workflows/deploy-pages.yml) on every push to `main` |
 | Settings | [`src/config/site.ts`](src/config/site.ts) (quiz length, event pop-up, analytics); copy in [`src/locales/en.json`](src/locales/en.json) |

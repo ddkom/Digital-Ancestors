@@ -236,6 +236,20 @@
     "title": "All pathway resources",
     "body": "Every link surfaced in the interactive map, organized by pathway and the step where it appears."
   },
+  "emailSignup": {
+    "title": "Want to stay up to date?",
+    "body": "This resource keeps growing. Share your email and we'll let you know when we've added new resources.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@example.com",
+    "submit": "Keep me in the loop",
+    "sending": "Sending…",
+    "smallPrint": "We'll only email you about updates to this resource, and you can unsubscribe anytime. Your email is kept separate from your quiz answers.",
+    "error": "Something went wrong and your email wasn't saved. Please try again.",
+    "thanksTitle": "You're in the loop!",
+    "thanksBody": "Thanks. We'll be in touch when there's something new.",
+    "done": "Done",
+    "close": "Close"
+  },
   "analyticsOptOut": {
     "optOut": "Opt out of anonymous data collection",
     "optedOut": "You're opted out: your visits and quiz answers aren't recorded.",

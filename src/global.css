@@ -3234,6 +3234,7 @@ footer {
   font-weight: 600;
 }
 
+.resource-field input,
 .resource-field textarea {
   width: 100%;
   box-sizing: border-box;
@@ -3247,6 +3248,7 @@ footer {
   resize: vertical;
 }
 
+.resource-field input:focus-visible,
 .resource-field textarea:focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: 1px;
@@ -3340,4 +3342,12 @@ footer {
 
 .about-living p {
   margin: 0 0 18px;
+}
+
+/* Email sign-up pop-up (src/components/layout/EmailSignupPopup.tsx): reuses the event and resource pop-up styles. */
+.email-signup-small {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
 }

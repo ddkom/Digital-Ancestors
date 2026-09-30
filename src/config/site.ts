@@ -25,6 +25,14 @@ export type SiteConfig = {
      */
     storageKey: string;
   };
+  emailSignup: {
+    /** Show the "stay up to date" email pop-up on the guides page. Turn on after running the SQL in docs/email-signup.md. */
+    enabled: boolean;
+    /** Seconds on the guides page before it appears. */
+    delaySeconds: number;
+    /** Remembers who has already seen it (shown once per browser). Change it to show it again to everyone. */
+    storageKey: string;
+  };
   analytics: {
     /** Umami website ID (Umami → Settings → Websites). Empty = visitor analytics off. See docs/umami.md. */
     umamiWebsiteId: string;
@@ -41,6 +49,11 @@ export const siteConfig: SiteConfig = {
     enabled: true,
     showUntil: "2026-10-08",
     storageKey: "da-event-popup-stackt-2026",
+  },
+  emailSignup: {
+    enabled: true,
+    delaySeconds: 5,
+    storageKey: "da-email-signup",
   },
   analytics: {
     umamiWebsiteId: "",
