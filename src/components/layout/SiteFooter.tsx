@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 import { copy } from "../../locales";
 import { AnalyticsOptOut } from "./AnalyticsOptOut";
 
 export function SiteFooter() {
-  const { intro, projectQuoted, outro, backgroundCredit: credit } = copy.siteFooter;
+  const { intro, projectQuoted, outro, aiUse, backgroundCredit: credit } = copy.siteFooter;
 
   return (
     <footer>
@@ -21,6 +22,9 @@ export function SiteFooter() {
           {credit.license}
         </a>
         .
+      </span>{" "}
+      <span className="footer-credit">
+        {aiUse.before} <Link to="/about#ai">{aiUse.link}</Link>.
       </span>{" "}
       <AnalyticsOptOut />
     </footer>

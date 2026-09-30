@@ -61,6 +61,14 @@
       "title": "What we want from this",
       "body": "We want people to think critically about the way they are interacting with AI. While there are many fascinating and innovative parts of AI, there is also a lot of fear about its social & ecological impacts. We would like to help guide people to consider how their use may affect others & the planet, while also helping provide tools for expanding & exploring."
     },
+    "ai": {
+      "kicker": "Transparency",
+      "title": "How we used AI",
+      "body": [
+        "Everything creative here is ours. We made the ancestor portraits, the characters, the quadrant framework and the installation at STACKT Market by hand, and we wrote the guides ourselves.",
+        "We used an AI assistant (Claude, by Anthropic) to help build the website's code. We also used it as a sounding board: to brainstorm, suggest edits, and draft some of the site's smaller text, like buttons and pop-ups. We reviewed and rewrote everything before it went live."
+      ]
+    },
     "living": {
       "kicker": "A living resource",
       "title": "This guide keeps growing",
@@ -259,6 +267,10 @@
     "intro": "Built as part of the",
     "projectQuoted": "\"Digital Ancestors: Mortality, Memory, Machine\"",
     "outro": "project in collaboration with artists and responsible AI practitioners. This is a living framework (v23).",
+    "aiUse": {
+      "before": "Built with help from AI;",
+      "link": "see how we used it"
+    },
     "backgroundCredit": {
       "before": "Background adapted from",
       "sketchTitle": "\u201cprocedural night reflections II\u201d",

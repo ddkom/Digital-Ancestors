@@ -13,7 +13,7 @@ const HEADER_OFFSET = 80;
 export function AboutPage() {
   const { hash } = useLocation();
   const [feedbackOpen, setFeedbackOpen] = useState(false);
-  const { title, intro, hope, living } = copy.about;
+  const { title, intro, hope, ai, living } = copy.about;
 
   // Open at the top, or jump straight to a section when linked to one (e.g. /about#why).
   // Instant, not smooth: a smooth scroll started during page load gets cancelled.
@@ -39,6 +39,20 @@ export function AboutPage() {
       </section>
 
       <WhoSection />
+
+      <section id="ai" className="section" aria-labelledby="ai-heading">
+        <div className="section-header">
+          <div className="section-kicker">{ai.kicker}</div>
+          <h2 className="section-title" id="ai-heading">
+            {ai.title}
+          </h2>
+          {ai.body.map((paragraph) => (
+            <p key={paragraph} className="section-body">
+              {paragraph}
+            </p>
+          ))}
+        </div>
+      </section>
 
       <section id="living" className="section" aria-labelledby="living-heading">
         <div className="story-card about-living">

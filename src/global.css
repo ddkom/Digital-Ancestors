@@ -151,6 +151,7 @@ body {
 #root > footer {
   position: relative;
   z-index: 1;
+  font-size: .78rem;
 }
 
 /* Larger screens: on short pages, push the footer down to the bottom of the window. */
