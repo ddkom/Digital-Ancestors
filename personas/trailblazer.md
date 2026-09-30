@@ -3,7 +3,7 @@
 ## "Try new things."
 
 ### The Archetype
-Trailblazers try things. They prefer testing new technology and seeing for themselves what it can and can't do. Trailblazers see AI as something that progresses them forward. Through experimentation they decide which tools are worth the hype. 
+Trailblazers try things for themselves. They prefer testing new technology firsthand than taking anyone's word for what it can or can't do. Trailblazers see AI as a way to push their practice forward. Through experimentation they decide which tools are worth the hype. 
 
 ### Do This
 
@@ -15,10 +15,12 @@ Trailblazers try things. They prefer testing new technology and seeing for thems
   1. Download [LM Studio](https://lmstudio.ai/).
   2. Pick any small model from its search.
   3. Chat with it with your Wi-Fi off.
+- Label what you make. Add Content Credentials, or a "made with AI" note when you post. Being open about it builds trust in AI-assisted work.
 
 #### Ongoing
 - **Connect:** Follow the [NeurIPS Creative AI Track](https://neurips.cc/Conferences/2026/CallForCreativeAI), where artists show AI work at the world's biggest AI conference. Join the mailing list to catch next year's call.
-- **Learn:** Train AI on your own work using a LoRA, via [Kohya_ss](https://github.com/bmaltais/kohya_ss) or [AI-Toolkit](https://github.com/ostris/ai-toolkit) locally; [fal.ai](https://fal.ai/)/[Replicate](https://replicate.com/) in the cloud.
+- **Learn:** Train AI on your own work using a LoRA, via [Kohya_ss](https://github.com/bmaltais/kohya_ss) or [AI-Toolkit](https://github.com/ostris/ai-toolkit) locally; [fal.ai](https://fal.ai/)/[Replicate](https://replicate.com/) in the cloud. (Never train on another artist's style without their consent.)
+- Keep an experiment log, including what each tool cost: the data it needed, the energy it used, and the money. That's your own evidence for what's worth the hype.
 
 
 <!-- ### Key resources
