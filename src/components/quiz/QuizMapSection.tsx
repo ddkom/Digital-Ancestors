@@ -200,11 +200,7 @@ export function QuizMapSection() {
   // On phones the result sits below the map: bring it into view when it appears.
   useEffect(() => {
     if (!quiz.resultVisible || window.innerWidth >= DESKTOP_MIN_WIDTH) return;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    resultRef.current?.scrollIntoView({
-      block: "nearest",
-      behavior: reduced ? "auto" : "smooth",
-    });
+    resultRef.current?.scrollIntoView({ block: "nearest", behavior: "auto" });
   }, [quiz.resultVisible]);
 
   const worldStyle = {
