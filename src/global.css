@@ -3117,8 +3117,7 @@ footer {
   }
 }
 
-
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce), (max-width: 880px) {
   .qm-world.is-animating,
   .qm-map-content,
   .qm-viewport,
